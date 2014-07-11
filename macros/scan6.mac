@@ -1,0 +1,41 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like /run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 9
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+
+/mydet/gunRHigh 10.0 mm
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+/mydet/particleNum 1
+/mydet/particle1/particleName e-
+#use the elastic engine
+#/mydet/particle1/engine HRSElasEl
+#use the fitted result for 90 degrees Helm coils
+/mydet/particle1/engine H90UserFit
+/mydet/particle1/momentumLow 300. MeV
+/mydet/particle1/momentumHigh 3500. MeV
+#randomize in TCS and with elipse shape, 1 is for rectangle shape
+/mydet/particle1/randomizeInTCS 2
+
+/mydet/particle1/detectorAngle 5.69 deg
+/run/beamOn 100000

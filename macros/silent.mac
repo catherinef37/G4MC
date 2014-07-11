@@ -1,0 +1,20 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like /run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+
+

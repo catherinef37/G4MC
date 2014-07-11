@@ -1,0 +1,99 @@
+##################################################################
+/vis/open HepRepFile
+#/vis/open DAWNFILE
+#/vis/open HepRepXML
+#/vis/open RayTracer
+/vis/scene/create G2P.heprep
+# just draw geometry:
+/vis/drawVolume world
+#####The following 3 lines = /vis/drawVolume world#######
+#/vis/scene/create
+#/vis/scene/add/volume
+#/vis/sceneHandler/attach
+#########################################################
+#/vis/heprep/appendGeometry  True  ##this line is used for HepRepXML only
+#/vis/viewer/set/culling global false  ##this cmd is used to remove invisable objs
+# Specify view angle, good for online visulization only, not file
+#/vis/viewer/set/viewpointThetaPhi 90. 0.
+# Specify style (surface or wireframe):
+/vis/viewer/set/style surface
+
+###The next line will invoke /tracking/storeTrajectory 1
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+
+# Draw coordinate axes: x,y,z axislength unit
+/vis/scene/add/axes 0. 0. 0. 2.0 m
+
+/vis/modeling/trajectories/create/drawByParticleID True
+#/vis/modeling/trajectories/drawByParticleID-0/set e- blue
+#/vis/modeling/trajectories/drawByParticleID-0/set pr green
+#/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsColour red
+#/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsSize 2
+
+#The next line can be executed only once, trajectory points are not shown by default
+#/vis/modeling/trajectories/create/drawByCharge True
+#modify current model to showing trajectory points and change color
+#/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsColour red
+#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+##############################################
+/run/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+/mydet/verbose 1
+#add your macro here, for example
+#/tracking/particleOnly e-
+#write out all tracks in txt output
+#/tracking/particleOnly all
+#/tracking/thisTrackOnly 0 
+#set no txt output
+#/tracking/thisTrackOnly 9 
+/tracking/noSecondary 1
+##################################################################
+
+/mydet/particleNum 5
+#beam
+/mydet/particle3/theta 0 deg
+/mydet/particle3/phi 0 deg
+/mydet/particle3/particleName e-
+/mydet/particle3/momentum 1100 MeV
+
+#spectator proton
+/mydet/particle4/theta 72 deg
+/mydet/particle4/phi -10 deg
+/mydet/particle4/particleName proton
+/mydet/particle4/momentum 330 MeV
+
+/mydet/particle5/theta 68 deg
+/mydet/particle5/phi -10 deg
+/mydet/particle5/particleName proton
+/mydet/particle5/momentum 380 MeV
+
+/mydet/particle1/theta 5.69 deg
+/mydet/particle1/phi 0 deg
+/mydet/particle1/particleName e-
+/mydet/particle2/theta -5.69 deg
+/mydet/particle2/phi 0 deg
+/mydet/particle2/particleName e-
+
+/mydet/particle1/momentum 369 MeV
+/mydet/particle2/momentum 950 MeV
+
+#/mydet/position3V 0 0 -876.93 mm
+/run/beamOn 1
+#/mydet/position3V -10.0 0.0 -891.90 mm
+/run/beamOn 1
+#/mydet/position3V 10.0 0.0 -852.0 mm
+/run/beamOn 1
+
+
+/mydet/particle1/theta 12.5 deg
+/mydet/particle2/theta 12.5 deg
+#/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+#/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+#/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
