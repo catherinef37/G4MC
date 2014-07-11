@@ -1,0 +1,52 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like /run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+/mydet/beamEnergy 1.159 GeV
+
+/mydet/gunRHigh 10.0 mm
+
+/mydet/particleNum 1
+#use the elastic engine
+/mydet/particle1/particleName e-
+/mydet/particle1/engine HRSElasEl
+#use this one to get the acceptance range then narrow it down
+/mydet/particle1/thetaLow 0. deg
+/mydet/particle1/thetaHigh 30. deg
+/mydet/particle1/phiLow 0. deg
+/mydet/particle1/phiHigh 90. deg
+
+#for E=1.1, transverse
+/mydet/particle1/thetaLow 0.1 rad
+/mydet/particle1/thetaHigh 0.4 rad
+/mydet/particle1/phiLow 0.5 rad
+/mydet/particle1/phiHigh 1.571 rad
+#accepted range
+/mydet/particle1/thetaLow 0.15 rad
+/mydet/particle1/thetaHigh 0.35 rad
+/mydet/particle1/phiLow 0.7 rad
+/mydet/particle1/phiHigh 1.4 rad
+
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+/run/beamOn 50000

@@ -1,0 +1,104 @@
+##################################################################
+/vis/open HepRepFile
+#/vis/open DAWNFILE
+#/vis/open HepRepXML
+#/vis/open RayTracer
+/vis/scene/create G2P.heprep
+# just draw geometry:
+/vis/drawVolume world
+#####The following 3 lines = /vis/drawVolume world#######
+#/vis/scene/create
+#/vis/scene/add/volume
+#/vis/sceneHandler/attach
+#########################################################
+#/vis/heprep/appendGeometry  True  ##this line is used for HepRepXML only
+#/vis/viewer/set/culling global false  ##this cmd is used to remove invisable objs
+# Specify view angle, good for online visulization only, not file
+#/vis/viewer/set/viewpointThetaPhi 90. 0.
+# Specify style (surface or wireframe):
+/vis/viewer/set/style surface
+
+###The next line will invoke /tracking/storeTrajectory 1
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+
+# Draw coordinate axes: x,y,z axislength unit
+/vis/scene/add/axes 0. 0. 0. 1.2 m
+
+#/vis/modeling/trajectories/create/drawByParticleID True
+#/vis/modeling/trajectories/drawByParticleID-0/set e- blue
+#/vis/modeling/trajectories/drawByParticleID-0/set pr green
+#/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsColour red
+#/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsSize 2
+
+
+#The next line cab be executed only once, trajectory points are not shown by default
+#/vis/modeling/trajectories/create/drawByCharge True
+#modify current model to showing trajectory points and change color
+#/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsColour red
+#/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+##############################################
+/run/verbose 0
+/tracking/verbose 0
+/mydet/verbose 1
+#add your macro here, for example
+#/tracking/particleOnly e-
+#write out all tracks in txt output
+#/tracking/particleOnly all
+#/tracking/thisTrackOnly 4 
+#set no txt output
+/tracking/thisTrackOnly 0
+/tracking/noSecondary 1
+#################################################################
+#In order to have scattered electron get into the HRS, the following phi
+#angle have to be chosen:  
+#(for theta=12.5 deg)
+# 1.1GeV ==> 90 deg
+# 1.6GeV ==> 45-55 deg
+# 2.2GeV ==> 30-35 deg
+# 3.3GeV ==> 20-25 deg
+#(for theta= 6 deg )
+# 1.1GeV ==> 90 deg
+# 1.6GeV ==> 45-55 deg
+# 2.2GeV ==> 30-35 deg
+# 3.3GeV ==> 40-45 deg
+#################################################################
+
+#/mydet/beamEnergy 1.159 GeV
+#turn off the raster
+/mydet/gunRHigh 0.0
+
+/mydet/particleNum 1
+#use the elastic engine
+/mydet/particle1/particleName e-
+/mydet/particle1/engine HRSElasEl
+/mydet/particle1/thetaLow 4. deg
+/mydet/particle1/thetaHigh 15. deg
+/mydet/particle1/phiLow -45. deg
+/mydet/particle1/phiHigh 45. deg
+
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+###################################
+/mydet/particle1/randomizeInTCS 1
+###################################
+/mydet/beamEnergy 2.257 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.04 rad
+/mydet/particle1/outPlaneAngleLow -0.18 rad
+/mydet/particle1/inPlaneAngleLow -0.05 rad
+/mydet/particle1/inPlaneAngleHigh 0.05 rad
+
+/run/beamOn 2
+
+/mydet/beamEnergy 1.706 GeV
+/run/beamOn 2
+
+/mydet/beamEnergy 1.159 GeV
+/run/beamOn 2
+

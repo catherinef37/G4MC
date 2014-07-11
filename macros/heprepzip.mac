@@ -1,0 +1,88 @@
+##################################################################
+/vis/open HepRepFile
+#/vis/open HepRepXML
+/vis/scene/create G2P.heprep.zip
+#/vis/heprep/appendGeometry true
+#/vis/viewer/set/culling global false
+#####The following 3 lines = /vis/drawVolume world#######
+#/vis/scene/create
+#/vis/scene/add/volume
+#/vis/sceneHandler/attach
+#########################################################
+/vis/drawVolume world
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+#/tracking/storeTrajectory 1
+/tracking/noSecondary 1
+##############################################
+/run/verbose 0
+/tracking/verbose 0
+/mydet/verbose 1
+#add your macro here, for example
+#/tracking/particleOnly e-
+#write out  all tracks in txt output
+#/tracking/particleOnly all
+#/tracking/thisTrackOnly 4 
+#set no txt output
+/tracking/thisTrackOnly 7
+################################################################
+#In order to have scattered electron get into the HRS, the following phi
+#angle have to be chosen:
+# 1.1GeV ==> 90 deg
+# 1.6GeV ==> 45-55 deg
+# 2.2GeV ==> 30-35 deg
+# 3.3GeV ==> 20-25 deg
+#################################################################
+/mydet/particleNum 5
+#beam
+/mydet/particle3/theta 0 deg
+/mydet/particle3/phi 0 deg
+/mydet/particle3/particleName e-
+/mydet/particle3/momentum 1100 MeV
+
+#spactator proton
+/mydet/particle4/theta 74 deg
+/mydet/particle4/phi 0 deg
+/mydet/particle4/particleName proton
+/mydet/particle4/momentum 280 MeV
+
+/mydet/particle5/theta 71 deg
+/mydet/particle5/phi 0 deg
+/mydet/particle5/particleName proton
+/mydet/particle5/momentum 340 MeV
+
+/mydet/particle1/theta 6 deg
+/mydet/particle1/phi 0 deg
+/mydet/particle1/particleName e-
+/mydet/particle2/theta 6 deg
+/mydet/particle2/phi 0 deg
+/mydet/particle2/particleName e-
+
+/mydet/particle1/momentum 396 MeV
+/mydet/particle2/momentum 950 MeV
+
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
+
+/mydet/particleNum 2
+/mydet/particle1/phi 90 deg
+/mydet/particle2/phi 90 deg
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
+
+/mydet/particle1/phi 270 deg
+/mydet/particle2/phi 270 deg
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1

@@ -1,0 +1,353 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Document of HRS Ntuple structure
+Author: Jixie Zhang
+Last Updated: 12/27/2010
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Trees included: config,track0,track1,...,track7,D
+
+------------------------------------------------------------------
+#define MAXSTEP  1024
+#define MaxTrackHit 128
+#define MAXPRIMARYNUM 8
+------------------------------------------------------------------
+
+1)Tree name: config
+
+Int_t     Run;                   //Run number
+Int_t     SkimLevel;             //Skim level, only events with track0.TrackClass>=Skimlevel will be stored 
+Int_t     BookTrees;             //How many tracks will be written into this ntuple 
+Double_t  Beam;                  //Beam Energy
+Double_t  BeamTiltedAngle;       //Tilted angle of the beam at target center
+Double_t  TargetM;               //Target Mass in GeV, will be used to calculate elas XS
+Double_t  TargetL;               //Target length
+Double_t  TargetAtomicNumber;    //Target Atomic Number, will be used to calculate elas and inelas XS
+Double_t  TargetNeutronNumber;   //Target Neutron Number, will be used to calculate inelas XS
+
+Int_t     SetupG2PTarget;
+Int_t     TargetType;
+/*
+    #SetupG2PTarget is used to define the target cell.  It can be 0, 1, 2, 3, 10, 20, 30;
+        #0 means do not set up the target, 
+        #1 means it is the large target cell(D=1.142", centered at zero), for NH3He. Can have target wall 
+        #2 is the middle size hole(D=0.397", centered at -10.81mm) for CH2. No target wall 
+        #3 is the smallest hole(D=0.312", centered at -10.81mm) for C12. No target wall 
+        #10 is the large target cell(D=1.142", centered at zero) but NO LHe inside the target nose. Can have target  wall      
+        #20 is the middle size hole(D=0.397", centered at -10.81mm) but NO LHe inside the target nose. No target wall 
+        #30 is the smallest hole(D=0.312", centered at -10.81mm) but NO LHe inside the target nose. No target wall 
+
+   I have also changed the configurable vaiable TargetType to this way:
+  
+    if (mTargetType==0) theTargetMaterial=vacuum;
+        else if (mTargetType==1) theTargetMaterial=NH3He;
+        else if (mTargetType==2) theTargetMaterial=CH2;
+        else if (mTargetType==3) theTargetMaterial=carbon;
+        else if (mTargetType==4) theTargetMaterial=tantalum;
+        else if (mTargetType==5) theTargetMaterial=liquidH2;
+        else if (mTargetType==6) theTargetMaterial=liquidD2;
+        else if (mTargetType==7) theTargetMaterial=liquidHe3;
+        else if (mTargetType==8) theTargetMaterial=liquidHe;
+        else if (mTargetType==9) theTargetMaterial=aluminum;
+        else if (mTargetType==10) theTargetMaterial=copper;
+        else if (mTargetType==11) theTargetMaterial=lead;
+        else if (mTargetType==12) theTargetMaterial=tungsten;
+        else if (mTargetType==13) theTargetMaterial=stainlesssteel;
+        else if (mTargetType==14) theTargetMaterial=kapton;
+        else if (mTargetType==15) theTargetMaterial=air;       //room temperature
+        else if (mTargetType==16) theTargetMaterial=heliumGas; //room temperature
+        else if (mTargetType==17) theTargetMaterial=calcium; 
+        else theTargetMaterial=NH3He; 
+*/
+
+Double_t  TargetXOffset;        //Target x position in Hall coordinate system
+Double_t  TargetYOffset;        //Target y position in Hall coordinate system
+Double_t  TargetZOffset;        //Target z position in Hall coordinate system
+Double_t  PivotXOffset;         //Pivot x position in Hall coordinate system
+Double_t  PivotYOffset;         //Pivot y position in Hall coordinate system
+Double_t  PivotZOffset;         //Pivot z position in Hall coordinate system
+Double_t  LHRSMomentum;         //Left HRS momentum 
+Double_t  RHRSMomentum;         //Right HRS momentum 
+Double_t  LHRSAngle;            //Left HRS angle in degree
+Double_t  RHRSAngle;            //Right HRS angle in degree
+
+Int_t     UseHelmField;         //use the Helm(target) field or not
+Double_t  HelmXOffset;          //Helm field origin x position in Hall coordinate system
+Double_t  HelmYOffset;          //Helm field origin y position in Hall coordinate system
+Double_t  HelmZOffset;          //Helm field origin z position in Hall coordinate system
+Double_t  HelmRotAxis1;         //Helm field Lab2Field rotation, 1st axis 
+Double_t  HelmRotAxis2;         //Helm field Lab2Field rotation, 2nd axis 
+Double_t  HelmRotAxis3;         //Helm field Lab2Field rotation, 3rd axis 
+Double_t  HelmRotAngle1;        //Helm field Lab2Field rotation, 1st angle 
+Double_t  HelmRotAngle2;        //Helm field Lab2Field rotation, 2nd angle 
+Double_t  HelmRotAngle3;        //Helm field Lab2Field rotation, 3rd angle 
+Double_t  HelmCurrentRatio;     //Helm field scale value
+
+Int_t     UseSeptumField;       //use the Septum field or not
+Double_t  SeptumXOffset;        //Septum field origin x position in Hall coordinate system
+Double_t  SeptumYOffset;        //Septum field origin y position in Hall coordinate system
+Double_t  SeptumZOffset;        //Septum field origin z position in Hall coordinate system
+Double_t  SeptumRotAxis1;       //Septum field Lab2Field rotation, 1st axis 
+Double_t  SeptumRotAxis2;       //Septum field Lab2Field rotation, 2nd axis 
+Double_t  SeptumRotAxis3;       //Septum field Lab2Field rotation, 3rd axis 
+Double_t  SeptumRotAngle1;      //Septum field Lab2Field rotation, 1st angle 
+Double_t  SeptumRotAngle2;      //Septum field Lab2Field rotation, 2nd angle 
+Double_t  SeptumRotAngle3;      //Septum field Lab2Field rotation, 3rd angle 
+Double_t  SeptumCurrentRatioL;  //Left Septum field scale value
+Double_t  SeptumCurrentRatioR;  //Right Septum field scale value
+
+Int_t     UseSeptumPlusStdHRS;  //use the Septum field and the std HRS transportation packages
+Double_t  Pivot2LHRSVBFace;   //Distance of left HRS virtual boundary front face to pivot
+Double_t  Pivot2RHRSVBFace;   //Distance of left HRS virtual boundary front face to pivot
+
+Double_t  BigBiteAngle;       //Bigbite arm angle, from -Pi to 0 for right, 0 to Pi for left
+Double_t  BigBiteTiltAngle;   //Bigbite scintillator tilted angle
+Double_t  Pivot2BigBiteFace;  //Distance of the Bigbite container's front face to pivot, usually 1.1m
+
+Double_t  ThirdArmAngle;		//Third arm angle, 
+Double_t  SetupThirdArmVD;	//whether or not to set up virtual detector for 3rd arm
+Double_t  ThirdArmRotZAngle;  //Third arm scintillator rotation angle
+Double_t  Pivot2ThirdArmFace;
+
+Int_t     SetupChicane;
+Int_t     SetupChicaneVD;
+Double_t  FZB1TiltedAngle;
+Double_t  FZB1PosX;
+Double_t  FZB1PosY;
+Double_t  FZB1PosZ;
+Double_t  FZB1Bx;
+Double_t  FZB1By;
+Double_t  FZB1Bz;
+Double_t  FZB2TiltedAngle;
+Double_t  FZB2PosX;
+Double_t  FZB2PosY;
+Double_t  FZB2PosZ;
+Double_t  FZB2Bx;
+Double_t  FZB2By;
+Double_t  FZB2Bz;
+
+Int_t     WhereToStopRecon; //specify where to stop reconstruction, 0 is at target plane, 
+                            //1 is at vertex plane, 2 is at exact vertex z0, 3 is z0
+                            //smeared with BPMXRes/sin(pEndPlaneAngle) 
+Int_t     SnakeModel;       //Use SnakeModel to identify which SNAKE packages
+//will be use, SnakeModel==10-19 is for g2p, 20 for E97110 GDH experiment
+//Here is a list of SnakeModel candidates:
+//SnakeModel=10: g2p septum without shim, 5.65 deg, Created by John, use this for g2p test run
+//SnakeModel=11: g2p septum 484816+shim, 5.65 deg, Created by Min, 
+//SnakeModel=12: g2p septum 403216+shim, 5.65 deg, SNAKE Model not ready yet 
+//SnakeModel=13: g2p septum 400016+shim, 5.65 deg, SNAKE Model not ready yet 
+//SnakeModel=19: g2p septum 484816, no shim, 5.65 deg, Min's version for normal septum without shim
+//SnakeModel=20: GDH exp with large X0 version
+//SnakeModel=othervalues: Standard HRS setting, no septum field, no target field
+
+Double_t  BPMXRes;          //BPM resolution for lab X
+Double_t  BPMYRes;          //BOM resolution for lab Y
+
+===========================================================================================
+2)Tree name: trackN, 0<=N< MAXPARTNUM
+
+Int_t     Index;         //Event ID
+Int_t     PdgId;         //PDG code for this particle
+Int_t     TrackId;       //Track index
+Int_t     TrackClass;    //Track flag to identify a good track, -1<=TrackClass<=4
+/* ----------------------------------------------------------------------------------------
+#
+#    Flag to identify a good track. For all HRS track. the conditions are:
+#    (A) hit virtual boundary;
+#    (B) pow(Thetavb_tr-0.0)/0.060,2.0)+pow(Phivb_tr-0.0)/0.035,2.0)<1.0 
+#    (C) dPOverP0 Cut: (P0-Pvb)/P0<0.05
+#    (D) pow(Thetavb_tr-0.0)/0.050,2.0)+pow(Phivb_tr-0.0)/0.028,2.0)<1.0 && (P0-Pvb)/P0<0.04
+#    -1 garbage: can not hit the virtual boundary
+#    0 barely normal: A satisfied 
+#    1 normal: A, B satisfied
+#    2 good: A, B, C satisfied
+#    3 gold: A, B, C, D satisfied
+#    will plus 4 if it can be transported to the focus plane 
+---------------------------------------------------------------------------------------- */ 
+Double_t  X0;           //Thrown x in mm
+Double_t  Y0;           //Thrown y in mm
+Double_t  Z0;           //Thrown z in mm
+Double_t  P0;           //Thrown total momentum in GeV/c
+Double_t  Theta0;       //Thrown theta angle (rad), scattering angle
+Double_t  Phi0;         //Thrown phi angle (rad)
+Double_t  X0_tr;        //Thrown x (mm) in Transportation coordinate system (TCS)
+Double_t  Y0_tr;        //Thrown y (mm) in Transportation coordinate system (TCS)
+Double_t  Z0_tr;        //Thrown z (mm) in Transportation coordinate system (TCS)
+Double_t  Theta0_tr;    //Vertical angle (rad), or out-of-plane angle, in TCS 
+Double_t  Phi0_tr;      //Honrizontal angle (rad), or in-plane angle, in TCS
+Double_t  Xtg_tr;       //Thrown vertex's image on target plane 
+Double_t  Ytg_tr;       //Thrown vertex's image on target plane
+
+//virtual boundary: or detector 
+Double_t  Xvb;          //x position (mm) at the virtual boundary  
+Double_t  Yvb;          //y position at the virtual boundary 
+Double_t  Zvb;          //z position at the virtual boundary 
+Double_t  Pvb;          //Momentum magnitude (GeV/c) at the virtual boundary 
+Double_t  Thetavb;      //Theta angle (rad) at the virtual boundary 
+Double_t  Phivb;        //Phi angle (rad) at the virtual boundary
+Double_t  Xvb_tr;       //x position (mm) at the virtual boundary, in TCS  
+Double_t  Yvb_tr;       //y position at the virtual boundary, in TCS 
+Double_t  Zvb_tr;       //z position at the virtual boundary, in TCS 
+Double_t  Thetavb_tr;   //Theta angle (rad) at the virtual boundary, in TCS 
+Double_t  Phivb_tr;     //Phi angle (rad) at the virtual boundary, in TCS
+
+//focus plan, from SNAKE parameterized package
+Double_t  Xfp_tr;       //x position (mm) at the focus plane, in TCS
+Double_t  Yfp_tr;       //y position (mm) at the focus plane, in TCS
+Double_t  Phifp_tr;     //Theta angle (rad) at the focus plane, in TCS
+Double_t  Thetafp_tr;   //Phi angle (rad) at the focus plane, in TCS
+
+Double_t  Xtg_rec_tr;   //Reconstructed x (include sieve to target drift) at target plane, in TCS
+Double_t  Ytg_rec_tr;   //Reconstructed y (include sieve to target drift) at target plane, in TCS
+Double_t  Thetatg_rec_tr;//Reconstructed theta (include sieve to target drift) at target plane, in TCS
+Double_t  Phitg_rec_tr; //Reconstructed phi (include sieve to target drift) at target plane, in TCS
+   
+Double_t  Xtg_rec_db_tr;    //Reconstructed x using optics matrix, at target plane, in TCS
+Double_t  Ytg_rec_db_tr;    //Reconstructed y  using optics matrix, at target plane, in TCS
+Double_t  Thetatg_rec_db_tr;//Reconstructed theta using optics matrix, at target plane, in TCS
+Double_t  Phitg_rec_db_tr;  //Reconstructed phi  using optics matrix, at target plane, in TCS
+Double_t  Delta_rec;        //Reconstructed delta  using optics matrix, at target plane
+
+Double_t  X_rec_tr;     //Reconstructed x (mm) at vertex, in TCS
+Double_t  Y_rec_tr;     //Reconstructed y (mm) at vertex, in TCS
+Double_t  Z_rec;        //Reconstructed z (mm) at vertex, in TCS
+Double_t  Theta_rec_tr; //Reconstructed Theta angle (rad) at vertex, in TCS
+Double_t  Phi_rec_tr;   //Reconstructed Phi angle (rad) at vertex, in TCS
+Double_t  P_rec;        //Reconstructed momentum at vertex, with eloss correction
+Double_t  Theta_rec;    //Reconstructed x (mm) at vertex, in HCS
+Double_t  Phi_rec;      //Reconstructed y (mm) at vertex, in HCS
+
+Double_t  Delta;        //Delta at VB, delta=(Pvb-HRSMomentum)/HRSMomentum, HRSMomentum=0, it is always 0
+Double_t  Delta_rec;    //Reconstructed delta  at vertex
+
+Double_t  X_proj2tg_tr;    //projected x (mm) from VB(sieve) to target plane, in TCS
+Double_t  Y_proj2tg_tr;    //projected y (mm) from VB(sieve) to target plane, in TCS
+
+Double_t  X_rec2tg_tr;     //Snake reconstructed theta (rad) from VB(sieve) to target plane, in TCS
+Double_t  Y_rec2tg_tr;     //Snake reconstructed phi (rad) from VB(sieve) to target plane, in TCS
+Double_t  Theta_rec2tg_tr; //Snake reconstructed x (mm) at target plane, in TCS
+Double_t  Phi_rec2tg_tr;   //Snake reconstructed y (mm) at target plane, in TCS
+Double_t  P_rec2tg;        //Snake reconstructed mometum, no eloss correction
+
+Double_t  X_proj2sl_tr;   //project Snake's reconstruction to VB, in TCS
+Double_t  Y_proj2sl_tr;   //project Snake's reconstruction to VB, in TCS
+
+
+Double_t  TrackRadlen;  //Integral of (StepTracklength/Radiationlength) over the whole track
+Double_t  Theta0Eff;    //Effective thrown scattering angle, with the tilted beam angle taking into account
+Double_t  ElasXS;       //Elastic XS calculated using P0,Theta0,Beam,TargetM,TargetAtomicNumber
+Double_t  XS;           //Inelastic XS calculated by QElXS using P0,Theta0,Beam
+
+//The following block will be available only if USE_MINI_TREE is not defined
+#ifndef USE_MINI_TREE
+
+Int_t     StepNum;                  //How many steps in this track, StepNum<=MAXSTEP
+Double_t  StepX[StepNum];           //x (mm) of each step in this track
+Double_t  StepY[StepNum];           //y (mm) of each step in this track
+Double_t  StepZ[StepNum];           //z (mm) of each step in this track
+Double_t  StepdE[StepNum];          //Deposited Energy(KeV) of each step (measured at the end of this step)
+Double_t  StepL[StepNum];           //Total Track Length(mm) measured in each step 
+
+Double_t  StepEkin[StepNum];        //Kenetic Energy(MeV) 
+Double_t  StepTL[StepNum];          //Track Length (mm)
+Double_t  StepRadlen[StepNum];      //Radlen (cm) of the material in current step
+Double_t  StepDsty[StepNum];        //Density (g/cm3) of the material in current step
+
+//added by Jixie @20110525        
+double  StepBx[StepNum];
+double  StepBy[StepNum];
+double  StepBz[StepNum];
+
+//TrackBdLx = #inte{v[1]*b[2]-b[1]*v[2]}dt=L[1]*b[2]-b[1]*L[2];
+//TrackBdLy = #inte{v[2]*b[0]-b[2]*v[0]}dt=L[2]*b[0]-b[2]*L[0];
+//TrackBdLz = #inte{v[0]*b[1]-b[0]*v[1]}dt=L[0]*b[1]-b[0]*L[1];
+double  TrackBdLx; //this is the sum of B*dL in x for the whole track
+double  TrackBdLy; //this is the sum of B*dL in y for the whole track
+double  TrackBdLz; //this is the sum of B*dL in z for the whole track
+
+Double_t  R0;       //radius (mm) of the helix fitted to this track, Not available for G2P
+Double_t  A0;       //x (mm), center of the helix fitted to this track, Not available for G2P
+Double_t  B0;       //y (mm), center of the helix fitted to this track, Not available for G2P
+#endif
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+The following is added by Jixie @20110801, v0.97
+//Detector response tree named "D"
+//TA1_* are for 3rd arm layer 1
+//TA2_* are for 3rd arm layer 2
+//SD_* are for general sensitive detector
+//T_* are used to stored the particle information at its vertex (the place it was created) 
+
+Int_t     Index;                 //Event Index, can be used to couple to Track#.Index
+Int_t     TA1_N;                 //Number of hits at third arm layer 1 
+Int_t     TA1_Pid[TA1_N];        //PDG Particle ID
+Int_t     TA1_Tid[TA1_N];        //Track id
+Int_t     TA1_ParentTid[TA1_N];  //Parent track ID
+Double_t  TA1_T[TA1_N];          //Hit time in ns
+Double_t  TA1_X[TA1_N];          //Hit position x
+Double_t  TA1_Y[TA1_N];          //Hit position y
+Double_t  TA1_Z[TA1_N];          //Hit position z
+Double_t  TA1_Edep[TA1_N];       //Energy deposited in this sensitive detector
+Double_t  TA1_P[TA1_N];          //momentum magnitude when entering this sensitive detector
+Double_t  TA1_Theta[TA1_N];      //theta angle when entering this sensitive detector
+Double_t  TA1_Phi[TA1_N];        //phi angle when entering this sensitive detector
+Double_t  TA1_Pout[TA1_N];       //momentum when leaving this sensitive detector
+
+Int_t     TA2_N;                 //Number of hits at third arm layer 2
+Int_t     TA2_Pid[TA2_N];
+Int_t     TA2_Tid[TA2_N];
+Int_t     TA2_ParentTid[TA2_N];
+Double_t  TA2_T[TA2_N];
+Double_t  TA2_X[TA2_N];
+Double_t  TA2_Y[TA2_N];
+Double_t  TA2_Z[TA2_N];
+Double_t  TA2_Edep[TA2_N];
+Double_t  TA2_P[TA2_N];
+Double_t  TA2_Theta[TA2_N];
+Double_t  TA2_Phi[TA2_N];
+Double_t  TA2_Pout[TA2_N];
+
+Int_t     SD_N;                  //Number of hits at sensitive detector
+Int_t     SD_Id[SD_N];			 //sesitive detector ID
+here is the list of them:
+enum SensitiveDetectorList {  
+	FZB1VD=1,FZB2VD=2,
+	sieveSlit=11,septumWindow=12,
+	thirdArmShielding=30, thirdArmSC1=31, thirdArmSC2=32, 
+	virtualDetector=40,
+	BBSC1=51,BBSC2=52,	
+	VETO=60,NDSC1=61,NDSC2=62,NDSC3=63,NDSC4=64,	
+	CREXUpBlock=70,CREXTarget=71,CREXDownBlock=72,
+	virtualBoundary=99
+};
+
+Int_t     SD_Pid[SD_N];
+Int_t     SD_Tid[SD_N];
+Int_t     SD_ParentTid[SD_N];
+Double_t  SD_T[SD_N];
+Double_t  SD_X[SD_N];
+Double_t  SD_Y[SD_N];
+Double_t  SD_Z[SD_N];
+Double_t  SD_Edep[SD_N];
+Double_t  SD_P[SD_N];
+Double_t  SD_Theta[SD_N];
+Double_t  SD_Phi[SD_N];
+Double_t  SD_Pout[SD_N];
+
+Int_t     T_N;                 //Number of tracks store at T_*
+Int_t     T_Pid[T_N];
+Int_t     T_Tid[T_N];
+Int_t     T_ParentTid[T_N];
+Double_t  T_T[T_N];
+Double_t  T_X[T_N];
+Double_t  T_Y[T_N];
+Double_t  T_Z[T_N];
+Double_t  T_P[T_N];
+Double_t  T_Theta[T_N];
+Double_t  T_Phi[T_N];
+
+#this following is used to stored the trajectory, they will be stored only if 
+# argument 'StoreTrajectory' truned to 1 in option '-fast' 
+Int_t     T_StepN[T_N];
+Double_t  T_StepX[T_N][MaxTrackHit];
+Double_t  T_StepY[T_N][MaxTrackHit];
+Double_t  T_StepZ[T_N][MaxTrackHit];

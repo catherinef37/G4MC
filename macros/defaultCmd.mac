@@ -1,0 +1,174 @@
+# Default macro file execute by Bonus G4 simulation
+# Current available graphics systems are:
+#  ASCIITree (ATree)
+#  DAWNFILE (DAWNFILE)
+#  GAGTree (GAGTree)
+#  G4HepRepFile (HepRepFile)
+#  G4HepRep (HepRepXML)
+#  RayTracer (RayTracer)
+#  VRML1FILE (VRML1FILE)
+#  VRML2FILE (VRML2FILE)
+#  FukuiRenderer (DAWN)
+#  OpenGLImmediateX (OGLIX)
+#  OpenGLStoredX (OGLSX)
+#  OpenGLImmediateXm (OGLIXm)
+#  OpenGLStoredXm (OGLSXm)
+#  OpenInventorXt (OIX)
+#
+/run/verbose 2
+/control/verbose 2
+/vis/open OGLIX
+#/vis/open OGLSX
+#/vis/open OGLIXm
+#/vis/open OGLSXm
+#(OGLSXm good visualization but very slow)
+#/vis/open OIX
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/scene/endOfEventAction accumulate
+/vis/sceneHandler/attach
+/vis/viewer/set/lightsThetaPhi 90. 0.
+/vis/viewer/set/viewpointThetaPhi 30. 150.
+#/vis/scene/zoom 1.5
+#/vis/viewer/refresh
+#
+#######thes are all default values
+/mydet/randomizePrimary false
+/mydet/particleNum 1
+/mydet/fastPsGen false
+####set vettex position
+/mydet/gunZLow -10.5 cm
+/mydet/gunZHigh 10.5 cm
+/mydet/gunRLow 0.0 mm
+/mydet/gunRHigh 0.0 mm
+####set momentum
+/mydet/particle1/particleName proton
+/mydet/particle1/momentumLow 0.065 GeV
+/mydet/particle1/momentumHigh 0.350 GeV
+/mydet/particle1/thetaLow 5. deg
+/mydet/particle1/thetaHigh 175. deg
+/mydet/particle1/phiLow 0. deg
+/mydet/particle1/phiHigh 360. deg
+/mydet/particle1/sigmaMomentum 0. GeV
+/mydet/particle1/sigmaTheta 0. deg
+/mydet/particle1/sigmaPhi 0. deg
+#
+/mydet/particle1/momentum -0.02 GeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+###############
+/mydet/particle2/particleName proton
+/mydet/particle2/momentumLow 0.1 GeV
+/mydet/particle2/momentumHigh 6.350 GeV
+/mydet/particle2/thetaLow 5. deg
+/mydet/particle2/thetaHigh 175. deg
+/mydet/particle2/phiLow 0. deg
+/mydet/particle2/phiHigh 360. deg
+/mydet/particle2/sigmaMomentum 0. GeV
+/mydet/particle2/sigmaTheta 0. deg
+/mydet/particle2/sigmaPhi 0. deg
+#
+/mydet/particle2/momentum -0.02 GeV
+/mydet/particle2/theta -10. deg
+/mydet/particle2/phi -365. deg
+###############
+/mydet/particle3/particleName proton
+/mydet/particle3/momentumLow 0.1 GeV
+/mydet/particle3/momentumHigh 6.350 GeV
+/mydet/particle3/thetaLow 5. deg
+/mydet/particle3/thetaHigh 175. deg
+/mydet/particle3/phiLow 0. deg
+/mydet/particle3/phiHigh 360. deg
+/mydet/particle3/sigmaMomentum 0. GeV
+/mydet/particle3/sigmaTheta 0. deg
+/mydet/particle3/sigmaPhi 0. deg
+#
+/mydet/particle3/momentum -0.02 GeV
+/mydet/particle3/theta -10. deg
+/mydet/particle3/phi -365. deg
+###############
+/mydet/particle4/particleName proton
+/mydet/particle4/momentumLow 0.1 GeV
+/mydet/particle4/momentumHigh 6.350 GeV
+/mydet/particle4/thetaLow 5. deg
+/mydet/particle4/thetaHigh 175. deg
+/mydet/particle4/phiLow 0. deg
+/mydet/particle4/phiHigh 360. deg
+/mydet/particle4/sigmaMomentum 0. GeV
+/mydet/particle4/sigmaTheta 0. deg
+/mydet/particle4/sigmaPhi 0. deg
+#
+/mydet/particle4/momentum -0.02 GeV
+/mydet/particle4/theta -10. deg
+/mydet/particle4/phi -365. deg
+###############
+/vis/viewer/flush
+/run/verbose 0
+/tracking/storeTrajectory 1
+/tracking/verbose 0
+/stepping/verbose 2
+/mydet/verbose 1
+#add your macro here, for example
+#/control/execute your.mac
+#/run/beamOn 1
+#/field/ErDC 0.50 kV/cm
+###############old cmd to set particle amd momentum3V
+/mydet/particleNum 4
+/mydet/particle1/particleName proton
+/mydet/particle1/momentum3V 10.7 50.0 20.9 MeV
+/mydet/particle2/particleName e-
+/mydet/particle2/momentum3V 2100.70 80.0 30.9 MeV
+/mydet/particle3/particleName proton
+/mydet/particle3/momentum3V 1003.7 500.0 220.9 MeV
+/mydet/particle4/particleName pi-
+/mydet/particle4/momentum3V 100.7 0.0 90.9 MeV
+#
+#############new cmd to set particle amd momentum3V
+/mydet/particleNum 4
+/mydet/particle1/particleName proton
+/mydet/particle1/momentum3V 10.7 50.0 20.9 MeV
+/mydet/particle2/particleName e-
+/mydet/particle2/momentum3V 2100.70 80.0 30.9 MeV
+/mydet/particle3/particleName proton
+/mydet/particle3/momentum3V 1003.7 500.0 220.9 MeV
+/mydet/particle4/particleName pi-
+/mydet/particle4/momentum3V 100.7 0.0 90.9 MeV
+############
+####Another way to set the vertex
+/mydet/fixedPointBL3V 0 0 0 mm
+/mydet/slopeBL3V 0.0001 0.0003 -150.0
+####
+/tracking/particleOnly e-
+/run/beamOn 1
+/mydet/particleNum 2
+/stepping/verbose 0
+/tracking/noSecondary 1
+/tracking/particleOnly all
+/run/beamOn 1
+
+
+#/stepping/verbose 6
+#/stepping/emptyPrintList
+#/stepping/add2PrintList targetExitCapPhys
+#/stepping/add2PrintList scatChamberPhys
+#/stepping/add2PrintList scatChamberExitWindow1CoverPhys
+#/stepping/add2PrintList scatChamberExitWindow2CoverPhys
+#/run/beamOn 2
+
+/vis/viewer/set/viewpointThetaPhi 30. 120.
+/vis/viewer/set/cutawayMode intersection
+/vis/viewer/set/edge
+/vis/viewer/set/sectionPlane on 0 0 0 cm -1 0 0
+/run/beamOn 1 
+#add one cut plane, on cutposition_(x,y,x) unit normal vector(nx,ny,nz)
+#Y-Z cut view, looking along X 
+#/vis/viewer/set/sectionPlane on 0 0 0 cm -1 0 0
+#/run/beamOn 1
+#X-Z cut view, looking along Y
+#/vis/viewer/set/sectionPlane on 0 0 0 cm 0 -1 0
+#/run/beamOn 1
+#X-Y cut view, 
+#/vis/viewer/set/sectionPlane on 0 0 0 cm 0 0 -1
+#/run/beamOn 1
