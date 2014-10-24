@@ -1,0 +1,106 @@
+#///////////////////////////////////////////////////////
+# Macro file for G2P to create HEPREP file
+#
+# This file does visualization using the HepRep2 format.
+# This format is not yet ready for general use (still being debugged).
+#///////////////////////////////////////////////////////
+#/run/verbose 2
+#
+#
+# Create empty scene ("world" is default)
+#
+/vis/scene/create G2POut.heprep.zip
+#
+# Create a scene handler for a specific graphics system
+# Edit the next line(s) to choose another graphic system
+#
+# macro file execute by G2P G4 simulation
+# Current available graphics systems are:
+#  ASCIITree (ATree)
+#  DAWNFILE (DAWNFILE)
+#  GAGTree (GAGTree)
+#  G4HepRepFile (HepRepFile)
+#  G4HepRep (HepRepXML)
+#  RayTracer (RayTracer)
+#  VRML1FILE (VRML1FILE)
+#  VRML2FILE (VRML2FILE)
+#  FukuiRenderer (DAWN)
+#  OpenGLImmediateX (OGLIX)
+#  OpenGLStoredX (OGLSX)
+#  OpenGLImmediateXm (OGLIXm)
+#  OpenGLStoredXm (OGLSXm)
+#  OpenInventorXt (OIX)
+#
+#/vis/open HepRepXML
+#/vis/open HepRepFile
+/vis/open DAWNFILE
+#
+/vis/heprep/appendGeometry true
+/vis/viewer/set/culling global false
+/vis/viewer/zoom 0.0001
+#This is the top view, namely Z-X view
+/vis/viewer/set/viewpointThetaPhi 90 90.0 deg
+#
+# Add volume,trajectories,hits to scene
+#
+/vis/scene/add/volume
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+#
+/tracking/storeTrajectory 1
+##################################################################
+#add your macro here, for example
+#/tracking/particleOnly e-
+#write out  all tracks in txt output
+#/tracking/particleOnly all
+#/tracking/thisTrackOnly 0 
+#set no txt output
+#/tracking/thisTrackOnly 5 
+##################################################################
+/mydet/particleNum 2
+/mydet/particle1/theta 6 deg
+/mydet/particle1/phi 0 deg
+/mydet/particle1/particleName e-
+/mydet/particle2/theta 12.5 deg
+/mydet/particle2/phi 0 deg
+/mydet/particle2/particleName e-
+
+/mydet/particle1/momentum 1.1 GeV
+/mydet/particle2/momentum 1.1 GeV
+
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
+
+/mydet/particle1/momentum 1.6 GeV
+/mydet/particle2/momentum 1.6 GeV
+
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
+
+/mydet/particle1/momentum 2.2 GeV
+/mydet/particle2/momentum 2.2 GeV
+
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1
+
+/mydet/particle1/momentum 3.3 GeV
+/mydet/particle2/momentum 3.3 GeV
+
+/mydet/position3V 0 0 0 mm
+/run/beamOn 1
+/mydet/position3V -10.0 0.0 -15.0 mm
+/run/beamOn 1
+/mydet/position3V 10.0 0.0 15.0 mm
+/run/beamOn 1

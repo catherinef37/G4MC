@@ -1,0 +1,40 @@
+Mon Sep  8 11:06:09 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Mon Sep  8 11:06:09 2014
+The input command is:
+G4MC 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Tue Sep  9 11:31:40 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Tue Sep  9 11:31:40 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Tue Sep  9 12:29:25 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Tue Sep  9 12:29:25 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Thu Sep 11 13:19:52 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Sep 11 13:19:52 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Mon Oct 20 14:18:34 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Mon Oct 20 14:18:34 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************

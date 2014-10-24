@@ -1,0 +1,24 @@
+Mon Sep  8 11:06:18 2014
+	Create file G4Sim_nt_01_00.root
+
+Mon Sep  8 11:07:06 2014
+	Create file G4Sim_nt_01_00.root
+
+Mon Sep  8 11:07:39 2014
+	Create file G4Sim_nt_01_00.root
+
+Mon Sep  8 11:08:13 2014
+	Create file G4Sim_nt_01_00.root
+
+Tue Sep  9 10:58:32 2014
+	### Processed 10000 events in run 0. Total= 10000  root= 10000 
+
+Tue Sep  9 11:21:16 2014
+	### Processed 100 events in run 0. Total= 100  root= 100 
+
+Tue Sep  9 11:26:25 2014
+	### Processed 100 events in run 0. Total= 100  root= 100 
+
+Tue Sep  9 12:14:07 2014
+	### Processed 100 events in run 0. Total= 100  root= 100 
+

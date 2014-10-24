@@ -1,0 +1,60 @@
+#this is the make rules to support fortran code
+#this file have to be include after  $(G4INSTALL)/config/binmake.gmk
+
+ifeq ("$(G4TMPDIR)","")
+include $(G4INSTALL)/config/binmake.gmk
+endif
+
+######################
+#By Jixie: this line does not work if place after "include $(G4INSTALL)/config/binmake.gmk"
+EXTRALIBS += -l$(G4TARGET)_FOR
+
+#######################
+#Add to support fortran code inside G4 framework
+FF        := gfortran
+FFLAGS    := -Wall -fPIC  -Wno-unused-variable -fno-second-underscore \
+               -fno-automatic -fbounds-check -funroll-all-loops \
+               -fdollar-ok -ffixed-line-length-none -fno-range-check
+ifeq ($(G4SYSTEM),Linux-g++) 
+#                -fno-leading-underscore  #do not use this in mac
+FFLAGS    += -fno-leading-underscore
+endif
+
+FSRCDIR   := src
+#FOBJDIR   := $(HRSLIBDIR)
+FOBJDIR   := $(G4TMPDIR)#Use the G4 framework, this variable is defined inside g4 framework
+FSOURCE   := $(wildcard $(FSRCDIR)/*.[Ff])
+FOBJS     := $(addsuffix .o, $(basename $(FSOURCE)))
+FOBJS     := $(patsubst  $(FSRCDIR)/%.o,$(G4TMPDIR)/%.o,$(FOBJS))
+
+######################
+
+$(FOBJDIR)/%.d: $(FSRCDIR)/%.F
+	@echo Making dependency for file $< ......
+	@set -e; \
+	$(FF) -cpp $(GPPFLAGS) $(FFLAGS) $< | \
+	sed 's!$*\.o!$(OBJDIR)/& $@!' > $@; \
+	[ -s $@ ] || rm -f $@
+
+$(FOBJDIR)/%.d: $(FSRCDIR)/%.f
+	@echo Making dependency for file $< ......
+	@set -e; \
+	$(FF) -cpp $(GPPFLAGS) $(FFLAGS) $< | \
+	sed 's!$*\.o!$(OBJDIR)/& $@!' > $@; \
+	[ -s $@ ] || rm -f $@
+
+######################
+$(FOBJDIR)/%.d: $(FSRCDIR)/%.F
+	@echo Compiling $< ......
+	@$(FF) -c $< -o $@  $(FFLAGS)
+
+$(FOBJDIR)/%.o: $(FSRCDIR)/%.f
+	@echo Compiling $< ......
+	$(FF) -c $< -o $@  $(FFLAGS)
+
+######################
+FORLIB: $(FOBJS)
+	@echo Creating fortran lib  $(G4TMPDIR)/lib$(G4TARGET)_FOR.a
+	@ar r $(G4TMPDIR)/lib$(G4TARGET)_FOR.a $(FOBJS) 
+
+######################

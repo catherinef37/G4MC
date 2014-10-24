@@ -1,0 +1,66 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like /run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+/mydet/beamEnergy 2.257 GeV
+
+/mydet/gunRHigh 10.0 mm
+
+/mydet/particleNum 1
+#use the elastic engine
+/mydet/particle1/particleName e-
+/mydet/particle1/detectorAngle 5.69 deg
+/mydet/particle1/engine HRSElasEl
+
+#use this one to get the acceptance range then narrow it down
+/mydet/particle1/thetaLow 10. deg
+/mydet/particle1/thetaHigh 20. deg
+/mydet/particle1/phiLow 0. deg
+/mydet/particle1/phiHigh 50. deg
+
+#for E=1.6
+#/mydet/particle1/thetaLow 0.1 rad
+#/mydet/particle1/thetaHigh 0.25 rad
+#/mydet/particle1/phiLow 0.55 rad
+#/mydet/particle1/phiHigh 1.2 rad
+
+#for E=1.1
+#/mydet/particle1/thetaLow 0.1 rad
+#/mydet/particle1/thetaHigh 0.40 rad
+#/mydet/particle1/phiLow 0.7 rad
+#/mydet/particle1/phiHigh 1.4 rad
+
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+###################################
+/mydet/particle1/randomizeInTCS 1
+###################################
+/mydet/beamEnergy 2.257 GeV 
+#/mydet/particle1/outPlaneAngleHigh 0.05 rad
+#/mydet/particle1/outPlaneAngleLow -0.05 rad
+/mydet/particle1/outPlaneAngleHigh -0.04 rad
+/mydet/particle1/outPlaneAngleLow -0.18 rad
+/mydet/particle1/inPlaneAngleLow -0.05 rad
+/mydet/particle1/inPlaneAngleHigh 0.05 rad
+
+/run/beamOn 10000

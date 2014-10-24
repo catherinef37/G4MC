@@ -1,0 +1,128 @@
+#------------------------------------------------------------------------
+# Created by jixie zhang, 11/10/2012
+# This ini file is used to config the geometry and materials 
+# Use "#" to comment line and each line should be ended  by ";"
+# Don't put any empty line at this file,in linux this will cause false
+# The Max length of each line is 1024
+# Unit: mm, mg/cm^3, kalvin, atmosphere
+#------------------------------------------------------------------------
+###########################for CREX experiment###########################
+#Scatering chamber, need to measure Rin and Rout
+ScatChamberRin=484.025;
+ScatChamberRout=509.425;
+#The height of the scatering chamber body is 27.25", or 692.15 mm, 
+#the top is 3.5(0.25+1.0+2.25) top flange + 17 LN2 containner body then 1.25 top plate
+#the bottom is 3.25 (1.0+2.25) bottom flange, then 1.25 bottom plate
+#in total the height is 53.5", Here I just put the body height
+ScatChamberL=692.15;
+#entrance window will be 10 mil
+ScatChamberEntranceWindowThick=0.254;
+#Exit window cover will be 20 mil thick, 15 inch high, surrounding the scattering chamber windows
+ScatChamberExitWindowThick=0.508;
+#
+#the inner radius of the aluminum block (10mm) and its thickness (10mm)
+UpBlockRin=12.7;
+UpBlockThick=4;
+DownBlockRin=10;
+#the downstream block can be tapered, starting at a thickness of 2 mm nearest to the target 
+#and increasing to 4 mm thick from 5 cm further downstream.
+#down block thickness at its frontface(0cm) and 15cm downstream(9mm)
+DownBlockThickAt0cm=2;
+DownBlockThickAt5cm=4;
+#
+UpBlockLength=270;
+DownBlockLength=270;
+#thickness of target window, not for scattering chamber
+UpCapThick=0.3;
+DownCapThick=0.3;
+#
+#vacuum chamber R,thickness and up|down cap thickness
+VCRin=50;
+VCThick=0.3;
+VCUpCapThick=0.3;
+VCDownCapThick=0.3;
+VCLength=400;
+#
+#target width, height and thickness
+TargetW=10;
+TargetH=10;	 	
+TargetL=2.54; 
+#
+#The position of the VacuumChamber, distance to the center of scattering chamber at Z
+VC2SCZOffset=0;
+#
+############################################################################
+#the following will be frequently changed
+#TargetType is used to tell what the target is. Here is the candidates: 0(vacuum), 1(NH3He) 
+#2(CH2), 3(Carbon), 4(Tantalum), 5(LH2), 6(LD2), 7(LHe3), 8(LHe), 9(Aluminum), 10(Copper)
+#11(Lead), 12(Tungsten), 13(stainlesssteel), 14(Kapton), 15 (300k Air), 16(300K HeliumGas)
+#17(calcium)
+#Note that TargetR will be used only for target cell 1, but TargetL will be used by all
+TargetType=17;
+#
+SetupCREXTarget=1;
+#
+#if SetupStdScatChamber==1, will build the body tubes only, if SetupStdScatChamber==2, 
+#will also build the head flange and bottom flange 
+SetupStdScatChamber=1;
+#
+############################################################################
+#distance of the target center to the front face of the sieve slit
+Pivot2LSieveFace=800;
+Pivot2RSieveFace=800;
+#
+#size distance of the target center to the front face of the HRS virtual boundary
+#these 5 values will be used only if septum field is used and argument UseSeptumPlusStdHRS=0
+HRSVBWidth=124.0;
+HRSVBHeight=204.0;
+HRSVBThick=0.0508;
+Pivot2LHRSVBFace=806;
+Pivot2RHRSVBFace=806;
+#
+############################################################################
+#The following is a copy of CREX Detector.ini
+#I put them here to overwrite those in Detector.ini 
+############################################################################
+#setup HRS have the following candidates: 0: do nothing; 1: will build septum, sieve and VB; 
+# 2: add Q1; 3: add Q2 ; 4: add Dipole and Q3  
+#Since ContructG2PHRS() will be called only if SetupLHRS or SetupRHRS none zero. HRSContainner
+#will be set up only if SetupLHRS>=2 or SetupRHRS>=2. In order to speep up, please do not set up
+#HRSContainer. for example, SetupLHRS=1 and SetupRHRS=1 will allows to set up sieve, septum and 
+#HRSVB without setting up HRSContainer, which allows to shrink the hall size and results in fast speed.
+SetupLHRS=4;
+#SetupLHRS=1;
+SetupRHRS=4;
+#SetupRHRS=1;
+#
+#Note that sieve slit will be placed only if HRS is placed
+SetupLSieveSlit=0;
+SetupRSieveSlit=0;
+#please note that the septum angle should always be given, even if the septum is not used,
+#for example, in 12.5 deg HRS seting, we should let Septum angle be 12.5
+#Beware that the right arm is negative or =360.0-fabs(angle)
+LHRSAngle=12.5;
+RHRSAngle=347.5;
+LSeptumAngle=6.5;
+#LSeptumAngle=90;
+RSeptumAngle=353.5;
+#RSeptumAngle=270;
+###################################################################
+#The x,y,z coordinate of the NEW PIVOT in the Hall coordinate system. 
+#For 6 degree SeptumAngle, it is (0,0,-876.93) mm
+#according to http://ace.phys.virginia.edu/HAPPEX/2866, target to septum center is 175.3 cm
+#assuming septum at 70cm, target to pivot is 22cm, 
+#therefore targetZ=-105.3 and Pivot=83.3   
+PivotXOffset=0.0;
+PivotYOffset=0.0;
+PivotZOffset=-833;
+#The x,y,z coordinate of the scatter chamber in Hall coordinate system. 
+ScatChamberXOffset=0;
+ScatChamberYOffset=0;
+ScatChamberZOffset=-833;
+#The  x,y,z coordinate of the target in Hall coordinate system.
+# Note that it should stay inside the scater chamber
+TargetXOffset=0.0;
+TargetYOffset=0.0;
+TargetZOffset=-1053;
+#
+####################################################################

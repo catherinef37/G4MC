@@ -1,0 +1,96 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like #/run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+/mydet/particleNum 4
+#/mydet/particle1/particleName proton
+#/mydet/particle1/engine HRSElasNucleus
+/mydet/particle1/particleName gamma
+/mydet/particle1/engine Uniform
+/mydet/particle1/detectorAngle 70 deg
+
+/mydet/particle2/particleName proton
+/mydet/particle2/engine Uniform
+/mydet/particle2/detectorAngle 70 deg
+
+/mydet/particle3/particleName pi-
+/mydet/particle3/engine Uniform
+/mydet/particle3/detectorAngle 70 deg
+
+/mydet/particle4/particleName neutron
+/mydet/particle4/engine Uniform
+/mydet/particle4/detectorAngle 70 deg
+
+
+/mydet/targetMass 0.938 GeV
+/mydet/targetAtomicNumber 1
+
+
+/mydet/gunRHigh 10.0 mm
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+/mydet/particle2/momentum -1. MeV
+/mydet/particle2/theta -10. deg
+/mydet/particle2/phi -365. deg
+
+/mydet/particle3/momentum -1. MeV
+/mydet/particle3/theta -10. deg
+/mydet/particle3/phi -365. deg
+
+/mydet/particle4/momentum -1. MeV
+/mydet/particle4/theta -10. deg
+/mydet/particle4/phi -365. deg
+
+/mydet/particle1/randomizeInTCS 0
+#use this one to get the acceptance range then narrow it down
+/mydet/particle1/thetaLow 65. deg
+/mydet/particle1/thetaHigh 75. deg
+/mydet/particle1/phiLow -2. deg
+/mydet/particle1/phiHigh 2. deg
+/mydet/particle1/momentumLow 10 MeV
+/mydet/particle1/momentumHigh 900 MeV
+
+/mydet/particle2/thetaLow 65. deg
+/mydet/particle2/thetaHigh 75. deg
+/mydet/particle2/phiLow -2. deg
+/mydet/particle2/phiHigh 2. deg
+/mydet/particle2/momentumLow 10 MeV
+/mydet/particle2/momentumHigh 900 MeV
+
+/mydet/particle3/thetaLow 65. deg
+/mydet/particle3/thetaHigh 75. deg
+/mydet/particle3/phiLow -2. deg
+/mydet/particle3/phiHigh 2. deg
+/mydet/particle3/momentumLow 10 MeV
+/mydet/particle3/momentumHigh 900 MeV
+
+/mydet/particle4/thetaLow 65. deg
+/mydet/particle4/thetaHigh 75. deg
+/mydet/particle4/phiLow -2. deg
+/mydet/particle4/phiHigh 2. deg
+/mydet/particle4/momentumLow 10 MeV
+/mydet/particle4/momentumHigh 900 MeV
+
+
+/run/beamOn 10000
+
