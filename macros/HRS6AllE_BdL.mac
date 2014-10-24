@@ -1,0 +1,91 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like #/run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+/mydet/particleNum 1
+/mydet/particle1/particleName e-
+/mydet/gunRHigh 1.0 cm
+/mydet/gunZLow  -887.9 mm
+/mydet/gunZHigh -886.9 mm
+/mydet/gunZLow  -891.9 mm
+/mydet/gunZHigh -861.9 mm
+
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+
+#/mydet/particle1/engine HRSElasEl
+/mydet/particle1/detectorAngle 5.65 deg
+#/mydet/particle1/engine Uniform
+#/mydet/particle1/engine H90UserFit
+/mydet/particle1/engine BdL
+/mydet/particle1/momentumHigh 3.4 GeV
+/mydet/particle1/momentumLow  0.4 GeV
+
+#/mydet/targetMass 0.938 GeV
+#/mydet/targetAtomicNumber 1
+
+#####################
+/mydet/particle1/randomizeInTCS 1
+#####################
+
+/mydet/beamEnergy 3.355 GeV 
+/mydet/particle1/outPlaneAngleHigh 0.05 rad
+/mydet/particle1/outPlaneAngleLow -0.12 rad
+/mydet/particle1/inPlaneAngleLow -0.05 rad
+/mydet/particle1/inPlaneAngleHigh 0.05 rad
+#/run/beamOn 10000
+
+/mydet/beamEnergy 2.254 GeV 
+/mydet/leftHRSMomentum 2.251 GeV
+/mydet/rightHRSMomentum 2.251 GeV
+/mydet/leftHRSMomentum 0 GeV
+/mydet/rightHRSMomentum 0 GeV
+/mydet/particle1/outPlaneAngleHigh -0.088 rad
+/mydet/particle1/outPlaneAngleLow -0.090 rad
+/mydet/particle1/inPlaneAngleLow -0.001 rad
+/mydet/particle1/inPlaneAngleHigh 0.001 rad
+/mydet/particle1/outPlaneAngleHigh -0.03 rad
+/mydet/particle1/outPlaneAngleLow -0.16 rad
+/mydet/particle1/inPlaneAngleLow -0.03 rad
+/mydet/particle1/inPlaneAngleHigh 0.03 rad
+/mydet/particle1/detectorAngle 5.65 deg
+/run/beamOn 100000
+/mydet/particle1/detectorAngle -5.65 deg
+#/run/beamOn 5000
+
+/mydet/beamEnergy 1.706 GeV 
+/mydet/particle1/outPlaneAngleHigh 0.02 rad
+/mydet/particle1/outPlaneAngleLow -0.14 rad
+/mydet/particle1/inPlaneAngleLow -0.05 rad
+/mydet/particle1/inPlaneAngleHigh 0.05 rad
+#/run/beamOn 10000
+
+
+/mydet/beamEnergy 1.159 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.01 rad
+/mydet/particle1/outPlaneAngleLow -0.19 rad
+/mydet/particle1/inPlaneAngleLow -0.05 rad
+/mydet/particle1/inPlaneAngleHigh 0.05 rad
+#/run/beamOn 50000
+
+#/mydet/particle1/detectorAngle -5.65 deg
+#/run/beamOn 50000

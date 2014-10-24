@@ -1,0 +1,76 @@
+##################################################################
+# macro file execute by Bonus G4 simulation
+# Current available graphics systems are:
+#  G4HepRepFile (HepRepFile)
+#  G4HepRep (HepRepXML)
+#  OpenGLImmediateX (OGLIX | OGLIWin32)
+#  OpenGLStoredX (OGLSX | OGLSWin32)
+#  OpenGLImmediateXm (OGLIXm)
+#  OpenGLStoredXm (OGLSXm)
+#  OpenInventorXt (OIX)
+#
+#/vis/open OGLIWin32
+#/vis/open OGLSWin32
+/vis/open OGLIX
+#/vis/open OGLSX
+#/vis/open OGLIXm
+#/vis/open OGLSXm
+#(OGLSXm good visualization but very slow)
+#/vis/open OIX
+/vis/scene/create
+/vis/scene/add/volume
+/vis/sceneHandler/attach
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/scene/endOfEventAction accumulate 10
+/vis/viewer/set/lightsThetaPhi 30. 270. deg
+/vis/viewer/set/viewpointThetaPhi 30. 30. deg
+#/vis/viewer/set/viewpointThetaPhi 90. 90. deg
+#/vis/viewer/zoom 1.5
+/vis/modeling/trajectories/create/drawByParticleID True
+# Draw coordinate axes: x,y,z axislength unit
+/vis/scene/add/axes 0. 0. -1.3 2 m
+#/vis/scene/add/scale  5 m x 1 0 0 auto
+#/vis/scene/add/scale  5 m y 0 1 0 auto
+#/vis/scene/add/scale  5 m z 0 0 1 auto
+/vis/scene/add/scale  4 m x 1 0 0 manual 0 -2 -2 m
+/vis/scene/add/scale  4 m y 0 1 0 manual -2 0 -2 m
+/vis/scene/add/scale  4 m z 0 0 1 manual -2 -2 0 m
+/vis/viewer/set/background 0.3 0.4 0.5 
+/vis/viewer/set/background 0.6 0.9 0.9
+/vis/viewer/set/style surface 
+/vis/viewer/refresh
+##############################################
+#add your macro here, for example
+#/tracking/particleOnly e-
+#write out  all tracks in txt output
+#/tracking/particleOnly all
+#/tracking/thisTrackOnly 0 
+#set no txt output
+#/tracking/thisTrackOnly 5 
+##################################################################
+
+/vis/viewer/set/viewpointThetaPhi 120. 120. deg
+#/vis/viewer/set/viewpointThetaPhi 180. 0. deg
+/vis/viewer/set/cutawayMode intersection
+/vis/viewer/set/edge
+#/vis/viewer/set/sectionPlane on 0 0 0 cm 0 1 1
+#/run/beamOn 1 
+#add one cut plane, on cutposition_(x,y,x) unit normal vector(nx,ny,nz)
+#Y-Z cut view, looking along X 
+#/vis/viewer/set/sectionPlane on 0 0 0 cm -1 0 0
+#/run/beamOn 1
+#X-Z cut view, looking along -Y (top view)
+#/vis/viewer/set/sectionPlane on 0 0 0 cm -0.0001 1 0
+#/run/beamOn 1
+#X-Y cut view, 
+#/vis/viewer/set/sectionPlane on 0 0 0 cm 0 0 -1
+#/run/beamOn 1
+
+
+#to view the target from top
+#/vis/viewer/set/viewpointThetaPhi 90. 90. deg
+#/vis/viewer/set/sectionPlane on 0 0 0 cm -0.0001 1 0
+#/vis/viewer/set/targetPoint 0 0 -1.3 m 
+#/vis/viewer/zoomTo 10.0
+ 

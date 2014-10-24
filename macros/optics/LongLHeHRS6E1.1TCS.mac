@@ -1,0 +1,68 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like #/run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+/mydet/verbose 0
+#for txt output
+#/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+/mydet/particleNum 1
+/mydet/particle1/particleName e-
+/mydet/gunRHigh 0.2 mm
+#trigger the random momentum and vertex generator
+/mydet/particle1/momentum -1. MeV
+/mydet/particle1/theta -10. deg
+/mydet/particle1/phi -365. deg
+/mydet/gunZ  -225 cm
+/mydet/gunZLow  -89.9 cm
+/mydet/gunZHigh -85.5 cm
+
+/mydet/particle1/engine HRSElasEl
+/mydet/particle1/detectorAngle 5.69 deg
+#/mydet/targetMass 0.938 GeV
+#/mydet/targetAtomicNumber 1
+
+#####################
+/mydet/particle1/randomizeInTCS 1
+#####################
+
+/mydet/beamEnergy 1.706 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.06 rad
+/mydet/particle1/outPlaneAngleLow -0.22 rad
+/mydet/particle1/inPlaneAngleLow -0.025 rad
+/mydet/particle1/inPlaneAngleHigh 0.035 rad
+#/run/beamOn 10000
+
+/mydet/beamEnergy 2.257 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.03 rad
+/mydet/particle1/outPlaneAngleLow -0.17 rad
+/mydet/particle1/inPlaneAngleLow -0.025 rad
+/mydet/particle1/inPlaneAngleHigh 0.035 rad
+#/run/beamOn 10000
+
+
+/mydet/beamEnergy 3.355 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.01 rad
+/mydet/particle1/outPlaneAngleLow -0.15 rad
+/mydet/particle1/inPlaneAngleLow -0.025 rad
+/mydet/particle1/inPlaneAngleHigh 0.035 rad
+#/run/beamOn 10000
+
+/mydet/beamEnergy 1.159 GeV 
+/mydet/particle1/outPlaneAngleHigh -0.11 rad
+/mydet/particle1/outPlaneAngleLow -0.28 rad
+/mydet/particle1/inPlaneAngleLow -0.025 rad
+/mydet/particle1/inPlaneAngleHigh 0.035 rad
+/run/beamOn 1000000
