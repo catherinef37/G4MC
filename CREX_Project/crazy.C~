@@ -1,0 +1,8 @@
+crazy(){
+  ifstream INFILE;
+  INFILE.open("parse.dat");
+  Double_t B1, B2, B3;
+  INFILE >> B1 >> B2 >> B3;
+  cout << B1 << " " << B2 << " " << B3 << endl;
+}
+

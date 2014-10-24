@@ -1,0 +1,77 @@
+########################################################################
+#   This Makefile shows how to compile all C++, C and Fortran
+#   files found in $(SRCDIR) directory.
+#   Linking is done with g++. Need to have $ROOTSYS defined
+########################################################################
+
+
+########################################################################
+LIBFILE     := libXSModel.a
+VERSION     := 1.5.0
+
+########################################################################
+#if you have multiple include dirs, use ':' or space to separate them 
+SRCDIR      := .
+INCDIR      := .
+
+
+########################################################################
+MODELDIR    := Bosted Elas QFS_N_EPC Wiser Compton
+INCDIR      := $(INCDIR):$(MODELDIR)
+
+########################################################################
+include mk.rules
+
+########################################################################
+# Libs
+SYSLIBS     := -lstdc++ -lgfortran
+MODELLIST   := $(subst :, ,$(MODELDIR))
+OTHEROBJS   := $(foreach n,$(MODELLIST),$(patsubst $(n)%,$(n)/$(OBJDIR)%,\
+               $(wildcard $(n)/*.[CcFf])))
+OTHEROBJS   += $(foreach n,$(MODELLIST),$(patsubst $(n)%,$(n)/$(OBJDIR)%,\
+               $(wildcard $(n)/*.[Cc][Cc])))
+OTHEROBJS   += $(foreach n,$(MODELLIST),$(patsubst $(n)%,$(n)/$(OBJDIR)%,\
+               $(wildcard $(n)/*.[Cc][XxPp][XxPp])))
+OTHEROBJS   := $(addsuffix .o, $(basename $(OTHEROBJS)))
+OTHERLIBS   := $(addprefix ../../, $(OTHERLIBS))
+
+########################################################################
+# ROOT configure
+ROOTCFLAGS  := $(shell root-config --cflags)
+ROOTLIBS    := $(shell root-config --libs)
+ROOTGLIBS   := $(shell root-config --glibs) -lMinuit
+
+CXXFLAGS    += $(ROOTCFLAGS) 
+LIBS        := $(SYSLIBS) $(ROOTLIBS)
+GLIBS       := $(SYSLIBS) $(ROOTGLIBS)
+########################################################################
+
+all: lib
+
+
+########################################################################
+lib: dir $(OBJS)
+	@for model in $(MODELLIST); do \
+		if [ -d $$model ]; then \
+		  make -s -C $$model; \
+		fi; \
+	done;
+	@$(AR) -r $(OBJDIR)/$(LIBFILE).$(VERSION) $(OBJS) $(OTHEROBJS) &>/dev/null
+	@ln -sf $(LIBFILE).$(VERSION) $(OBJDIR)/$(LIBFILE)
+	@echo "Linking $(LIBFILE) ($(VERSION)) ...... done!"
+
+########################################################################
+myclean: dir
+	@rm -f $(OBJDIR)/*
+	@rm -f $(LIBFILE) $(LIBFILE).$(VERSION)
+	@rm -f *~ *# */*~ */*#
+
+
+distclean: clean
+	@for model in $(MODELLIST); do \
+		if [[ -d $$model ]]; then \
+			make clean -s -C $$model; \
+		fi; \
+	done;
+
+########################################################################
