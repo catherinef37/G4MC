@@ -71,7 +71,10 @@ private:
 	void   H90UserFitEngine(int index);
 	void   ComptonEngine(int index);
 	void   BdLEngine(int index);
+<<<<<<< HEAD
 	void   PREXEngine(int index);
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	void   TwoBodyEngine(int index);
 	
 	//calculate the BdL (tesla.m) from target to 805mm away along ray with angle of pEndPlaneAngle  

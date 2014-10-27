@@ -75,8 +75,11 @@ private:
 
   G4VPhysicsConstructor*  emPhysicsList;
   G4VPhysicsConstructor*  particleList;
+<<<<<<< HEAD
   G4VPhysicsConstructor*  electroNuclear;
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
   std::vector<G4VPhysicsConstructor*>  hadronPhys;
     
   PhysicsListMessenger* pMessenger;

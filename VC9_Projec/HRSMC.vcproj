@@ -230,6 +230,13 @@
 				>
 			</File>
 			<File
+<<<<<<< HEAD
+=======
+				RelativePath="..\src\HRSEMPhysics.cc"
+				>
+			</File>
+			<File
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				RelativePath="..\src\HRSEventAction.cc"
 				>
 			</File>
@@ -632,10 +639,13 @@
 				>
 			</File>
 			<File
+<<<<<<< HEAD
 				RelativePath=".\Detector_BoNuS.ini"
 				>
 			</File>
 			<File
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				RelativePath=".\Detector_CREX.ini"
 				>
 			</File>
@@ -716,10 +726,13 @@
 				>
 			</File>
 			<File
+<<<<<<< HEAD
 				RelativePath="..\src\BoNuSDetectorConstruction.cc"
 				>
 			</File>
 			<File
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				RelativePath="..\src\CREXDetectorConstruction.cc"
 				>
 			</File>
@@ -796,6 +809,7 @@
 			Name="Physics"
 			>
 			<File
+<<<<<<< HEAD
 				RelativePath="..\src\ElectroNuclearPhysics.cc"
 				>
 			</File>
@@ -804,6 +818,8 @@
 				>
 			</File>
 			<File
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				RelativePath="..\src\HRSGeneralPhysics.cc"
 				>
 			</File>

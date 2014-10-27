@@ -69,11 +69,17 @@ HRSEventAction::~HRSEventAction()
 
 void HRSEventAction::BeginOfEventAction(const G4Event* evt)
 {
+<<<<<<< HEAD
   //cout << "We are at the beginning of event action!" << endl;
 	for(int i=0;i<MaxStoredTrjN;i++) mStoreTrackIdList[i]=false;
 	//cout << "After loop." << endl;
 	if (verboseLevel<2) return;
 	cout << "Verbose is > 1" << endl;
+=======
+	for(int i=0;i<MaxStoredTrjN;i++) mStoreTrackIdList[i]=false;
+	if (verboseLevel<2) return;
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//print the following info
 	//>>>Begin of Event       1:  Vertex=(10.000,0.000,15.000)mm
 	//*********************************************************************************************
@@ -700,7 +706,10 @@ void HRSEventAction::ProcessSDHits(G4HCofThisEvent* HCE)
 
 void HRSEventAction::EndOfEventAction(const G4Event* evt)
 {
+<<<<<<< HEAD
   //cout << "We are at the end of event action!" << endl;
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	if(!gHRSTree->iNoDetectorResponse)
 	{
 		UsageManager* pConfig=UsageManager::GetUsageManager(); 
