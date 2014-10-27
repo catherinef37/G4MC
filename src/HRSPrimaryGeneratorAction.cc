@@ -397,7 +397,10 @@ void HRSPrimaryGeneratorAction::GetMomentum(int i)
 	else if(primaryEngine[i]=="RootNtuple")  {HRSNtupleEngine(i); return;}
 	else if(primaryEngine[i]=="H90UserFit")  {H90UserFitEngine(i); return;}
 	else if(primaryEngine[i]=="BdL")         {BdLEngine(i); return;}
+<<<<<<< HEAD
 	else if(primaryEngine[i]=="PREX")         {PREXEngine(i); return;}
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	else 
 	{
 		G4cout<<"Warning: Unknown event generator \""<<primaryEngine[i]
@@ -1072,6 +1075,7 @@ void HRSPrimaryGeneratorAction::BdLEngine(int index)
 	momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
 }
 
+<<<<<<< HEAD
 void HRSPrimaryGeneratorAction::PREXEngine(int index)
 {
 	double pPtot=0.0;
@@ -1095,6 +1099,8 @@ void HRSPrimaryGeneratorAction::PREXEngine(int index)
 	momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
 }
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 //if the beam is tilted, need to get the the effective scattering angle
 //this routine will be used only if the beam is tilted and the particle

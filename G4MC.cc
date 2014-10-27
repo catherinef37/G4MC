@@ -106,6 +106,10 @@ int main(int argc,char** argv)
 	runManager->SetUserAction(new HRSEventAction);
 	runManager->SetUserAction(new HRSTrackingAction);
 	runManager->SetUserAction(new HRSSteppingAction);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	////////////////////////////////////////////////////////////////////
 	// User interactions
 	//////////////////////////////////////////////////////////////////// 
@@ -113,6 +117,10 @@ int main(int argc,char** argv)
 	// Define (G)UI for interactive mode
 	// The UImanager will be handled by Ranmanager,no need to delete it manually 
 	G4UImanager* UImanager = G4UImanager::GetUIpointer();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	char cmd[255],tmpstr[255];
 	//take care of cmd files then the mcin file
 	int pNofMac=0;
@@ -129,6 +137,10 @@ int main(int argc,char** argv)
 			UImanager->ApplyCommand(cmd);
 		}
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//By Jixie: Might change the trigger for this part later
 	//gConfig->GetArgument("UseRootNtuple",pUseRootNtuple); 
 	//if(UseRootNtuple) //root ntuple mode	
@@ -142,6 +154,10 @@ int main(int argc,char** argv)
 		G4cout<<"Trying to execute cmd: "<<cmd<<G4endl;
 		UImanager->ApplyCommand(cmd);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	////////////////////////////////////////////////////////////////////
 	// interaction mode
 	////////////////////////////////////////////////////////////////////
@@ -157,11 +173,19 @@ int main(int argc,char** argv)
 			//put your extra cmd here;
 			if(CheckFile("gui.mac"))
 			{
+<<<<<<< HEAD
 			  UImanager->ApplyCommand("/control/execute gui.mac");
+=======
+				UImanager->ApplyCommand("/control/execute gui.mac");
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 			}
 		}
 		pUI->SessionStart();
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	////////////////////////////////////////////////////////////////////
 	//free the memory
 	////////////////////////////////////////////////////////////////////

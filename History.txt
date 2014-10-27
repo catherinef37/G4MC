@@ -31,6 +31,7 @@ waste a lot of CPU cycles to propagate some unwanted particles. Need to find out
 a way to optimize the speed.
 
 ---------------------------------------------------------------------------
+<<<<<<< HEAD
 V1.06
 1.  Added New geometry class for RTPC12. Keep original RTPC6. One can choose it 
 	using parameter "SetupRTPCGeometry" in Detector ini
@@ -49,6 +50,8 @@ V1.06
 	
 
 ---------------------------------------------------------------------------
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 V1.05
 1. Added RTPC Geometry. Do not add reconstruction part yet. Added RTPC target field maps.
    I still use BField_Helm to read and interpolate this map, since it is also a RZ field.
