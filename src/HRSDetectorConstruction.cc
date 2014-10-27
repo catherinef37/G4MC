@@ -49,7 +49,10 @@
 #include "BigBiteDetectorConstruction.hh"
 #include "SBSDetectorConstruction.hh"
 #include "G2PDetectorConstruction.hh"
+<<<<<<< HEAD
 #include "BoNuSDetectorConstruction.hh"
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 #include "RTPCDetectorConstruction.hh"
 #include "CREXDetectorConstruction.hh"
 #include "HMSDetectorConstruction.hh"
@@ -450,6 +453,7 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 	/////////////////////////
 	//RTPC geometries
 	/////////////////////////
+<<<<<<< HEAD
 	if (mSetupRTPCGeometry==1) 
 	{
 		BoNuSDetectorConstruction* theBoNuS6 = new BoNuSDetectorConstruction(magneticLogical); 
@@ -461,6 +465,12 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 	{
 		RTPCDetectorConstruction* theBoNuS12 = new RTPCDetectorConstruction(magneticLogical); 
 		theBoNuS12->Construct();
+=======
+	if (mSetupRTPCGeometry) 
+	{
+		RTPCDetectorConstruction* theRTPC = new RTPCDetectorConstruction(magneticLogical); 
+		theRTPC->Construct();
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		//update the parameters
 		this->GetConfig(); 
 	}
@@ -593,6 +603,10 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 			pVBRin,(pVBRin+pVBRout)/2,pVBHeight/2.0,-240*deg,300*deg);
 		G4VSolid* virtualBoundary1Solid = new G4Tubs("virtualBoundary1Tubs",
 			(pVBRin+pVBRout)/2,pVBRout,pVBHeight/2.0,-240*deg,300*deg);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		G4LogicalVolume* virtualBoundary0Logical = new G4LogicalVolume(virtualBoundary0Solid,
 			mMaterialManager->air,"virtualBoundary0Logical",0,0,0);
 		G4LogicalVolume* virtualBoundary1Logical = new G4LogicalVolume(virtualBoundary1Solid,
@@ -1084,6 +1098,10 @@ G4VPhysicalVolume* HRSDetectorConstruction::ConstructHRS(G4LogicalVolume* mother
 
 	G4VSolid* Q3TunnelSolid = new G4Tubs("Q3TunnelTub",0,pQ3Rin-0.1*mm,
 		1.8*m,0.0,360.0*deg);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4LogicalVolume* LQ3TunnelLogical = new G4LogicalVolume(Q3TunnelSolid,
 		mMaterialManager->vacuum,"LQ3TunnelLogical",0,0,0);
 	G4LogicalVolume* RQ3TunnelLogical = new G4LogicalVolume(Q3TunnelSolid,

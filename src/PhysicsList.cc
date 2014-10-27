@@ -81,9 +81,12 @@
 #include "G4Positron.hh"
 #include "G4Proton.hh"
 
+<<<<<<< HEAD
 #include "ElectroNuclearPhysics.hh"
 
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
 
 PhysicsList::PhysicsList(G4String phys) : G4VModularPhysicsList()
@@ -103,10 +106,13 @@ PhysicsList::PhysicsList(G4String phys) : G4VModularPhysicsList()
 
   // EM physics
   emPhysicsList = new G4EmStandardPhysics();
+<<<<<<< HEAD
 
   // Electro-Nuclear or Photo-Nuclear physics
   electroNuclear = new ElectroNuclearPhysics("Electro-Nuclear");
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
   if(phys!="") AddPhysicsList(phys); 
 }
 
@@ -117,7 +123,10 @@ PhysicsList::~PhysicsList()
   delete pMessenger;
   delete particleList;
   delete emPhysicsList;
+<<<<<<< HEAD
   delete electroNuclear;
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
   for(size_t i=0; i<hadronPhys.size(); i++) {
     delete hadronPhys[i];
   }
@@ -137,8 +146,11 @@ void PhysicsList::ConstructProcess()
   AddTransportation();
   emPhysicsList->ConstructProcess();
   particleList->ConstructProcess();
+<<<<<<< HEAD
   electroNuclear->ConstructProcess();
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
   for(size_t i=0; i<hadronPhys.size(); i++) {
     hadronPhys[i]->ConstructProcess();
   }

@@ -284,10 +284,15 @@ void HRSMaterial::ConstructMaterials()
 	aluminum = new G4Material(name="Aluminum", z=13., a, density);
 
 	//Calcium
+<<<<<<< HEAD
 	//a = 40.078*g/mole;//natural
 	a = 47.952534*g/mole;//48Ca
 	//density = 1.55*g/cm3;//natural
 	density = 1.855*g/cm3;//48Ca
+=======
+	a = 40.078*g/mole;
+	density = 1.55*g/cm3;
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	calcium = new G4Material(name="Calcium", z=20., a, density);
 
 	//Iron
@@ -364,10 +369,13 @@ void HRSMaterial::ConstructMaterials()
 	density = 11.34*g/cm3;
 	lead = new G4Material(name="Lead", z=82., a, density);
 
+<<<<<<< HEAD
 	//lead208
 	a = 207.9766521*g/mole;
 	density = 11.38*g/cm3;
 	lead208 = new G4Material(name="Lead208", z=82., a, density);
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	//solid NH3 	
 	//double mSolidNH3D = 0.817*g/cm3;

@@ -48,9 +48,13 @@ private:
 	G4Material* kapton;
 	G4Material* deuteriumGas;
 	G4Material* copper;
+<<<<<<< HEAD
 	G4Material* silicon;
 	G4Material* stainlesssteel;
 	G4Material* beryllium;
+=======
+	G4Material* stainlesssteel;
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	G4Material* H2TgGas;
 	G4Material* D2TgGas;

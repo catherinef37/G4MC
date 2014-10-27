@@ -64,8 +64,11 @@ public:
 	#    will plus 4 if it can be transported to the focus plane 
 	*/
 
+<<<<<<< HEAD
         double  rate_208Pb;
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	double  X0;
 	double  Y0;
 	double  Z0;
@@ -101,11 +104,14 @@ public:
 	double	Thetafp_tr;
 	double  Phifp_tr;
 
+<<<<<<< HEAD
 	double  Xpr_tr;
 	double  Ypr_tr;
 	double	Thetapr_tr;
 	double  Phipr_tr;
 
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//reconstructed variables at target plane
 	double  Xtg_rec_tr;
 	double  Ytg_rec_tr;
@@ -296,7 +302,10 @@ public:
 	void SetSDName(int i, const char* val){if(i<MaxSDHit) sprintf(mSDName[i],"%s",val);};
 
 	bool GetConfigTreeFilledFlag(){return bConfigTreeFilled;};
+<<<<<<< HEAD
   float InterpolateNickie(float Q2_in);
+=======
+>>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 public:
 	// tree variables
