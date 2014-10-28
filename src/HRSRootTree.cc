@@ -14,10 +14,7 @@
 
 #include "TObject.h"
 #include "math.h"
-<<<<<<< HEAD
 #include <stdlib.h> 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 #include <string>
 #include <iostream>
 #include "HRSTransform_TCSNHCS.hh"
@@ -169,10 +166,6 @@ void HRSRootTree::Initilize()
 {
 	printf("HRSRootTree::HRSRootTree(): Initializing HRSRootTree......\n");
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	/////////////////////////////////////////////////////
 	mSetupLHRS=mSetupRHRS=0;
 	gConfig->GetParameter("SetupLHRS",mSetupLHRS);
@@ -234,16 +227,10 @@ void HRSRootTree::Initilize()
 	gConfig->GetArgument("SnakeModel",mSnakeModel);
 	if(mUseSeptumPlusStdHRS)  
 	{
-<<<<<<< HEAD
-	  cout<<"You have specified to use option '-UseSeptumPlusStdHRS', so the standard 12.5 SNAKE model will be used\n";
-		mSnakeModel=1;
-	}
-=======
 		cout<<"You have specified to use option '-UseSeptumPlusStdHRS', so the standard 12.5 SNAKE model will be used\n";
 		mSnakeModel=1;
 	}
 
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//Do not use HRS optics reconstruction is HRS is not used
 	mUseOpticsDB=0;
 	if(mSetupLHRS || mSetupRHRS)
@@ -739,11 +726,7 @@ void HRSRootTree::Initilize()
 				tree[j]->Branch("TrackId",&(track[j]->TrackId),"TrackId/I");
 				tree[j]->Branch("TrackClass",&(track[j]->TrackClass),"TrackClass/I");
 
-<<<<<<< HEAD
 				tree[j]->Branch("rate_208Pb",&(track[j]->rate_208Pb),"rate_208Pb/D");
-
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				tree[j]->Branch("X0",&(track[j]->X0),"X0/D");
 				tree[j]->Branch("Y0",&(track[j]->Y0),"Y0/D");
 				tree[j]->Branch("Z0",&(track[j]->Z0),"Z0/D");
@@ -778,14 +761,10 @@ void HRSRootTree::Initilize()
 				tree[j]->Branch("Thetafp_tr",&(track[j]->Thetafp_tr),"Thetafp_tr/D");
 				tree[j]->Branch("Phifp_tr",&(track[j]->Phifp_tr),"Phifp_tr/D");
 
-<<<<<<< HEAD
 				tree[j]->Branch("Xpr_tr",&(track[j]->Xpr_tr),"Xpr_tr/D");
 				tree[j]->Branch("Ypr_tr",&(track[j]->Ypr_tr),"Ypr_tr/D");
 				tree[j]->Branch("Thetapr_tr",&(track[j]->Thetapr_tr),"Thetapr_tr/D");
 				tree[j]->Branch("Phipr_tr",&(track[j]->Phipr_tr),"Phipr_tr/D");
-
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 				tree[j]->Branch("Xtg_rec_tr",&(track[j]->Xtg_rec_tr),"Xtg_rec_tr/D");
 				tree[j]->Branch("Ytg_rec_tr",&(track[j]->Ytg_rec_tr),"Ytg_rec_tr/D");
 				tree[j]->Branch("Thetatg_rec_tr",&(track[j]->Thetatg_rec_tr),"Thetatg_rec_tr/D");
@@ -1064,11 +1043,8 @@ void HRSRootTree::Reset()//reset the variables
 		track[i]->TrackId = i;
 		track[i]->TrackClass=-1;
 
-<<<<<<< HEAD
 		track[i]->rate_208Pb = 0;
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		track[i]->X0=-150.0;
 		track[i]->Y0=-150.0;
 		track[i]->Z0=-150.0;
@@ -1114,14 +1090,11 @@ void HRSRootTree::Reset()//reset the variables
 		track[i]->Thetafp_tr=-10.0;
 		track[i]->Phifp_tr=-10.0;
 
-<<<<<<< HEAD
 		track[i]->Xpr_tr=-150.0;
 		track[i]->Ypr_tr=-150.0;
 		track[i]->Thetapr_tr=-10.0;
 		track[i]->Phipr_tr=-10.0;
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		track[i]->X_rec_tr=-150.0;
 		track[i]->Y_rec_tr=-150.0;
 		track[i]->Z_rec_tr=-150.0;
@@ -1749,26 +1722,19 @@ bool HRSRootTree::TransportThruHMS(int i)
 	//Update TrackClass and store focal plane variables
 	pTrack->TrackClass+=4;
 	// in unit of mm and rad
-<<<<<<< HEAD
 	//NOT THIS ONE
 	//cout << "What about now?" << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	pTrack->Xfp_tr=pV5_fp[0]*1000.;
 	pTrack->Thetafp_tr=pV5_fp[1];
 	pTrack->Yfp_tr=pV5_fp[2]*1000.;
 	pTrack->Phifp_tr=pV5_fp[3];
-
-<<<<<<< HEAD
 	float z_pr= 1000.; //mm
 	
 	pTrack->Xpr_tr     = pTrack->Xfp_tr + pTrack->Thetafp_tr * z_pr;
 	pTrack->Ypr_tr     = pTrack->Yfp_tr + pTrack->Phifp_tr * z_pr;
 	pTrack->Thetapr_tr = pTrack->Thetafp_tr;
 	pTrack->Phipr_tr   = pTrack->Phifp_tr;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
-	
+
 	//currently there is no HMS transportation package, so I simply do these smearing  
 	double pDetRes_x = 0.001; //m; 
 	double pDetRes_y = 0.001; //m; 
@@ -2038,10 +2004,7 @@ bool HRSRootTree::TransportThruHMS(int i)
 
 bool HRSRootTree::TransportThruHRS(int i)
 {
-<<<<<<< HEAD
   //cout << "Transporting through HRS." << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	MyTrack *pTrack=track[i];
 	if(pTrack->Pvb/keV<1.0) return false;
 /*
@@ -2293,17 +2256,13 @@ bool HRSRootTree::TransportThruHRS(int i)
 	//Update TrackClass and store focal plane variables
 	pTrack->TrackClass+=4;
 	// in unit of mm and rad
-<<<<<<< HEAD
 	//NOT THIS ONE EITHER
 	//cout << "Defining fp variables now." << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	pTrack->Xfp_tr=pV5_fp[0]*1000.;
 	pTrack->Thetafp_tr=pV5_fp[1];
 	pTrack->Yfp_tr=pV5_fp[2]*1000.;
 	pTrack->Phifp_tr=pV5_fp[3];
 
-<<<<<<< HEAD
 	float z_pr= 1000.; //mm
 	
 	pTrack->Xpr_tr     = pTrack->Xfp_tr + pTrack->Thetafp_tr * z_pr;
@@ -2610,16 +2569,10 @@ bool HRSRootTree::TransportThruHRS(int i)
 
 bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 {
-<<<<<<< HEAD
   //cout << "Starting Transport." << endl;
   MyTrack *pTrack=track[i];
 	if(pTrack->Pvb/keV<1.0) return false;
 	//cout << "Passes keV test!" << endl;
-=======
-	MyTrack *pTrack=track[i];
-	if(pTrack->Pvb/keV<1.0) return false;
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	int    pIsLeftArm=(pTrack->Xvb>0)?1:0; //left arm or right arm
 	double pEndPlaneAngle=(pIsLeftArm)?mLSeptumAngle:mRSeptumAngle;
 	double pHRSMomentum=(pIsLeftArm)?mLHRSMomentum:mRHRSMomentum;
@@ -2695,14 +2648,9 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	}
 
 	//Jixie: to make it run fast, stop tracking if less than skim level
-<<<<<<< HEAD
 	//cout << "It could die here?" << endl;
 	if (track[0]->TrackClass<iSkimLevel) return false;
 	//cout << "NOPE!"<< endl;
-=======
-	if (track[0]->TrackClass<iSkimLevel) return false;
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	// *************************************************************************
 	//Section 2:
@@ -2714,14 +2662,9 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 
 	pTrack->Delta = (pTrack->Pvb - pHRSMomentum) / pHRSMomentum;
 	//We know that this particle will not go thrught HRS, stop here to save time
-<<<<<<< HEAD
 	//cout << "It could die here?" << endl;
 	if(fabs(pTrack->Delta)>0.1) return false;
 	//cout << "NOPE" << endl;
-=======
-	if(fabs(pTrack->Delta)>0.1) return false;
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	// To use the transportation functions (from target plane to focus plane), 
 	// we have to project it back to the target plane (Z_tg=0), all length in unit of mm
@@ -2749,13 +2692,9 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//reconstructed values stored in pV5_rec
 
 	bGoodParticle=mHRSTranModel->Forward(pV5_proj2tg, pV5_fp);
-<<<<<<< HEAD
 	//cout << "It could die here?" << endl;
 	//if(!bGoodParticle) return false;
 	//cout << "NOPE!" << endl;
-=======
-	if(!bGoodParticle) return false;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	bool bApplyVDCSmearing=true;
 	if(bApplyVDCSmearing)
@@ -2805,17 +2744,13 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//Update TrackClass and store focal plane variables
 	pTrack->TrackClass+=4;
 	// in unit of mm and rad
-<<<<<<< HEAD
 	//THIS IS THE ONE cout << "Then it's got to be this one!" << endl;
 	//cout << pV5_fp[0] << " " << pV5_fp[1] << " " << pV5_fp[2] << " " << pV5_fp[3] << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	pTrack->Xfp_tr=pV5_fp[0]*1000.;
 	pTrack->Thetafp_tr=pV5_fp[1];
 	pTrack->Yfp_tr=pV5_fp[2]*1000.;
 	pTrack->Phifp_tr=pV5_fp[3];
 
-<<<<<<< HEAD
 	float z_pr= 1000.; //mm
 	
 	pTrack->Xpr_tr     = pTrack->Xfp_tr + pTrack->Thetafp_tr * z_pr;
@@ -2840,8 +2775,6 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//cout << "Cross section for 208Pb at " << QQ2 << " is " << XXS_208Pb << endl;
 	pTrack->rate_208Pb = XXS_208Pb;
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	if (mUseOpticsDB==1) {
 		pTrack->Xtg_rec_db_tr = pV5_rec_db[0]*1000.;
 		pTrack->Thetatg_rec_db_tr = pV5_rec_db[1];
@@ -2948,18 +2881,11 @@ void HRSRootTree::DoRootTree()
 	//for (int j=0;j<MaxPrimaryNum;j++)   
 	for (int j=0;j<PartNum;j++)   //use this line to speed up
 	{	
-<<<<<<< HEAD
 	  //cout << track[j]->Pvb/keV << " = " << track[j]->Pvb << " / " << keV << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		if (track[j]->Pvb/keV>1.0) track[j]->TrackClass=0;
 		if(track[j]->TrackClass>=0)
 		{
 			bool bGoodParticle=false;
-<<<<<<< HEAD
-=======
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 			//check which VB this particle hit
 			if(track[j]->VBName.find("HRS") != string::npos)
 			{ 
@@ -3099,7 +3025,6 @@ void HRSRootTree::DoRootTree()
 	return;
 }
 
-<<<<<<< HEAD
 float HRSRootTree::InterpolateNickie(float Q2_in){
   ifstream INFILE;
   INFILE.open("/home/Nickie/JLab/HallA/G4MC/CREX_Project/mefcal.pb208_1_25deg_fine.out");
@@ -3125,5 +3050,3 @@ float HRSRootTree::InterpolateNickie(float Q2_in){
   //cout << mmm << " " << FFF << endl;
   return FFF;
 }
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
