@@ -3,7 +3,6 @@
 #how long it just took, it is good only for shooting a large amount 
 #of events like /run/beamOn 10000, not good for event by event 
 #shooting like fsgen
-<<<<<<< HEAD
 #/run/verbose 0
 #/control/verbose 0
 #/tracking/verbose 0
@@ -13,17 +12,6 @@
 #for txt output
 /tracking/particleOnly e-
 #/tracking/particleOnly all
-=======
-/run/verbose 0
-/control/verbose 0
-/tracking/verbose 0
-/stepping/verbose 0
-#this will print the event header
-/mydet/verbose 0
-#for txt output
-#/tracking/particleOnly e-
-/tracking/particleOnly all
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 #write out  all tracks in txt output
 #/tracking/thisTrackOnly 0
 #set no txt output
@@ -33,7 +21,6 @@
 
 /mydet/gunRHigh 0.0 mm
 #trigger the random momentum and vertex generator
-<<<<<<< HEAD
 /mydet/particle1/momentum 2.2 GeV
 #/mydet/particle1/theta 4. deg
 /mydet/particle1/theta 12.5 deg
@@ -42,12 +29,6 @@
 #/mydet/gunZ  -83.3 cm
 /mydet/gunZ  0 cm
 #/mydet/gunZ  -100. cm
-=======
-/mydet/particle1/momentum -10. MeV
-/mydet/particle1/theta 0. deg
-/mydet/particle1/phi 0. deg
-/mydet/gunZ  -87.693 cm
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 /mydet/particleNum 1
 /mydet/particle1/particleName e-
@@ -55,7 +36,6 @@
 #/mydet/particle1/engine HRSElasEl
 #use the fitted result for 90 degrees Helm coils
 #/mydet/particle1/engine H90UserFit
-<<<<<<< HEAD
 #/mydet/particle1/engine Uniform
 #/mydet/particle1/momentumLow 300. MeV
 #/mydet/particle1/momentumHigh 3500. MeV
@@ -64,13 +44,3 @@
 
 #/mydet/particle1/detectorAngle 5.69 deg
 /run/beamOn 100
-=======
-/mydet/particle1/engine Uniform
-/mydet/particle1/momentumLow 300. MeV
-/mydet/particle1/momentumHigh 3500. MeV
-#randomize in TCS and with elipse shape, 1 is for rectangle shape
-/mydet/particle1/randomizeInTCS 0
-
-/mydet/particle1/detectorAngle 5.69 deg
-/run/beamOn 500
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
