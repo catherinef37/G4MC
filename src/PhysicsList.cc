@@ -80,10 +80,7 @@
 #include "G4Electron.hh"
 #include "G4Positron.hh"
 #include "G4Proton.hh"
-
 #include "ElectroNuclearPhysics.hh"
-
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
 
 PhysicsList::PhysicsList(G4String phys) : G4VModularPhysicsList()
