@@ -50,10 +50,7 @@ public:
 	G4Material* tantalum;
 	G4Material* tungsten;
 	G4Material* lead;
-<<<<<<< HEAD
 	G4Material* lead208;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4Material* solidNH3;
 	G4Material* liquidHe;
 	G4Material* liquidHe3;
