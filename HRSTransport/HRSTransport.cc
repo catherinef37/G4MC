@@ -28,11 +28,7 @@
 #include "GDHTransLargeX0.hh"
 
 #include "HRSTransport.hh"
-<<<<<<< HEAD
 #include <iostream>
-=======
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 using namespace std;
 
 //#define DEBUG_HRS_FORWARD
@@ -179,10 +175,6 @@ bool HRSTransport::Forward(const double* V5_tg, double* V5_fp)
     if (bIsLeftArm) {
         pModel->CoordsCorrection(fHRSAngle-fModelAngle, V5);
         bGoodParticle = pModel->TransLeftHRS(V5);
-<<<<<<< HEAD
-	//cout << bGoodParticle << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
         pModel->FPCorrLeft(V5_tg, V5);
     }
     else {
