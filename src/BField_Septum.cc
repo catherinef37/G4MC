@@ -404,10 +404,7 @@ bool BField_Septum::ReadMap(const char *filename)
 				for(col=0;col<mNPara;col++)
 				{
 					mBField[indexX][indexY][indexZ][col]=tempLine[col];
-<<<<<<< HEAD
 					//cout << indexX << " " << indexY << " " << indexZ << " " << mBField[indexX][indexY][indexZ][col] << endl;
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 					if(col>=3 && col<=5) mBField[indexX][indexY][indexZ][col]*=mFieldUnit; //change unit to tesla
 				}
 			}
