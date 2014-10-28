@@ -53,11 +53,8 @@ mMotherLogVol(mother)
 	GetConfig();
 	ConstructMaterials();
 	
-<<<<<<< HEAD
 	G4cout<<"Contrstruct RTPC12 geometry ... done! "<<G4endl;
-=======
-	G4cout<<"Contrstruct RTPC geometry ... done! "<<G4endl;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
+
 }
 
 RTPCDetectorConstruction::~RTPCDetectorConstruction()
@@ -65,11 +62,7 @@ RTPCDetectorConstruction::~RTPCDetectorConstruction()
 	//I might need to delete the materials
 	//But it does not hurt if I don't, since this class will have only one instance
 	//in the program
-<<<<<<< HEAD
 	G4cout<<"Delete RTPC12 geometry ... done! "<<G4endl;
-=======
-	G4cout<<"Delete RTPC geometry ... done! "<<G4endl;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,16 +228,12 @@ void RTPCDetectorConstruction::ConstructMaterials()
 	deuteriumGas = new G4Material(name="DeuteriumGas", z=1., a, density,
 		kStateGas, temperature, pressure);
 
-<<<<<<< HEAD
 	//kapton COMPOSITION:
 	//Atomic number 	Fraction by weight
 	//1 	0.026362
 	//6 	0.691133
 	//7 	0.073270
 	//8 	0.209235
-=======
-	//kapton
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	density = 1.42*g/cm3;
 	kapton = new G4Material(name="Kapton", density, nElem=4);
 	kapton->AddElement(elH, nAtoms=10);
@@ -381,7 +370,6 @@ void RTPCDetectorConstruction::ConstructMaterials()
 	density = 8.96*g/cm3;
 	copper = new G4Material(name="Copper", z=29., a, density);
 
-<<<<<<< HEAD
 	//silicon
 	a = 28.0855*g/mole;
 	density = 2.329*g/cm3;
@@ -392,8 +380,6 @@ void RTPCDetectorConstruction::ConstructMaterials()
 	density = 1.85*g/cm3;
 	beryllium = new G4Material(name="Beryllium", z=4., a, density);
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 }
 
 
@@ -403,7 +389,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	G4SDManager* SDMan = G4SDManager::GetSDMpointer();
 	G4String SDname;
 	
-<<<<<<< HEAD
 	G4VSensitiveDetector* RTPCTargetSD = new HRSDCSD(SDname="RTPCTargetGas");
 	SDMan->AddNewDetector(RTPCTargetSD);
 
@@ -419,13 +404,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	G4VSensitiveDetector* RTPC2ndGapSD = new HRSDCSD(SDname="RTPC2ndGap");
 	SDMan->AddNewDetector(RTPC2ndGapSD);
 
-=======
-	G4VSensitiveDetector* SDTargetWall = new HRSStdSD(SDname="RTPCTargetWall");
-	SDMan->AddNewDetector(SDTargetWall);
-
-	G4VSensitiveDetector* SDMylar1 = new HRSStdSD(SDname="RTPCMylar1");
-	SDMan->AddNewDetector(SDMylar1);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSensitiveDetector* SDMylar2 = new HRSStdSD(SDname="RTPCMylar2");
 	SDMan->AddNewDetector(SDMylar2);
 
@@ -525,15 +503,10 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	new G4PVPlacement(0,G4ThreeVector(),targetVesselLogical,
 		"targetPhys",RTPCContainerLogical,0,0);
 
-<<<<<<< HEAD
 	targetVesselLogical->SetSensitiveDetector(RTPCTargetSD);
 
 	/////////////////////
 	//Target wall cylinder with 25 um Kapton wall
-=======
-	/////////////////////
-	//Target wall cylinder with 50 um Kapton wall
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	/////////////////////
 	//mTgWallMaterialType;  //1 is kapton, 2 is aluminum
 	if(mTgWallMaterialType==2) targetWallMaterial=aluminum;
@@ -553,13 +526,10 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	else 
 		targetWallLogical->SetVisAttributes(DarkRedVisAtt);  //dark red
 
-<<<<<<< HEAD
 
 	//////////////////////////
 	//aluminum end caps 
 	//////////////////////////
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//setup entrance cap and exit cap
 	G4VSolid* entranceCoverSolid=0;
 	if(mSetupEntranceNExitCap)
@@ -567,18 +537,11 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		//////////////////////////
 		//Downtream exit window aluminum cap 
 		//////////////////////////
-<<<<<<< HEAD
 		//a cup of 3.1 mm height, including 10 mil thick bottom, 0.5
 		phi_min=0.*deg;
 		phi_max=360.*deg;
 		double pDownEndCapThick=10*0.0254*mm;
 		const G4double  zPlane_cap[] ={-3*mm+mD2GasL/2,mD2GasL/2,mD2GasL/2,mD2GasL/2+pDownEndCapThick};
-=======
-		//a cup of 3.1 mm height, including 0.1 mm thick bottom, 0.5
-		phi_min=0.*deg;
-		phi_max=360.*deg;
-		const G4double  zPlane_cap[] ={-3*mm+mD2GasL/2,mD2GasL/2,mD2GasL/2,mD2GasL/2+0.1*mm};
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		const G4double  rInner_cap[] ={mD2GasR+mTgWallThick,mD2GasR+mTgWallThick,0.0*mm,0.0*mm};
 		const G4double rOutner_cap[] ={mD2GasR+0.6*mm,mD2GasR+0.6*mm,mD2GasR+0.6*mm,mD2GasR+0.6*mm};
 		G4VSolid* exitCapSolid = new G4Polycone("exitCapPcon",
@@ -592,35 +555,16 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		//////////////////////////
 		//Uptream entrance aluminum cover  
 		//////////////////////////
-<<<<<<< HEAD
 		phi_min=0.*deg;
 		phi_max=360.*deg;
 		double pUpEndCapThick=10*0.0254*mm;
-=======
-		//const G4double  zPlane_u[] ={-58.70*mm,-70.70*mm,-70.70*mm,-72.70*mm,-72.70*mm,
-		//	-74.70*mm,-79.45*mm,-79.45*mm,-113.8936*mm,-113.8936*mm,
-		//	-123.8936*mm,-123.8936*mm,-145.0*mm,-145.0*mm,-145.1*mm};
-		//const G4double  rInner_u[] ={3.125*mm,3.125*mm,3.050*mm,3.050*mm,3.500*mm,
-		//	3.500*mm,3.500*mm,3.500*mm,3.500*mm,3.500*mm,
-		//	3.500*mm,3.500*mm,3.500*mm,0.000*mm.0.000*mm};
-		//const G4double rOutner_u[] ={3.150*mm,7.726*mm,7.726*mm,8.493*mm,8.493*mm,
-		//	9.260*mm,9.260*mm,12.00*mm,12.00*mm,15.00*mm,
-		//	15.00*mm,12.00*mm,12.00*mm,12.00*mm,12.00*mm};
-
-		phi_min=0.*deg;
-		phi_max=360.*deg;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		z_down=-mRTPCLength/2+51.3*mm;  //Its down stream edge is 51.3*mm from RTPC up edge
 		r_min=mD2GasR+0.5*mm;  //3.5*mm
 		const G4double  zPlane_u[] ={
 			z_down,z_down-12*mm,z_down-12*mm,z_down-14*mm,z_down-14*mm,
 			z_down-16*mm,z_down-21.75*mm,z_down-21.75*mm,z_down-55.1936*mm,z_down-55.1936*mm,
-<<<<<<< HEAD
 			z_down-65.1936*mm,z_down-65.1936*mm,z_down-86.3*mm,z_down-86.3*mm,
 			z_down-86.3*mm-pUpEndCapThick};
-=======
-			z_down-65.1936*mm,z_down-65.1936*mm,z_down-86.3*mm,z_down-86.3*mm,z_down-86.4*mm};
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		const G4double  rInner_u[] ={
 			r_min-0.375*mm,r_min-0.375*mm,r_min-0.450*mm,r_min-0.450*mm,r_min,
 			r_min,r_min,r_min,r_min,r_min,
@@ -637,7 +581,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 			"entranceCoverPhys",RTPCContainerLogical,0,0);
 
 		entranceCoverLogical->SetVisAttributes(WhiteVisAtt); //white
-<<<<<<< HEAD
 
 		//place 10 mil Be as the beam exit window
 		double pBeamExitWindowThick=10*0.0254*mm;
@@ -652,17 +595,11 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 
 		beamExitWindowLogical->SetVisAttributes(GrayVisAtt);  //grey 
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	}
 
 
 	/////////////////////
-<<<<<<< HEAD
 	//*****first gap //1 atm helium gas from target wall to R<20mm
-=======
-	//*****first gap //1 atm helium gas at 2.14mm<r<20mm
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	/////////////////////
 	//Need to subtract the entrance cover to avoid overlapping
 	G4VSolid* firstGapSolid = 0;
@@ -683,110 +620,55 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		"firstGapPhys",RTPCContainerLogical,0,0);
 	firstGapLogical->SetVisAttributes(HallVisAtt);
 
-<<<<<<< HEAD
 	firstGapLogical->SetSensitiveDetector(RTPC1stGapSD);
 
 	/////////////////////
 	//fisrt mylar foils
-=======
-
-
-	/////////////////////
-	//fisrt foils
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	/////////////////////
 	//*****first cylider foil//0.006mm Mylar and 0.000035mm Al on both sides at r=20mm
 	//Thia want to test how low the meomentum threshold can go with this 1at mylar layer
 	bool bSetup1stMylar=true;
 	if(bSetup1stMylar)
 	{
-<<<<<<< HEAD
 		phi_min=0*deg;
 		phi_max=360*deg;
 
 		r_min=R20;	//19.98373
 		r_max=R20+m1stAlThick;	//19.98373+0.000035
-=======
-		r_min=R20;	//19.98373
-		r_max=R20+m1stAlThick;	//19.98373+0.000035
-
-		phi_min=asin(0.5*mBedPlateThick/r_min);  //10.315*deg;
-		phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		G4VSolid* firstAlFoil1Solid
 			= new G4Tubs("firstAlFoil1Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 		G4LogicalVolume* firstAlFoil1Logical
 			= new G4LogicalVolume(firstAlFoil1Solid,aluminum,"firstAlFoil1Logical",0,0,0);
-<<<<<<< HEAD
-		
+
 		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstAlFoil1Logical,
 			"firstAlFoil1Phys",RTPCContainerLogical,0,0);
 		
 
 		r_min=R20+m1stAlThick;	//19.98373+0.000035
 		r_max=R20+m1stMylarThick+m1stAlThick; //19.98373+0.000035+0.006
-=======
-		//left half
-		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstAlFoil1Logical,
-			"firstAlFoil1Phys",RTPCContainerLogical,0,0);
-		//right half
-		new G4PVPlacement(RotZ270deg,G4ThreeVector(),firstAlFoil1Logical,
-			"firstAlFoil1Phys",RTPCContainerLogical,0,0);
-
-		r_min=R20+m1stAlThick;	//19.98373+0.000035
-		r_max=R20+m1stMylarThick+m1stAlThick; //19.98373+0.000035+0.006
-		phi_min=asin(0.5*mBedPlateThick/r_min);    //10.315 *deg;
-		phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		G4VSolid* firstMylarSolid
 			= new G4Tubs("firstMylarTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 		G4LogicalVolume* firstMylarLogical
 			= new G4LogicalVolume(firstMylarSolid,mylar,"firstMylarLogical",0,0,0);
-<<<<<<< HEAD
 		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstMylarLogical,
 			"firstMylarPhys",RTPCContainerLogical,0,0);
 
 
 		r_min=R20+m1stMylarThick+m1stAlThick;
 		r_max=R20+m1stMylarThick+2.0*m1stAlThick;
-=======
-		//left half
-		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstMylarLogical,
-			"firstMylarPhys",RTPCContainerLogical,0,0);
-		//right half
-		new G4PVPlacement(RotZ270deg,G4ThreeVector(),firstMylarLogical,
-			"firstMylarPhys",RTPCContainerLogical,0,0);
-
-		r_min=R20+m1stMylarThick+m1stAlThick;
-		r_max=R20+m1stMylarThick+2.0*m1stAlThick;
-		phi_min=asin(0.5*mBedPlateThick/r_min); //10.315 *deg;
-		phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		G4VSolid* firstAlFoil2Solid
 			= new G4Tubs("firstAlFoil2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 		G4LogicalVolume* firstAlFoil2Logical
 			= new G4LogicalVolume(firstAlFoil2Solid,aluminum,"firstAlFoil2Logical",0,0,0);
-<<<<<<< HEAD
 		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstAlFoil2Logical,
 			"firstAlFoil2Phys",RTPCContainerLogical,0,0);
 
 		firstMylarLogical->SetSensitiveDetector(SDMylar1);
-=======
-		//left half
-		new G4PVPlacement(RotZ90deg,G4ThreeVector(),firstAlFoil2Logical,
-			"firstAlFoil2Phys",RTPCContainerLogical,0,0);
-		//right half
-		new G4PVPlacement(RotZ270deg,G4ThreeVector(),firstAlFoil2Logical,
-			"firstAlFoil2Phys",RTPCContainerLogical,0,0);
-
-		firstMylarLogical->SetSensitiveDetector(SDMylar2);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 		firstAlFoil1Logical->SetVisAttributes(WhiteVisAtt);   //white
 		firstMylarLogical->SetVisAttributes(GrayVisAtt); //grey
 		firstAlFoil2Logical->SetVisAttributes(WhiteVisAtt);   //white
 	}
 
-<<<<<<< HEAD
 	///////////////////// 
 	//InnerGap drift region
 	///////////////////// 
@@ -815,89 +697,12 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	//to support layer 1
 	x_min=R20+m1stMylarThick+2.0*m1stAlThick;
 	x_max=x_min+2*mm;
-=======
-	
-	/////////////////////
-	//Bed plate  	
-	/////////////////////
-	//*****Bed plate, from r=20 to r=108mm, BedPlateThick=7.1628mm
-	//the Bed is 8 mm protured
-	double protruedHeight_h=4.0*mm;
-	x_min=mBedPlateLowEdge;
-	x_max=mBedPlateHighEdge;
-	xx_h=(x_max-x_min)/2.0;
-	yy_h=mBedPlateThick/2.0;
-	zz_h=Z_Half;
-	G4ThreeVector Tran_bed(-1.*(xx_h+protruedHeight_h), 0., 0.);
-	//G4VSolid* bedPlateSolid = new G4Box("bedPlateBox",xx_h,yy_h,zz_h);
-	//end plate thickness 6.35mm
-	G4VSolid* Box_bed_edge = new G4Box("Box_bed_edge",protruedHeight_h,yy_h,Z_Half+6.35*mm);
-	G4VSolid* Box_bed = new G4Box("Box_bed",xx_h,yy_h,zz_h);
-	G4UnionSolid* bedPlateSolid = new G4UnionSolid("bedPlateSolid",
-		Box_bed ,Box_bed_edge,RotZero,Tran_bed);
-	G4LogicalVolume* bedPlateLogical = new G4LogicalVolume(bedPlateSolid,
-		ultem,"bedPlateLogical",0,0,0);
-	//left half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(0.,x_min+xx_h,0.),
-		bedPlateLogical,"bedPlatePhysL",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(0.,-x_min-xx_h,0.),
-		bedPlateLogical,"bedPlatePhysR",RTPCContainerLogical,0,0);
-
-	bedPlateLogical->SetVisAttributes(YellowVisAtt);
-
-
-	///////////////////// 
-	//PCBBedPlate
-	/////////////////////
-	//PCB board attach to the bed plate
-	x_min=R30+2.*m2ndAlThick+m2ndMylarThick;
-	//in case the bed plate does not start from the 2nd marler foil
-	if(x_min<mBedPlateLowEdge) x_min=mBedPlateLowEdge;
-
-	x_max=mBedPlateHighEdge;
-	y_min=mBedPlateThick/2.0;
-	y_max=mG10FR4Thick+mBedPlateThick/2.0;
-	xx_h=(x_max-x_min)/2.0;
-	yy_h=mG10FR4Thick/2.0;
-	zz_h=Z_Half;
-	G4ThreeVector Tran_pcbBedSp(-1.*(xx_h+protruedHeight_h), 0., 0.);
-	G4VSolid* Box_pcbBedSp = new G4Box("Box_pcbBedSp",xx_h,yy_h,zz_h);
-	G4VSolid* Box_pcbBedSp_edge = new G4Box("Box_pcbBedSp_edge",
-		protruedHeight_h,yy_h,Z_Half+6.35*mm);
-	G4UnionSolid* pcbBedSpSolid = new G4UnionSolid("pcbBedSpBox",
-		Box_pcbBedSp,Box_pcbBedSp_edge,RotZero,Tran_pcbBedSp);
-	G4LogicalVolume* pcbBedSpLogical
-		= new G4LogicalVolume(pcbBedSpSolid,G10FR4,"pcbBedSpLogical",0,0,0);
-	//left half
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),
-		pcbBedSpLogical,"pcbBedSpPhysL1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),
-		pcbBedSpLogical,"pcbBedSpPhysR1",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),
-		pcbBedSpLogical,"pcbBedSpPhysL2",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),
-		pcbBedSpLogical,"pcbBedSpPhysR2",RTPCContainerLogical,0,0);
-
-	pcbBedSpLogical->SetVisAttributes(PcbGreenVisAtt);  
-
-
-	///////////////////// 
-	//InnerGap support
-	///////////////////// 
-	x_max=R30;
-	x_min=R20;
-	y_min=mBedPlateThick/2.0;
-	y_max=(mBedPlateThick/2.0)+mInnerGapSpThick;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	xx_h=(x_max-x_min)/2.0;
 	yy_h=mInnerGapSpThick/2.0;
 	zz_h=Z_Half;
 	G4VSolid* innerGapSpSolid = new G4Box("innerGapSpBox",xx_h,yy_h,zz_h);
 	G4LogicalVolume* innerGapSpLogical
 		= new G4LogicalVolume(innerGapSpSolid,ultem,"innerGapSpLogical",0,0,0);
-<<<<<<< HEAD
 	//place it into InnerGap drift region
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(0,-x_min-xx_h,0.),
 		innerGapSpLogical, "innerGapSpPhysL1",innerGapLogical,0,0);
@@ -912,105 +717,40 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 
 	innerGapSpLogical->SetVisAttributes(YellowVisAtt); //ultem yellow
 
-=======
-	//left half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),
-		innerGapSpLogical, "innerGapSpPhysL1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),
-		innerGapSpLogical, "innerGapSpPhysL2",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),
-		innerGapSpLogical, "innerGapSpPhysR1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),
-		innerGapSpLogical, "innerGapSpPhysR2",RTPCContainerLogical,0,0);
-
-	innerGapSpLogical->SetVisAttributes(YellowVisAtt); //ultem yellow
-
-	///////////////////// 
-	//InnerGap drift region
-	///////////////////// 
-	//second drift region //1 atm 300k mixture gases (bonusGas) at 20.08907mm<r<30mm
-	r_min=R20+m1stMylarThick+2.0*m1stAlThick;
-	r_max=R30;
-	phi_min=asin((0.5*mBedPlateThick+mInnerGapSpThick)/r_max); //9.896 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
-	G4VSolid* innerGapSolid
-		= new G4Tubs("innerGapTubs",r_min,r_max,Z_Half,phi_min,phi_max);
-	G4LogicalVolume* innerGapLogical
-		= new G4LogicalVolume(innerGapSolid,bonusGas,"innerGapLogical",0,0,0);
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(),innerGapLogical,
-		"innerGapPhys",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),innerGapLogical,
-		"innerGapPhys",RTPCContainerLogical,0,0);
-	innerGapLogical->SetUserLimits(uBStepLimits);
-	innerGapLogical->SetVisAttributes(HallVisAtt);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	///////////////////// 
 	//2nd mylar foil
 	///////////////////// 
 	//second cylider foil//0.0254mm Mylar and 0.000035 Al on both sides at r=30mm
-<<<<<<< HEAD
 	phi_min=0*deg;
 	phi_max=360*deg;
 
 	r_min=R30;	//29.9974 *mm; //2.362*inch
 	r_max=R30+m2ndAlThick;	//29.9974+0.006 mm;
-=======
-	r_min=R30;	//29.9974 *mm; //2.362*inch
-	r_max=R30+m2ndAlThick;	//29.9974+0.006 mm;
-	phi_min=asin((0.5*mBedPlateThick)/r_min);//6.856 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* secondAlFoil1Solid
 		= new G4Tubs("secondAlFoil1Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* secondAlFoil1Logical
 		= new G4LogicalVolume(secondAlFoil1Solid,aluminum,"secondAlFoil1Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),secondAlFoil1Logical,
 		"secondAlFoil1Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 
 	r_min=R30+m2ndAlThick;	//29.9974+0.006
 	r_max=R30+m2ndAlThick+m2ndMylarThick; //29.9974+0.006+0.000035
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),secondAlFoil1Logical,
-		"secondAlFoil1Phys",RTPCContainerLogical,0,0);
-
-	r_min=R30+m2ndAlThick;	//29.9974+0.006
-	r_max=R30+m2ndAlThick+m2ndMylarThick; //29.9974+0.006+0.000035
-	phi_min=asin((0.5*mBedPlateThick)/r_min);//6.856 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* secondMylarSolid
 		= new G4Tubs("secondMylarTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* secondMylarLogical
 		= new G4LogicalVolume(secondMylarSolid,mylar,"secondMylarLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),secondMylarLogical,
 		"secondMylarPhys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 
 	r_min=R30+m2ndAlThick+m2ndMylarThick;
 	r_max=R30+2.*m2ndAlThick+m2ndMylarThick;
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),secondMylarLogical,
-		"secondMylarPhys",RTPCContainerLogical,0,0);
-
-	r_min=R30+m2ndAlThick+m2ndMylarThick;
-	r_max=R30+2.*m2ndAlThick+m2ndMylarThick;
-	phi_min=asin((0.5*mBedPlateThick)/r_min);//6.856 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* secondAlFoil2Solid
 		= new G4Tubs("secondAlFoil2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* secondAlFoil2Logical
 		= new G4LogicalVolume(secondAlFoil2Solid,aluminum,"secondAlFoil2Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),secondAlFoil2Logical,
 		"secondAlFoil2Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),secondAlFoil2Logical,
-		"secondAlFoil2Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	secondMylarLogical->SetSensitiveDetector(SDMylar2);
 	secondAlFoil1Logical->SetVisAttributes(WhiteVisAtt);  //white
@@ -1018,7 +758,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	secondAlFoil2Logical->SetVisAttributes(WhiteVisAtt);  //white
 
 
-<<<<<<< HEAD
 	/////////////////////
 	//Bed plate  	
 	/////////////////////
@@ -1075,22 +814,14 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 
 	pcbBedSpLogical->SetVisAttributes(PcbGreenVisAtt);  
 
-
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//////////////////////////
 	//main Drift Region
 	//////////////////////////
 	//1 atm 300k mixture gases (bonusGas) at 30.02547mm<r<60mm
 	r_min=R30+2.*m2ndAlThick+m2ndMylarThick;
 	r_max=mGEM1R;
-<<<<<<< HEAD
 	phi_min=0*deg;
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick)/r_min);//9.895 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* driftRegionSolid
 		= new G4Tubs("driftRegionTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* driftRegionLogical = new G4LogicalVolume(driftRegionSolid,
@@ -1112,62 +843,35 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_min=mGEM1R;
 	r_max=mGEM1R+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick)/r_min);//4.930 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM1CuFoil1Solid
 		= new G4Tubs("GEM1CuFoil1Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM1CuFoil1Logical
 		= new G4LogicalVolume(GEM1CuFoil1Solid,copper,"GEM1CuFoil1Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM1CuFoil1Logical,
 		"GEM1CuFoil1Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM1CuFoil1Logical,
-		"GEM1CuFoil1Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM1R+0.005*mm;
 	r_max=mGEM1R+0.005*mm+0.05*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick)/r_min);//4.930 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM1KaptonSolid
 		= new G4Tubs("GEM1KaptonTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM1KaptonLogical
 		= new G4LogicalVolume(GEM1KaptonSolid,kapton,"GEM1KaptonLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM1KaptonLogical,
 		"GEM1KaptonPhys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM1KaptonLogical,
-		"GEM1KaptonPhys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM1R+0.005*mm+0.05*mm;
 	r_max=mGEM1R+0.005*mm+0.05*mm+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick)/r_min);//4.930 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM1CuFoil2Solid
 		= new G4Tubs("GEM1CuFoil2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM1CuFoil2Logical
 		= new G4LogicalVolume(GEM1CuFoil2Solid,copper,"GEM1CuFoil2Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM1CuFoil2Logical,
 		"GEM1CuFoil2Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM1CuFoil2Logical,
-		"GEM1CuFoil2Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM1CuFoil1Logical->SetSensitiveDetector(SDGEM1);
 	GEM1KaptonLogical->SetSensitiveDetector(SDGEM1);
@@ -1191,19 +895,9 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	//left half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),
 		GEM1SpLogical,"GEM1SpPhysL1",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 	//right half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),
 		GEM1SpLogical,"GEM1SpPhysR1",RTPCContainerLogical,0,0);
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),
-		GEM1SpLogical,"GEM1SpPhysL2",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),
-		GEM1SpLogical,"GEM1SpPhysR1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),
-		GEM1SpLogical,"GEM1SpPhysR2",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM1SpLogical->SetVisAttributes(YellowVisAtt); //ultem yellow //color closed to Cu
 
@@ -1214,22 +908,13 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_min=mGEM1R+0.005*mm+0.05*mm+0.005*mm;
 	r_max=mGEM2R;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick)/r_min);
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* driftRegionG1G2Solid
 		= new G4Tubs("driftRegionG1G2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* driftRegionG1G2Logical = new G4LogicalVolume(driftRegionG1G2Solid,
 		bonusGas,"driftRegionG1G2Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),driftRegionG1G2Logical,
 		"driftG1G2Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),driftRegionG1G2Logical,
-		"driftG1G2Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	driftRegionG1G2Logical->SetVisAttributes(HallVisAtt);
 	//Drift Region between gem1 and gem2 end  
 
@@ -1241,62 +926,35 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_min=mGEM2R;
 	r_max=mGEM2R+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick)/r_min);//6.621 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM2CuFoil1Solid
 		= new G4Tubs("GEM2CuFoil1Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM2CuFoil1Logical
 		= new G4LogicalVolume(GEM2CuFoil1Solid,copper,"GEM2CuFoil1Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM2CuFoil1Logical,
 		"GEM2CuFoil1Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM2CuFoil1Logical,
-		"GEM2CuFoil1Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM2R+0.005*mm;
 	r_max=mGEM2R+0.005*mm+0.050*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick)/r_min);//6.621 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM2KaptonSolid
 		= new G4Tubs("GEM2KaptonTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM2KaptonLogical
 		= new G4LogicalVolume(GEM2KaptonSolid,kapton,"GEM2KaptonLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM2KaptonLogical,
 		"GEM2KaptonPhys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM2KaptonLogical,
-		"GEM2KaptonPhys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM2R+0.005*mm+0.050*mm;
 	r_max=mGEM2R+0.005*mm+0.050*mm+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick)/r_min);//6.621 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM2CuFoil2Solid
 		= new G4Tubs("GEM2CuFoil2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM2CuFoil2Logical
 		= new G4LogicalVolume(GEM2CuFoil2Solid,copper,"GEM2CuFoil2Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM2CuFoil2Logical,
 		"GEM2CuFoil2Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM2CuFoil2Logical,
-		"GEM2CuFoil2Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM2CuFoil1Logical->SetSensitiveDetector(SDGEM2);
 	GEM2KaptonLogical->SetSensitiveDetector(SDGEM2);
@@ -1312,11 +970,7 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	x_max=mBedPlateHighEdge;
 	y_min=mBedPlateThick/2.0+mG10FR4Thick+mGEM1SpThick;
 	xx_h=(x_max-x_min)/2.0;
-<<<<<<< HEAD
 	yy_h=mGEM2SpThick/2.0;
-=======
-	yy_h=(mGEM2SpThick/2.0) *mm;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	zz_h=Z_Half;
 	G4VSolid* GEM2SpSolid = new G4Box("GEM2SpBox",xx_h,yy_h,zz_h);
 	G4LogicalVolume* GEM2SpLogical
@@ -1324,19 +978,9 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	//left half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),GEM2SpLogical,
 		"GEM2SpPhysL1",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 	//right half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),GEM2SpLogical,
 		"GEM2SpPhysR1",RTPCContainerLogical,0,0);
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),GEM2SpLogical,
-		"GEM2SpPhysL2",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),GEM2SpLogical,
-		"GEM2SpPhysR1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),GEM2SpLogical,
-		"GEM2SpPhysR2",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM2SpLogical->SetVisAttributes(YellowVisAtt); //ultem yellow
 
@@ -1347,22 +991,13 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_min=mGEM2R+0.005*mm+0.050*mm+0.005*mm;
 	r_max=mGEM3R;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick+mGEM1SpThick)/r_min);
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* driftRegionG2G3Solid
 		= new G4Tubs("driftRegionG2G3Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* driftRegionG2G3Logical = new G4LogicalVolume(driftRegionG2G3Solid,
 		bonusGas,"driftRegionG2G3Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),driftRegionG2G3Logical,
 		"driftG2G3Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),driftRegionG2G3Logical,
-		"driftG2G3Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	driftRegionG2G3Logical->SetVisAttributes(HallVisAtt);
 	//Drift Region between gem2 and gem3 end  
 
@@ -1375,64 +1010,37 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_max=mGEM3R+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+
 		mGEM1SpThick+mGEM2SpThick)/r_min);//10.376 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM3CuFoil1Solid
 		= new G4Tubs("GEM3CuFoil1Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM3CuFoil1Logical
 		= new G4LogicalVolume(GEM3CuFoil1Solid,copper,"GEM3CuFoil1Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM3CuFoil1Logical,
 		"GEM3CuFoil1Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM3CuFoil1Logical,
-		"GEM3CuFoil1Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM3R+0.005*mm;
 	r_max=mGEM3R+0.005*mm+0.050*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+
 		mGEM1SpThick+mGEM2SpThick)/r_min);//10.376 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM3KaptonSolid
 		= new G4Tubs("GEM3KaptonTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM3KaptonLogical
 		= new G4LogicalVolume(GEM3KaptonSolid,kapton,"GEM3KaptonLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM3KaptonLogical,
 		"GEM3KaptonPhys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM3KaptonLogical,
-		"GEM3KaptonPhys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	r_min=mGEM3R+0.005*mm+0.050*mm;
 	r_max=mGEM3R+0.005*mm+0.050*mm+0.005*mm;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick
 		+mGEM1SpThick+mGEM2SpThick)/r_min);//10.376 *deg;
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* GEM3CuFoil2Solid
 		= new G4Tubs("GEM3CuFoil2Tubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* GEM3CuFoil2Logical
 		= new G4LogicalVolume(GEM3CuFoil2Solid,copper,"GEM3CuFoil2Logical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),GEM3CuFoil2Logical,
 		"GEM3CuFoil2Phys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),GEM3CuFoil2Logical,
-		"GEM3CuFoil2Phys",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM3CuFoil1Logical->SetSensitiveDetector(SDGEM3);
 	GEM3KaptonLogical->SetSensitiveDetector(SDGEM3);
@@ -1457,19 +1065,9 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	//left half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),GEM3SpLogical,
 		"GEM3SpPhysL1",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 	//right half
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),GEM3SpLogical,
 		"GEM3SpPhysR1",RTPCContainerLogical,0,0);
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),GEM3SpLogical,
-		"GEM3SpPhysL2",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),GEM3SpLogical,
-		"GEM3SpPhysR1",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),GEM3SpLogical,
-		"GEM3SpPhysR2",RTPCContainerLogical,0,0);
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	GEM3SpLogical->SetVisAttributes(YellowVisAtt); //ultem yellow
 
@@ -1482,25 +1080,14 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_max=mPCBReadOutR;
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick
 		+mGEM1SpThick+mGEM2SpThick+mGEM3SpThick)/r_min);
-<<<<<<< HEAD
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	G4VSolid* driftRegionG3PCBSolid
 		= new G4Tubs("driftRegionG3PCBTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* driftRegionG3PCBLogical = new G4LogicalVolume(driftRegionG3PCBSolid,
 		bonusGas,"driftRegionG3PCBLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),driftRegionG3PCBLogical,
 		"driftG3PCBPhys",RTPCContainerLogical,0,0);
-<<<<<<< HEAD
 	driftRegionG3PCBLogical->SetVisAttributes(HallVisAtt);
-=======
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),driftRegionG3PCBLogical,
-		"driftG3PCBPhys",RTPCContainerLogical,0,0);
-	driftRegionG3PCBLogical->SetVisAttributes(HallVisAtt);
-	//Drift Region between gem3 and PCB end  
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 
 	//////////////////////////
@@ -1510,70 +1097,39 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 	r_max=mPCBReadOutR+mG10FR4Thick;	//2.731'=6.93674cm
 	phi_min=asin((0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick+
 		mGEM2SpThick+mGEM3SpThick)/r_min);
-<<<<<<< HEAD
 	//phi_min=5*deg;
 	phi_max=360.0*deg-2.0*phi_min;
-=======
-	//phi_min=13.642 *deg;
-	phi_max=180.0*deg-2.0*phi_min;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	G4VSolid* pcbReadOutSolid
 		= new G4Tubs("pcbReadOutTubs",r_min,r_max,Z_Half,phi_min,phi_max);
 	G4LogicalVolume* pcbReadOutLogical
 		= new G4LogicalVolume(pcbReadOutSolid,G10FR4,"pcbReadOutLogical",0,0,0);
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(),pcbReadOutLogical,
-<<<<<<< HEAD
 		"pcbReadOutPhys",RTPCContainerLogical,0,0);
 
 	pcbReadOutLogical->SetSensitiveDetector(SDReadOut);
 	pcbReadOutLogical->SetVisAttributes(PcbGreenVisAtt); //green, color for pcb
 
-=======
-		"pcbReadOutPhysL",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(),pcbReadOutLogical,
-		"pcbReadOutPhysR",RTPCContainerLogical,0,0);
-
-	pcbReadOutLogical->SetSensitiveDetector(SDReadOut);
-	pcbReadOutLogical->SetVisAttributes(PcbGreenVisAtt); //green, color for pcb
-	//pcbReadOut end  //pcbReadOut end  //pcbReadOut end  //pcbReadOut end
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	//////////////////////////
 	//ReadOut Support
 	//////////////////////////
 	//use boolean method to construct the readOutSp
-<<<<<<< HEAD
 	//readOutSp = Box - tub (sector start from 5 deg) - tub_small
 	//build a box, then cut it at phi=5 deg, then subtract a small cylinder to 
-=======
-	//readOutSp= Box -tub (sector start from 16 deg) - tub_small
-	//build a box, then cut it at phi=16 deg, then subtract a small cylinder to 
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	//form the shape of the bottom
 	//readOutSp //readOutSp  //readOutSp //readOutSp
 	r_min=mPCBReadOutR+mG10FR4Thick; //2.731'=6.93674cm
 	r_max=r_min+150*mm; //make it 5mm larger ennough to cut at phi=phi_min
-<<<<<<< HEAD
 	//G4double mReadOutSpThick=6.35*mm;
-=======
-	G4double mReadOutSpThick=6.35*mm;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	y_min=0.5*mBedPlateThick+mG10FR4Thick+mGEM1SpThick+mGEM2SpThick+mGEM3SpThick;
 	y_max=y_min+mReadOutSpThick;
 	phi_min=asin(y_max/r_min);
-<<<<<<< HEAD
 	//5*deg is BoNuS12 RTPC coverage start, if radius change, this angle will change
 	//I want to keep this minimum angle
 	if(phi_min>5*deg) phi_min=5*deg;
 	phi_max=phi_min+10.*deg;
-=======
-	//16.*deg is BoNuS RTPC coverage start, if radius change, this angle will change
-	//I want to keep this minimum angle
-	if(phi_min>16*deg) phi_min=16*deg;
-	phi_max=phi_min+15.*deg;
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 	x_min=r_min*cos(phi_min);
 	x_max=mBedPlateHighEdge;
 	xx_h=(x_max-x_min)/2.;
@@ -1600,7 +1156,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		ultem,"readOutSpLogical",0,0,0);
 
 	//left half
-<<<<<<< HEAD
 	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),readOutSpLogical,
 		"readOutSpPhysL2",RTPCContainerLogical,0,0);
 	//right half
@@ -1608,20 +1163,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		"readOutSpPhysR2",RTPCContainerLogical,0,0);
 
 	readOutSpLogical->SetVisAttributes(YellowVisAtt);
-=======
-	new G4PVPlacement(RotX180Z90deg,G4ThreeVector(y_min+yy_h,x_min+xx_h,0.),readOutSpLogical,
-		"readOutSpPhysL2",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotZ90deg,G4ThreeVector(y_min+yy_h,-x_min-xx_h,0.),readOutSpLogical,
-		"readOutSpPhysL1",RTPCContainerLogical,0,0);
-	//right half
-	new G4PVPlacement(RotZ270deg,G4ThreeVector(-y_min-yy_h,x_min+xx_h,0.),readOutSpLogical,
-		"readOutSpPhysR2",RTPCContainerLogical,0,0);
-	new G4PVPlacement(RotX180Z270deg,G4ThreeVector(-y_min-yy_h,-x_min-xx_h,0.),readOutSpLogical,
-		"readOutSpPhysR1",RTPCContainerLogical,0,0);
-
-	readOutSpLogical->SetVisAttributes(YellowVisAtt);
-	//readOutSp end  //readOutSp end //readOutSp end //readOutSp end
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	//############################################
 	//////////////////////////
@@ -1660,10 +1201,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 		virtualBoundaryLogical->SetVisAttributes(LightYellowVisAtt);
 	else 
 		virtualBoundaryLogical->SetVisAttributes(HallVisAtt);
-<<<<<<< HEAD
-=======
-	//virtual boundary foil end  //virtual boundary foil end  //virtual boundary foil end
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	//############################################
 
@@ -2038,10 +1575,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::Construct()
 //setup solenoid geometry
 //if mSetupSolenoid==1, build DVCS solenoid, which is used in CLAS DVCS and BoNuS
 //if mSetupSolenoid==2, build UVA solenoid, provided by Gorden Gates
-<<<<<<< HEAD
-//if mSetupSolenoid==3, CLAS12 solenoid, 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 G4VPhysicalVolume* RTPCDetectorConstruction::ConstructSolenoid(G4LogicalVolume *pMotherLogVol)
 {
 	double startphi=0.*deg, deltaphi=360.*deg;
@@ -2095,7 +1628,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::ConstructSolenoid(G4LogicalVolume *
 		solenoidSolid = new G4Tubs("UVASolenoidTubs",200.*mm,851.*mm,
 			1527.*mm/2.0,startphi,deltaphi);
 	}
-<<<<<<< HEAD
 	else if(mSetupSolenoid==3)
 	{
 		//CLAS12 solenoid, coil: 1.10m OD x 0.78m ID x 1.055m long
@@ -2109,8 +1641,6 @@ G4VPhysicalVolume* RTPCDetectorConstruction::ConstructSolenoid(G4LogicalVolume *
 		solenoidSolid = new G4Polycone("CLAS12SolPolycone",startphi,deltaphi,
 			kNPlane_CLAS12Sol,zPlane_CLAS12Sol,rInner_CLAS12Sol,rOuter_CLAS12Sol);
 	}
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
 	solenoidLogical = new G4LogicalVolume(solenoidSolid,
 		stainlesssteel,"RTPCCoilLogical",0,0,0);
