@@ -8,13 +8,8 @@
 /gui/addButton viewer "Update viewer"        "/vis/viewer/update"
 /gui/addButton viewer "Update scene"         "/vis/scene/notifyHandlers"
 
-<<<<<<< HEAD
 #/vis/open OGLSQt
 /vis/open OGLS
-=======
-/vis/open OGLSQt
-#/vis/open OGLSX
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 #
 # Create a new empty scene
 #
@@ -89,9 +84,5 @@
 #/vis/viewer/set/cutawayMode union
 #/vis/viewer/set/sectionPlane on 0 0 0 cm -1 -0.01 0
 
-<<<<<<< HEAD
 #/control/execute rtpc.mac
-=======
-/control/execute rtpc.mac
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 #/control/execute twopr.mac
