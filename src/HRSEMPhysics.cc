@@ -32,19 +32,12 @@ HRSEMPhysics::~HRSEMPhysics()
 #include "G4AntiNeutrinoE.hh"
 
 
-<<<<<<< HEAD
 // e- e+
-=======
-// e+
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
+
 #include "G4eIonisation.hh" 
 #include "G4eBremsstrahlung.hh" 
 #include "G4eplusAnnihilation.hh"
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 void HRSEMPhysics::ConstructParticle()
 {
   // gamma
@@ -100,11 +93,6 @@ void HRSEMPhysics::ConstructProcess()
    }
    //add step limiter, by jixie for Geant4.7.0 version and up
    pManager->AddProcess(new G4StepLimiter(),      -1, -1,4);
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
 
    //Positron
    pManager = G4Positron::Positron()->GetProcessManager();
@@ -112,19 +100,10 @@ void HRSEMPhysics::ConstructProcess()
    G4VProcess* theeplusIonisation         = new G4eIonisation();
    G4VProcess* theeplusBremsstrahlung     = new G4eBremsstrahlung();
    G4VProcess* theeplusAnnihilation       = new G4eplusAnnihilation();
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
    pManager->AddProcess(theeplusMultipleScattering);
    pManager->AddProcess(theeplusIonisation);
    pManager->AddProcess(theeplusBremsstrahlung);
    pManager->AddProcess(theeplusAnnihilation);
-<<<<<<< HEAD
-
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
    //
    // set ordering for AtRestDoIt
    pManager->SetProcessOrderingToFirst(theeplusAnnihilation, idxAtRest);
@@ -133,10 +112,7 @@ void HRSEMPhysics::ConstructProcess()
    pManager->SetProcessOrdering(theeplusMultipleScattering, idxAlongStep,1);
    pManager->SetProcessOrdering(theeplusIonisation,         idxAlongStep,2);
    pManager->SetProcessOrdering(theeplusBremsstrahlung,     idxAlongStep,3);
-<<<<<<< HEAD
 
-=======
->>>>>>> 70d0792159dc490f42961f9e3553e99da64e8e18
    //
    // set ordering for PostStepDoIt
    pManager->SetProcessOrdering(theeplusMultipleScattering, idxPostStep,1);
