@@ -1095,7 +1095,6 @@ void HRSPrimaryGeneratorAction::PREXEngine(int index)
 	momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
 }
 
-
 //if the beam is tilted, need to get the the effective scattering angle
 //this routine will be used only if the beam is tilted and the particle
 //is a charged particle

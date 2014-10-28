@@ -230,6 +230,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\HRSEMPhysics.cc"
+				>
+			</File>
+			<File
 				RelativePath="..\src\HRSEventAction.cc"
 				>
 			</File>
@@ -629,10 +633,6 @@
 			</File>
 			<File
 				RelativePath=".\Detector_BigBite.ini"
-				>
-			</File>
-			<File
-				RelativePath=".\Detector_BoNuS.ini"
 				>
 			</File>
 			<File

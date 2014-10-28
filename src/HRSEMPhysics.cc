@@ -37,7 +37,6 @@ HRSEMPhysics::~HRSEMPhysics()
 #include "G4eBremsstrahlung.hh" 
 #include "G4eplusAnnihilation.hh"
 
-
 void HRSEMPhysics::ConstructParticle()
 {
   // gamma
@@ -93,7 +92,6 @@ void HRSEMPhysics::ConstructProcess()
    }
    //add step limiter, by jixie for Geant4.7.0 version and up
    pManager->AddProcess(new G4StepLimiter(),      -1, -1,4);
-	
 
    //Positron
    pManager = G4Positron::Positron()->GetProcessManager();
@@ -101,12 +99,10 @@ void HRSEMPhysics::ConstructProcess()
    G4VProcess* theeplusIonisation         = new G4eIonisation();
    G4VProcess* theeplusBremsstrahlung     = new G4eBremsstrahlung();
    G4VProcess* theeplusAnnihilation       = new G4eplusAnnihilation();
-  
    pManager->AddProcess(theeplusMultipleScattering);
    pManager->AddProcess(theeplusIonisation);
    pManager->AddProcess(theeplusBremsstrahlung);
    pManager->AddProcess(theeplusAnnihilation);
-
    //
    // set ordering for AtRestDoIt
    pManager->SetProcessOrderingToFirst(theeplusAnnihilation, idxAtRest);

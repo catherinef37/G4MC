@@ -726,7 +726,6 @@ void HRSRootTree::Initilize()
 				tree[j]->Branch("TrackClass",&(track[j]->TrackClass),"TrackClass/I");
 
 				tree[j]->Branch("rate_208Pb",&(track[j]->rate_208Pb),"rate_208Pb/D");
-
 				tree[j]->Branch("X0",&(track[j]->X0),"X0/D");
 				tree[j]->Branch("Y0",&(track[j]->Y0),"Y0/D");
 				tree[j]->Branch("Z0",&(track[j]->Z0),"Z0/D");
@@ -765,7 +764,6 @@ void HRSRootTree::Initilize()
 				tree[j]->Branch("Ypr_tr",&(track[j]->Ypr_tr),"Ypr_tr/D");
 				tree[j]->Branch("Thetapr_tr",&(track[j]->Thetapr_tr),"Thetapr_tr/D");
 				tree[j]->Branch("Phipr_tr",&(track[j]->Phipr_tr),"Phipr_tr/D");
-
 				tree[j]->Branch("Xtg_rec_tr",&(track[j]->Xtg_rec_tr),"Xtg_rec_tr/D");
 				tree[j]->Branch("Ytg_rec_tr",&(track[j]->Ytg_rec_tr),"Ytg_rec_tr/D");
 				tree[j]->Branch("Thetatg_rec_tr",&(track[j]->Thetatg_rec_tr),"Thetatg_rec_tr/D");
@@ -1729,14 +1727,12 @@ bool HRSRootTree::TransportThruHMS(int i)
 	pTrack->Thetafp_tr=pV5_fp[1];
 	pTrack->Yfp_tr=pV5_fp[2]*1000.;
 	pTrack->Phifp_tr=pV5_fp[3];
-
 	float z_pr= 1000.; //mm
 	
 	pTrack->Xpr_tr     = pTrack->Xfp_tr + pTrack->Thetafp_tr * z_pr;
 	pTrack->Ypr_tr     = pTrack->Yfp_tr + pTrack->Phifp_tr * z_pr;
 	pTrack->Thetapr_tr = pTrack->Thetafp_tr;
 	pTrack->Phipr_tr   = pTrack->Phifp_tr;
-	
 	//currently there is no HMS transportation package, so I simply do these smearing  
 	double pDetRes_x = 0.001; //m; 
 	double pDetRes_y = 0.001; //m; 
