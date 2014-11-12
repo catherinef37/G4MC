@@ -2565,7 +2565,7 @@ bool HRSRootTree::TransportThruHRS(int i)
 
 bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 {
-  //cout << "Starting Transport." << endl;
+  //cout << "Starting Transport NoTgField." << endl;
   MyTrack *pTrack=track[i];
 	if(pTrack->Pvb/keV<1.0) return false;
 	//cout << "Passes keV test!" << endl;
@@ -2573,12 +2573,18 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	double pEndPlaneAngle=(pIsLeftArm)?mLSeptumAngle:mRSeptumAngle;
 	double pHRSMomentum=(pIsLeftArm)?mLHRSMomentum:mRHRSMomentum;
 	double pTrackL_vb2tg=(pIsLeftArm)?mPivot2LHRSVBFace:mPivot2RHRSVBFace;
+	//cout << mDefaultMomentumL << " is default " << endl;
+	//cout << pEndPlaneAngle << endl;
 
 	//in this code, default mLHRSMomentum=mRHRSMomentum=0;
 	//The purpose is to simulate the whole momentum range [0,4.0) Gev ignoring the delta effect of HRS
 	//In this case, I have to set pHRSMomentum = Pvb event by event
+	//cout << "L and R: " << mLHRSMomentum << " " << mRHRSMomentum << endl;
+	//cout << pHRSMomentum << " is the momentum" << endl;
 	if(pHRSMomentum<1.0E-05) pHRSMomentum=pTrack->Pvb;
-
+	//cout << pHRSMomentum << " is the momentum" << endl;
+	pHRSMomentum = 1.06;
+	//cout << pHRSMomentum << " is the momentum" << endl;
 	// *************************************************************************
 	//Section 1: 
 	//A) Convert vertex, vb variable from HTC to TCS, 
@@ -2657,6 +2663,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	// *************************************************************************
 
 	pTrack->Delta = (pTrack->Pvb - pHRSMomentum) / pHRSMomentum;
+	//cout << "Where did the delta go? Delta, track mom, central mom: " << pTrack->Delta << " " << pTrack->Pvb << " " << pHRSMomentum;
 	//We know that this particle will not go thrught HRS, stop here to save time
 	//cout << "It could die here?" << endl;
 	if(fabs(pTrack->Delta)>0.1) return false;
@@ -2689,7 +2696,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 
 	bGoodParticle=mHRSTranModel->Forward(pV5_proj2tg, pV5_fp);
 	//cout << "It could die here?" << endl;
-	//if(!bGoodParticle) return false;
+	if(!bGoodParticle) return false;
 	//cout << "NOPE!" << endl;
 
 	bool bApplyVDCSmearing=true;

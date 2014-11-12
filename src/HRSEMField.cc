@@ -39,10 +39,12 @@ HRSEMField::HRSEMField():mBField_Helm(0), mBField_Septum(0), mBField_SBS(0)
 		double pLHRSMomentum,pRHRSMomentum;
 		gConfig->GetArgument("LHRSMomentum",pLHRSMomentum); 
 		gConfig->GetArgument("RHRSMomentum",pRHRSMomentum);
+		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
 		string pSeptumFieldIni=gConfig->GetArgument("SeptumFieldIni");
 		string pSeptumFieldMap=gConfig->GetArgument("SeptumFieldMap");
 		mBField_Septum = new BField_Septum(pLHRSMomentum,pRHRSMomentum,
 			pSeptumFieldIni.c_str(),pSeptumFieldMap.c_str());
+		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
 	}
 
 	int pSetupSuperBigBite=0;

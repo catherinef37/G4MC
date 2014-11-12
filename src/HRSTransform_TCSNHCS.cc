@@ -37,6 +37,9 @@ namespace Transform
 		x_tr = -y;
 		y_tr =  x * cosHRS - z * sinHRS;
 		z_tr =  x * sinHRS + z * cosHRS; 
+		//cout << EndPlaneTheta_hall << endl;
+		//cout << x << " " << y << " " << z << endl;
+		//cout << x_tr << " " << y_tr << " " << z_tr << endl;
 	}
 
 	//transorm from Hall coordinate to tranportation coordinate 
@@ -62,6 +65,10 @@ namespace Transform
 		x_tr = -y;
 		y_tr =  x * cosHRS - z * sinHRS;
 		z_tr =  x * sinHRS + z * cosHRS; 
+
+		//cout << "You can never go back." << endl;
+		//cout << x << " " << y << " " << z << endl;
+		//cout << x_tr << " " << y_tr << " " << z_tr << endl;
 	}
 
 	//transorm from Hall coordinate to tranpotrtation coordinate 
