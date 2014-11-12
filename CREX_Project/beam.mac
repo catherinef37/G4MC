@@ -25,6 +25,7 @@
 #trigger the random momentum and vertex generator
 #/mydet/particle1/momentum 2.2 GeV
 #/mydet/particle1/momentum 1.06 GeV
+#/mydet/particle1/momentum 5.0 GeV
 /mydet/particle1/theta 5. deg
 #/mydet/particle1/theta 12.5 deg
 /mydet/particle1/phi 0. deg
@@ -46,12 +47,12 @@
 #/mydet/particle1/engine Uniform
 #/mydet/particle1/engine PREX
 #/mydet/particle1/engine HRSQuasiElasEl
-/mydet/particle1/momentumLow 0.86 GeV
-/mydet/particle1/momentumHigh 1.26 GeV
+/mydet/particle1/momentumLow 1.00 GeV
+/mydet/particle1/momentumHigh 1.12 GeV
 #/mydet/particle1/thetaLow 4.0 deg
 #/mydet/particle1/thetaHigh 6.0 deg
 #randomize in TCS and with elipse shape, 1 is for rectangle shape
 #/mydet/particle1/randomizeInTCS 0
 
 #/mydet/particle1/detectorAngle 5.69 deg
-/run/beamOn 10000
+/run/beamOn 100000

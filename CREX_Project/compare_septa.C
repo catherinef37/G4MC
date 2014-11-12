@@ -20,8 +20,8 @@ compare_septa(){
   Float_t cray2 [665691];
   Int_t crayi2 = 0;
 
-  Float_t x = 2.;
-  Float_t y = 2.;
+  Float_t x = 30.;
+  Float_t y = 0.;
   Float_t z = 2.;
 
   Float_t x_min1 =  -40.0;

@@ -142,6 +142,7 @@ bool HRSTransSTD::TransRightHRS(double* pV5)
 	return true;
 }
 
+
 void HRSTransSTD::ReconLeftHRS(double* pV5)
 {   
 	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
@@ -168,8 +169,9 @@ void HRSTransSTD::ReconRightHRS(double* pV5)
 	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
 	int iii = 5; int *ii = &iii;
     int jjj = 1; int *jj = &jjj;
-    
+   
 	/* Orthogonalize theta as JJL asks*/
+
 	vector_jjl[1]   = vector_jjl[1] - txfit_r12p5_(vector_jjl, jj);
 	float x_or      = vector_jjl[4];
 	float delta_rec = delta_r12p5_(vector_jjl, ii);
@@ -185,3 +187,4 @@ void HRSTransSTD::ReconRightHRS(double* pV5)
 	pV5[4] = (double)delta_rec;
 
 } 
+
