@@ -31,8 +31,8 @@ bool hamcPREXTrans::TransLeftHRS(double* pV5)
 
 	float x_test, y_test;
 	//Target to Q1 exit, circle of radius 14.92 cm
-	x_test = x_sp_q1ex(vector_jjl, ii)*m2cm;
-	y_test = y_sp_q1ex(vector_jjl, ii)*m2cm;
+	x_test = x_sp_q1ex_(vector_jjl, ii)*m2cm;
+	y_test = y_sp_q1ex_(vector_jjl, ii)*m2cm;
 	//x_test = x_test - 0.9;
 	if( (x_test*x_test + y_test*y_test) > (14.92*14.92) )
 		return false;
@@ -44,21 +44,21 @@ bool hamcPREXTrans::TransLeftHRS(double* pV5)
 	//	return false;
 
 	//Target to dipole exit, trapezoid -46.19cm<x<46.19cm  |y| < -0.0161*x+12.5
-	x_test = x_sp_dex(vector_jjl, ii)*m2cm;
-	y_test = y_sp_dex(vector_jjl, ii)*m2cm;
+	x_test = x_sp_dex_(vector_jjl, ii)*m2cm;
+	y_test = y_sp_dex_(vector_jjl, ii)*m2cm;
 	//cout<<"dipole_exit:(x,y)=\t"<<x_test<<"\t "<<y_test<<endl;
 	if( fabs(x_test)>46.19 || fabs(y_test) > fabs(-0.0161*x_test+12.5) )
 		return false;
 
 	//Target to Q3 entrance, circle of radius 30.0 cm
-	x_test = x_sp_q3en(vector_jjl, ii)*m2cm;
-	y_test = y_sp_q3en(vector_jjl, ii)*m2cm;
+	x_test = x_sp_q3en_(vector_jjl, ii)*m2cm;
+	y_test = y_sp_q3en_(vector_jjl, ii)*m2cm;
 	if( (x_test*x_test + y_test*y_test) > (30.0*30.0) )
 		return false;
 
 	//Target to Q3 exit, circle of radius 30.0 cm  -> 28.0cm
-	x_test = x_sp_q3ex(vector_jjl, ii)*m2cm;
-	y_test = y_sp_q3ex(vector_jjl, ii)*m2cm;
+	x_test = x_sp_q3ex_(vector_jjl, ii)*m2cm;
+	y_test = y_sp_q3ex_(vector_jjl, ii)*m2cm;
 	//x_test = (x_test + 1.0) / (28.0);
 	//y_test = y_test / (30.0);
 	if( (x_test*x_test + y_test*y_test) > (30.0*30.0) )
@@ -66,10 +66,10 @@ bool hamcPREXTrans::TransLeftHRS(double* pV5)
 
 	/////////////////////////////////////////////////////////////
 	/* If we reach this point, it means the test was succesful */
-	float x_fp     = x_sp_fp(vector_jjl, ii);
-	float theta_fp = t_sp_fp(vector_jjl, ii);
-	float y_fp     = y_sp_fp(vector_jjl, ii);
-	float phi_fp   = p_sp_fp(vector_jjl, ii);
+	float x_fp     = x_sp_fp_(vector_jjl, ii);
+	float theta_fp = t_sp_fp_(vector_jjl, ii);
+	float y_fp     = y_sp_fp_(vector_jjl, ii);
+	float phi_fp   = p_sp_fp_(vector_jjl, ii);
 
 	//reset the vector and return it back to the caller
 	pV5[0] = (double)x_fp;
