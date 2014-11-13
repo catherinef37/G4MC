@@ -1,5 +1,5 @@
-#ifndef PREX_W_SEPTUM
-#define PREX_W_SEPTUM
+#ifndef PREX_SEPTUM
+#define PREX_SEPTUM
 
 #include "HRSTransBase.hh"
 
