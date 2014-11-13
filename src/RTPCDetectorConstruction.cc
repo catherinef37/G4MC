@@ -1657,4 +1657,3 @@ G4VPhysicalVolume* RTPCDetectorConstruction::ConstructSolenoid(G4LogicalVolume *
 
 	return thePhysVol;
 }
-
