@@ -636,6 +636,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Detector_BoNuS.ini"
+				>
+			</File>
+			<File
 				RelativePath=".\Detector_CREX.ini"
 				>
 			</File>

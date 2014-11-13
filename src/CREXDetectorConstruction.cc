@@ -848,6 +848,7 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		double pSeptumCoilThickness = 4.5*cm;
 		G4VSolid* septumCoilCylinderSolid = new G4Tubs("septumCoilCylinderTub",
 			0,pSeptumCoilRadius,pSeptumCoilThickness/2.0,0,360*deg);
+	  //8
 		double septumCoilRecX = 25.0*cm;
 		double septumCoilRecY = 15.0*cm;
 		G4VSolid* septumCoilRecSolid = new G4Box("septumCoilRecBox",
