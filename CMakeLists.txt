@@ -140,7 +140,7 @@ target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XS
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(g4mc DEPENDS G4MC)
+#add_custom_target(g4mc DEPENDS G4MC)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
