@@ -5,10 +5,10 @@
 
 #include <cmath>
 
-#include "Fwd_l12p5_STD.h"
-#include "Fwd_r12p5_STD.h"
-#include "Bwd_l12p5_STD.h"
-#include "Bwd_r12p5_STD.h"
+#include "Fwd_l12p5_STD.hh"
+#include "Fwd_r12p5_STD.hh"
+#include "Bwd_l12p5_STD.hh"
+#include "Bwd_r12p5_STD.hh"
 
 #include "HRSTransSTD.hh"
 

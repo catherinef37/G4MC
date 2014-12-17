@@ -6,8 +6,8 @@
 
 #include <cmath>
 
-#include "Fwd_r5p65_484816.h"
-#include "Bwd_r5p65_484816.h"
+#include "Fwd_r5p65_484816.hh"
+#include "Bwd_r5p65_484816.hh"
 
 #include "G2PTrans484816.hh"
 

@@ -4,7 +4,7 @@
 
 using namespace std;
 #include "ElasModel.hh"
-#include "gauss_legendre.h"
+#include "gauss_legendre.hh"
 
 namespace  ElasModel
 {
