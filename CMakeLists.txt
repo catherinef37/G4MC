@@ -5,6 +5,8 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(g4mc)
 
+enable_language (Fortran)
+
 
 #ROOT path
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
