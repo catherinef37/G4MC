@@ -35,7 +35,7 @@ EXTRALIBS += -lgfortran
 endif
 
 #add root package
-ROOTCFLAGS   := $(shell root-config --cflags)
+ROOTCFLAGS   := $(shell root-config --cflags) $(shell geant4-config --cflags)
 ROOTLIBS     := $(shell root-config --libs)
 ROOTGLIBS    := $(shell root-config --glibs)
 
