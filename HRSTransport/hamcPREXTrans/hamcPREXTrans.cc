@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-#include "prex_forward.h"
+#include "prex_forward.hh"
 #include "hamcPREXTrans.hh"
 
 //using namespace SNoSepta;
