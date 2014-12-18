@@ -86,7 +86,7 @@ private:
 
 	double mPivot2LSieveFace,mPivot2RSieveFace;
 
-	double mPivot2LHRSVBFace,mPivot2RHRSVBFace;
+        double mPivot2LHRSVBFace,mPivot2RHRSVBFace,mPivot2CHRSVBFace;
 	double mHRSVBWidth,mHRSVBHeight,mHRSVBThick;
 
 };

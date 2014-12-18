@@ -135,6 +135,8 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	kRasterR=10.0*mm;		//raster size
 	kZLow=-15.0*mm+kTargetZOffset;		//target vertex lower limit
 	kZHigh=15.0*mm+kTargetZOffset;		//target vertex higher limit
+	//kZLow=-15.0*cm+kTargetZOffset;		//target vertex lower  limit - NICKIE'S EDIT
+	//kZHigh=15.0*cm+kTargetZOffset;		//target vertex higher limit - NICKIE'S EDIT
 	kZLowTrig=-100.0*cm+kTargetZOffset;	//the trigger to use random vertex 
 	kZHighTrig=400.0*cm+kTargetZOffset;	//the trigger to use random vertex 
 
@@ -214,6 +216,7 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	fixedPointBL3V.set(0.,0.,kTargetZOffset);
 	slopeBL3V.set(0.,0.,kTargetZOffset);
 	vertexFlag=1;
+	//vertexFlag=2;
 
 	//random event generator based on real data
 	bUseRootHisto=false;
@@ -360,14 +363,18 @@ void HRSPrimaryGeneratorAction::GetPosition()
 		{//use random z position
 			//tmpzz = G4UniformRand()*(gunZHigh-gunZLow)+gunZLow;
 			tmpzz = mRand.fRand(gunZLow,gunZHigh);
+			//cout << "DOOOOOOOOP: " << tmpzz << " " << gunZLow << " " << gunZHigh << endl;
 		}
 
 		//apply the raster and offset
 		tmpxx+=kTargetXOffset;
 		tmpyy+=kTargetYOffset;
+		tmpzz = mRand.fRand(gunZLow,gunZHigh);
+		//cout << "DOOOOOOOOP: " << tmpzz << " " << gunZLow << " " << gunZHigh << endl;
+	
 	}
 	position3V.set(tmpxx,tmpyy,tmpzz);
-
+	//cout << tmpxx << " " << tmpyy << " " << tmpzz << endl;
 }
 
 void HRSPrimaryGeneratorAction::GetMomentum(int i)
@@ -384,7 +391,7 @@ void HRSPrimaryGeneratorAction::GetMomentum(int i)
 	if(useMom3V[i] && pPtot>=keV) return;
 
 	//comparing string is very slow ...... need to improve this
-	if(primaryEngine[i]=="Uniform")			 {/*do thing, jump over this if block;*/;}
+	if(primaryEngine[i]=="Uniform")			 {/*do nothing, jump over this if block;*/;}
 	else if(primaryEngine[i]=="HRSElasEl")           {HRSElasElectronEngine(i);return;}
 	else if(primaryEngine[i]=="HRSElasNucleus") {HRSElasNucleusEngine(i); return;}
 	else if(primaryEngine[i]=="HRSQuasiElasEl") {HRSQuasiElasElectronEngine(i); return;}
@@ -667,6 +674,7 @@ void HRSPrimaryGeneratorAction::RandHCSThetaPhi(int i,double &pTheta,double &pPh
 		//use random theta angle,Let low<=theta<high
 		//By Jixie:  we should randomize in costheta, not theta
 		pTheta = acos(mRand.fRand(cos(thetaLow[i]),cos(thetaHigh[i])));
+		//pTheta = mRand.fRand(thetaLow[i],thetaHigh[i]);
 	}
 	else
 	{
@@ -1074,25 +1082,35 @@ void HRSPrimaryGeneratorAction::BdLEngine(int index)
 
 void HRSPrimaryGeneratorAction::PREXEngine(int index)
 {
-	double pPtot=0.0;
-	if (momentum[index]<=0.*GeV)
-	{
-		//use random total momentum; Let low<=total momentum<high
-		pPtot = mRand.fRand(momentumLow[index],momentumHigh[index]);
-	}
-	else
-	{
-		//use specify total momentum and smear it with sigma
-		pPtot = mRand.fGaus(momentum[index],sigmaMomentum[index]);
-	}
+  //cout << "At the level of the generator!: " << momentum[index] << " " << thetaAngle[index] << " " << phiAngle[index] << " --------------------" << endl;
+  
+  double pPtot = momentum[index];
+  //Uniform Engine in HCS or TCS                                                                                                                                                        
+  G4double pTheta=0.0,pPhi=0.0;
+  if(randomizeInTCS[index]>0) RandTCSThetaPhi(index,pTheta,pPhi);
+  else RandHCSThetaPhi(index,pTheta,pPhi);
+  
+  if (momentum[index]<=0.*GeV)
+    {//use random total momentum; Let low<=total momentum<high                                                                                                                            
+      pPtot = mRand.fRand(momentumLow[index],momentumHigh[index]);
+    }
+  else
+    {//use specify total momentum and smear it with sigma                                                                                                                                 
+      pPtot = mRand.fGaus(momentum[index],sigmaMomentum[index]);
+    }
+  
+  
+  double M     = 938.;
+  double E     = momentum[index];
+  //double pTheta= abs( thetaAngle[index] );
+  //double pPhi  = phiAngle[index];
+  pPtot = ( 2 * M * E ) / ( 4 * E * sin( pTheta / 2 ) * sin( pTheta / 2 ) + 2 * M );
+  //momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
+  //cout << "At the level of the generator!: " << pPtot << " " << pTheta << " " << pPhi << " --------------------" << endl;
+  
+  //G4cout<<"Debug GetMomentum(): pTheta="<<pTheta/deg<<"deg  pPhi="<<pPhi/deg<<"deg \n";                                                                                               
+  momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
 
-	//check if Theta out of range
-	//if(pTheta<0.*deg) {pTheta*=-1;}
-	//if(pTheta>180.*deg) {pTheta=fmod(pTheta,180.0*deg);}
-	pPtot  = 5.1;
-	double pTheta = 0;
-	double pPhi   = 0.;
-	momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
 }
 
 //if the beam is tilted, need to get the the effective scattering angle

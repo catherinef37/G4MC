@@ -20,15 +20,16 @@
 #include "TObject.h"
 
 #include "HRSTransBase.hh"
-#include "HRSTransSTD.hh"
+//#include "HRSTransSTD.hh"
 #include "hamcPREXTrans.hh"
-#include "G2PTrans400016.hh"
-#include "G2PTrans484816.hh"
-#include "G2PTrans484816R00.hh"
-#include "GDHTransSTD.hh"
-#include "GDHTransLargeX0.hh"
+//#include "G2PTrans400016.hh"
+//#include "G2PTrans484816.hh"
+//#include "G2PTrans484816R00.hh"
+//#include "GDHTransSTD.hh"
+//#include "GDHTransLargeX0.hh"
 
 #include "HRSTransport.hh"
+#include "TMath.h"
 #include <iostream>
 using namespace std;
 
@@ -104,7 +105,7 @@ HRSTransport::~HRSTransport()
 void HRSTransport::RegisterModel()
 {
     HRSTransBase* temp;
-
+    /*
     temp = new HRSTransSTD();
     mModelIndex["STD"] = 1;
     mModel[1] = temp;
@@ -128,7 +129,7 @@ void HRSTransport::RegisterModel()
     temp = new GDHTransLargeX0();
     mModelIndex["GDHLargeX0"] = 21;
     mModel[21] = temp;
-
+    */
     temp = new hamcPREXTrans();
     mModelIndex["PREX"] = 47;
     mModel[47] = temp;
@@ -159,6 +160,10 @@ void HRSTransport::ChangeModel(int setting)
     }
 }
 
+void HRSTransport::Acceptance_Check(double* vec, double* acc_check, bool* acc_bool){
+  pModel->Acceptance(vec, acc_check, acc_bool);
+}
+
 bool HRSTransport::Forward(const double* V5_tg, double* V5_fp)
 {
     // Definition of variables
@@ -172,24 +177,52 @@ bool HRSTransport::Forward(const double* V5_tg, double* V5_fp)
     V5[2] = V5_tg[2];
     V5[3] = tan(V5_tg[3]);
     V5[4] = V5_tg[4];
-
-    //cout << "in:  " << V5_tg[0] << " " << V5_tg[1] << " " << V5_tg[2] << " " << V5_tg[3] << " " << V5_tg[4] << endl;
+    
+    /*
+    V5[0] = 0;
+    V5[1] = 0;
+    V5[2] = 0;
+    V5[3] = 0;//tan( 7.5 * 3.141592654 / 180.);
+    V5[4] = 0;
+    *///THIS WAS JUST AN IDIOT TEST
+#ifdef DEBUG_HRS_FORWARD
+    cout << "in:  " << V5_tg[0] << " " << V5_tg[1] << " " << V5_tg[2] << " " << V5_tg[3] << " " << V5_tg[4] << endl;
+#endif
 
 #ifdef DEBUG_HRS_FORWARD
     printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
 #endif
 
     bool bGoodParticle=false;
-
+    
     if (bIsLeftArm) {
-        pModel->CoordsCorrection(fHRSAngle-fModelAngle, V5);
-        bGoodParticle = pModel->TransLeftHRS(V5);
-        pModel->FPCorrLeft(V5_tg, V5);
+      //cout << "In left arm." << endl;
+      if( iModelIndex!=47 ){
+	pModel->CoordsCorrection(fHRSAngle-fModelAngle, V5);
+      }else{
+	pModel->CoordsCorrection(0., V5);
+      }
+#ifdef DEBUG_HRS_FORWARD
+      printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
+#endif
+      //cout << fHRSAngle << " " << fModelAngle << endl;
+      bGoodParticle = pModel->TransLeftHRS(V5);
+      //pModel->FPCorrLeft(V5_tg, V5);
     }
     else {
-        pModel->CoordsCorrection(fHRSAngle+fModelAngle, V5);
-        bGoodParticle = pModel->TransRightHRS(V5);
-        pModel->FPCorrRight(V5_tg, V5);
+      //cout << "In right arm." << endl;
+      if( iModelIndex!=47 ){
+	pModel->CoordsCorrection(fHRSAngle+fModelAngle, V5);
+      }else{
+	pModel->CoordsCorrection( 0, V5);
+      }
+
+#ifdef DEBUG_HRS_FORWARD
+    printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
+#endif
+    //cout << fHRSAngle << " " << fModelAngle << endl;
+    bGoodParticle = pModel->TransRightHRS(V5);
+        //pModel->FPCorrRight(V5_tg, V5);
     }
 
     V5_fp[0] = V5[0];
@@ -197,9 +230,10 @@ bool HRSTransport::Forward(const double* V5_tg, double* V5_fp)
     V5_fp[2] = V5[2];
     V5_fp[3] = atan(V5[3]);
     V5_fp[4] = V5[4];
-
-    //cout << "out: " << V5_fp[0] << " " << V5_fp[1] << " " << V5_fp[2] << " " << V5_fp[3] << " " << V5_fp[4] << endl;
-    
+#ifdef DEBUG_HRS_FORWARD
+    cout << "out: " << V5_fp[0] << " " << V5_fp[1] << " " << V5_fp[2] << " " << V5_fp[3] << " " << V5_fp[4] << endl;
+#endif
+    //cout << "And bGoodParticle is " << bGoodParticle << endl;
     return bGoodParticle;
 }
 

@@ -130,6 +130,8 @@ void CREXDetectorConstruction::GetConfig()
 	mPivot2LHRSVBFace*=mm;
 	gConfig->GetParameter("Pivot2RHRSVBFace",mPivot2RHRSVBFace);
 	mPivot2RHRSVBFace*=mm;
+	gConfig->GetParameter("Pivot2CHRSVBFace",mPivot2CHRSVBFace);
+	mPivot2CHRSVBFace*=mm;
 
 	gConfig->GetParameter("HRSVBWidth",mHRSVBWidth);
 	mHRSVBWidth*=mm;
@@ -616,6 +618,7 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 	//set up the septum only if there is an angle difference	
 	bool mSetupSeptumBlock=((mLHRSAngle-mLSeptumAngle)/deg>0.5)?true:false;
 	cout << mLHRSAngle-mLSeptumAngle << " = " << mLHRSAngle << " - " << mLSeptumAngle << " divided by " << deg << endl;
+	cout << mRHRSAngle-mRSeptumAngle << " = " << mRHRSAngle << " - " << mRSeptumAngle << " divided by " << deg << endl;
 	cout << "True or false? " << mSetupSeptumBlock << endl;
 	/////////////////////////////////////////////////
 	//From Hall A NIM Paper, the standard sieve slit
@@ -642,6 +645,8 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 	pRotLSeptum->rotateY(-mLSeptumAngle); 
 	G4RotationMatrix *pRotRSeptum=new G4RotationMatrix();
 	pRotRSeptum->rotateY(-mRSeptumAngle); 
+	G4RotationMatrix *pRotNone=new G4RotationMatrix();
+	pRotNone->rotateY(0); 
 
 	G4RotationMatrix *pRotX90deg=new G4RotationMatrix();
 	pRotX90deg->rotateX(-90*deg); 
@@ -956,10 +961,13 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 
 	int pUseSeptumPlusStdHRS=0;
 	gConfig->GetArgument("UseSeptumPlusStdHRS",pUseSeptumPlusStdHRS);
-	if((pUseSeptumField && pUseSeptumPlusStdHRS) || !mSetupSeptumBlock) 
+	//bool nickietest = false;
+	if( ( (pUseSeptumField && pUseSeptumPlusStdHRS) || !mSetupSeptumBlock ) )//&& ( nickietest ) ) 
 	//if(0)
 	{
 	  cout << "THIS IS NICKIE'S TEST: " << pUseSeptumField << " " << pUseSeptumPlusStdHRS << " " << mSetupSeptumBlock << endl;
+	  //bool nickietest = ((pUseSeptumField && pUseSeptumPlusStdHRS) || !mSetupSeptumBlock);
+	  //cout << nickietest << endl;
 		//this part is trying to place a virtual boundary 1 cm in front of the HRSContainer
 		//It is for the case that we use the septum field to propogate electrons to Q1 entrance 
 		//and then use the STD HRS transportation other than use 5.69 degrees HRS transportation
@@ -974,6 +982,15 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		SDman->AddNewDetector(septumWindowSD);
 		HRSVBLogical->SetSensitiveDetector(septumWindowSD);
 		HRSVBLogical->SetVisAttributes(LightYellowVisAtt); 
+
+
+		G4VSolid* TargetSolid = new G4Tubs("TargetTub",0.0,50*cm,
+			mHRSVBThick/2.0,0.0,360.0*deg);
+		G4LogicalVolume* TargetLogical = new G4LogicalVolume(TargetSolid,
+			mMaterialManager->mylar,"TargetLogical",0,0,0);
+		SDman->AddNewDetector(septumWindowSD);
+		TargetLogical->SetSensitiveDetector(septumWindowSD);
+		TargetLogical->SetVisAttributes(LightYellowVisAtt); 
 
 		double pHallCenter2VB=1.40*m;
 		gConfig->SetParameter("Pivot2LHRSVBFace",pHallCenter2VB-mPivotZOffset*cos(mLHRSAngle));
@@ -997,6 +1014,25 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 			new G4PVPlacement(pRotRHRS,G4ThreeVector(pRHRSVBPos_X,pRHRSVBPos_Y,pRHRSVBPos_Z),
 				HRSVBLogical,"virtualBoundaryPhys_RHRS",motherLogical,0,0,0);
 		}
+		int    mSnakeModel;
+		gConfig->GetArgument("SnakeModel",mSnakeModel);
+		//cout << "Snake model " << mSnakeModel << endl;
+		//cout << "Snake model " << mSnakeModel << endl;
+		//cout << "Snake model " << mSnakeModel << endl;
+		//cout << "Snake model " << mSnakeModel << endl;
+
+
+		//if(mSnakeModel==47){
+		//double pCHRSVBPos_X=mPivotXOffset;// + mHRSVBThick/2.0 * cos(mLSeptumAngle);
+		// double pCHRSVBPos_Y=mPivotYOffset;
+		  //no need to correct for pivot since the distance is from the hall center
+		  //double pCHRSVBPos_Z=(mHRSVBThick/2.0 - 110 * cm);
+		  //double pCHRSVBPos_Z=( - 100 * cm );//DANGER IN PLACEMENT
+		  //new G4PVPlacement(pRotNone,G4ThreeVector(pCHRSVBPos_X,pCHRSVBPos_Y,pCHRSVBPos_Z),
+		  //TargetLogical,"virtualBoundaryPhys_C",motherLogical,0,0,0);
+		  //cout << "The angle of the HRS is: " << -mLHRSAngle << endl;
+		  //}
+
 	}
 	else
 	{
@@ -1005,7 +1041,11 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		//double mHRSVBWidth=104*mm;
 		//double mHRSVBHeight=244*mm;
 		//double mHRSVBThick=0.0508*mm; 
+		double mHRSVBWidth=800*mm;
+		double mHRSVBHeight=800*mm;
+		double mHRSVBThick=0.0508*mm; 
 		//acceptance is 20 mrad
+	  
 		G4VSolid* septumWindowSolid = new G4Box("septumWindowBox",mHRSVBWidth/2.0,
 			mHRSVBHeight/2.0,mHRSVBThick/2.0);
 		G4LogicalVolume* septumWindowLogical = new G4LogicalVolume(septumWindowSolid,
@@ -1014,41 +1054,96 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		septumWindowLogical->SetSensitiveDetector(septumWindowSD);
 		septumWindowLogical->SetVisAttributes(LightYellowVisAtt); 
 
+		G4VSolid* TargetSolid = new G4Tubs("TargetTub",0.0,50*cm,
+			mHRSVBThick/2.0,0.0,360.0*deg);
+		G4LogicalVolume* TargetLogical = new G4LogicalVolume(TargetSolid,
+			mMaterialManager->mylar,"TargetLogical",0,0,0);
+		SDman->AddNewDetector(septumWindowSD);
+		TargetLogical->SetSensitiveDetector(septumWindowSD);
+		TargetLogical->SetVisAttributes(LightYellowVisAtt); 
 
 		double pTunnel2Beam_X=8.4*cm;
 		//put both left and right septum entrance window, which should not less than pTunnel2Beam_X
-		if(mSetupLHRS)
-		{
-			double pLSeptumWindowPos_X=(mPivot2LHRSVBFace+mHRSVBThick/2.0)*
-				sin(mLSeptumAngle)+mPivotXOffset;
-			if(mPivot2LHRSVBFace>1190*mm)
-			{
-				//need to shift it in X to make it barely touch the septum tunnel		
-				pLSeptumWindowPos_X=mHRSVBWidth/2*cos(mLSeptumAngle)+pTunnel2Beam_X;
-			}
-			double pLSeptumWindowPos_Y=mPivotYOffset;
-			double pLSeptumWindowPos_Z=(mPivot2LHRSVBFace+mHRSVBThick/2.0)*
-				cos(mLSeptumAngle)+mPivotZOffset;
-			new G4PVPlacement(pRotLSeptum,
-				G4ThreeVector(pLSeptumWindowPos_X,pLSeptumWindowPos_Y,pLSeptumWindowPos_Z),
-				septumWindowLogical,"virtualBoundaryPhys_LHRS",motherLogical,0,0,0);
+		if(mSetupLHRS){
+		  double pLSeptumWindowPos_X=(mPivot2LHRSVBFace+mHRSVBThick/2.0)*
+		    sin(mLSeptumAngle)+mPivotXOffset;
+		  if(mPivot2LHRSVBFace>1190*mm){
+		    //need to shift it in X to make it barely touch the septum tunnel		
+		    pLSeptumWindowPos_X=mHRSVBWidth/2*cos(mLSeptumAngle)+pTunnel2Beam_X;
+		  }
+		  double pLSeptumWindowPos_Y=mPivotYOffset;
+		  double pLSeptumWindowPos_Z=(mPivot2LHRSVBFace+mHRSVBThick/2.0)*
+		    cos(mLSeptumAngle)+mPivotZOffset;
+		  new G4PVPlacement(pRotLSeptum,
+				    G4ThreeVector(pLSeptumWindowPos_X,pLSeptumWindowPos_Y,pLSeptumWindowPos_Z),
+				    septumWindowLogical,"virtualBoundaryPhys_LHRS",motherLogical,0,0,0);
+		}if(mSetupRHRS){
+		  double pRSeptumWindowPos_X=(mPivot2RHRSVBFace+mHRSVBThick/2.)*
+		    sin(mRSeptumAngle)+mPivotXOffset;			
+		  if(mPivot2LHRSVBFace>1190*mm){
+		    //need to shift it in X to make it barely touch the septum tunnel		
+		    pRSeptumWindowPos_X=-mHRSVBWidth/2*cos(mRSeptumAngle)-pTunnel2Beam_X;
+		  }
+		  double pRSeptumWindowPos_Y=mPivotYOffset;
+		  double pRSeptumWindowPos_Z=(mPivot2RHRSVBFace+mHRSVBThick/2.0)*
+		    cos(mRSeptumAngle)+mPivotZOffset;
+		  new G4PVPlacement(pRotRSeptum,
+				    G4ThreeVector(pRSeptumWindowPos_X,pRSeptumWindowPos_Y,pRSeptumWindowPos_Z),
+				    septumWindowLogical,"virtualBoundaryPhys_RHRS",motherLogical,0,0,0);
 		}
-		if(mSetupRHRS)
-		{
-			double pRSeptumWindowPos_X=(mPivot2RHRSVBFace+mHRSVBThick/2.)*
-				sin(mRSeptumAngle)+mPivotXOffset;			
-			if(mPivot2LHRSVBFace>1190*mm)
-			{
-				//need to shift it in X to make it barely touch the septum tunnel		
-				pRSeptumWindowPos_X=-mHRSVBWidth/2*cos(mRSeptumAngle)-pTunnel2Beam_X;
-			}
-			double pRSeptumWindowPos_Y=mPivotYOffset;
-			double pRSeptumWindowPos_Z=(mPivot2RHRSVBFace+mHRSVBThick/2.0)*
-				cos(mRSeptumAngle)+mPivotZOffset;
-			new G4PVPlacement(pRotRSeptum,
-				G4ThreeVector(pRSeptumWindowPos_X,pRSeptumWindowPos_Y,pRSeptumWindowPos_Z),
-				septumWindowLogical,"virtualBoundaryPhys_RHRS",motherLogical,0,0,0);
+		//NICKIE ADDED ALL OF THIS
+		/*
+		G4VSolid* HRSVBSolid = new G4Tubs("HRSVBTub",0.0,15*cm,
+			mHRSVBThick/2.0,0.0,360.0*deg);
+		G4LogicalVolume* HRSVBLogical = new G4LogicalVolume(HRSVBSolid,
+			mMaterialManager->mylar,"HRSVBLogical",0,0,0);
+		SDman->AddNewDetector(septumWindowSD);
+		HRSVBLogical->SetSensitiveDetector(septumWindowSD);
+		HRSVBLogical->SetVisAttributes(LightYellowVisAtt); 
+		*/
+		double pHallCenter2VB=1.40*m;
+		//gConfig->SetParameter("Pivot2CHRSVBFace",pHallCenter2VB-mPivotZOffset);
+		gConfig->SetParameter("Pivot2CHRSVBFace",pHallCenter2VB-mPivotZOffset); 
+
+		int    mSnakeModel;
+		gConfig->GetArgument("SnakeModel",mSnakeModel);
+		/*
+		cout << "Snake model " << mSnakeModel << endl;
+		cout << "Snake model " << mSnakeModel << endl;
+		cout << "Snake model " << mSnakeModel << endl;
+		cout << "Snake model " << mSnakeModel << endl;
+		
+		if(mSnakeModel==47){
+		  double pCHRSVBPos_X=mPivotXOffset;
+		  double pCHRSVBPos_Y=mPivotYOffset;
+		  //no need to correct for pivot since the distance is from the hall center
+		  //double pCHRSVBPos_Z=(mHRSVBThick/2.0 - 110 * cm);
+		  double pCHRSVBPos_Z=( - 100 * cm ); // DANGER IN PLACEMENT
+		  new G4PVPlacement(pRotNone,G4ThreeVector(pCHRSVBPos_X,pCHRSVBPos_Y,pCHRSVBPos_Z),
+				    TargetLogical,"virtualBoundaryPhys_C",motherLogical,0,0,0);
+		  //cout << "The angle of the HRS is: " << -mLHRSAngle << endl;
 		}
+		*/
+		/*
+		//THIS IS THE NICKIE ADDITION FOR THE PREX TUNE FUNCTIONS STARTING AT THE TARGET CENTER
+		G4VSolid* HRSVBSolid = new G4Tubs("HRSVBTub",0.0,15*cm,
+			mHRSVBThick/2.0,0.0,360.0*deg);
+		G4LogicalVolume* HRSVBLogical = new G4LogicalVolume(HRSVBSolid,
+			mMaterialManager->mylar,"HRSVBLogical",0,0,0);
+		SDman->AddNewDetector(septumWindowSD);
+		HRSVBLogical->SetSensitiveDetector(septumWindowSD);
+		HRSVBLogical->SetVisAttributes(LightYellowVisAtt); 
+
+		double pHallCenter2VB=1.40*m;
+		gConfig->SetParameter("Pivot2LHRSVBFace",pHallCenter2VB-mPivotZOffset);
+		gConfig->SetParameter("Pivot2RHRSVBFace",pHallCenter2VB-mPivotZOffset); 
+		double pLHRSVBPos_X=mPivotXOffset;
+		double pLHRSVBPos_Y=mPivotYOffset;
+		//no need to correct for pivot since the distance is from the hall center
+		double pLHRSVBPos_Z=(pHallCenter2VB-mHRSVBThick/2.0);
+		new G4PVPlacement(pRotLHRS,G4ThreeVector(pLHRSVBPos_X,pLHRSVBPos_Y,pLHRSVBPos_Z),
+				  HRSVBLogical,"virtualBoundaryPhys_LHRS",motherLogical,0,0,0);
+		*/
 	}
 
 

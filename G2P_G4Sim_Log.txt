@@ -38,3 +38,51 @@ G4MC -i -x 1
 ****************************VALUE**START*****************************
 PrintOpt(): The content of the arguments in the vector are:
 ****************************VALUE****END*****************************
+Thu Nov 13 12:18:41 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Nov 13 12:18:41 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Thu Nov 13 17:25:14 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Nov 13 17:25:14 2014
+The input command is:
+G4MC -m 1 beam.mac 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Thu Nov 20 10:06:13 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Nov 20 10:06:13 2014
+The input command is:
+G4MC -i 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Thu Nov 20 10:06:17 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Nov 20 10:06:17 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Thu Dec  4 11:30:09 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Dec  4 11:30:09 2014
+The input command is:
+G4MC -m 1 beam.mac 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************
+Wed Dec 10 09:48:24 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Wed Dec 10 09:48:24 2014
+The input command is:
+G4MC -m 1 beam.mac 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************

@@ -11,6 +11,7 @@
 using namespace std;
 
 //#define TRANSFORM_DEBUG 1
+//#define TRANSFORM_DEBUG 2
 
 #if defined TRANSFORM_DEBUG && (TRANSFORM_DEBUG>=2)
 #include "G4RotationMatrix.hh"
@@ -114,6 +115,8 @@ namespace Transform
 		double z_tr=x * sinHRS + z * cosHRS;
 		Theta_tr=atan(x_tr/z_tr);
 		Phi_tr=atan(y_tr/z_tr);
+		//cout << "Hall      coords: " << Theta_hall * 180.0 / 3.141592654 << " " << Phi_hall * 180.0 / 3.141592654 << endl;
+		//cout << "Transport coords: " << Theta_tr * 180.0 / 3.141592654 << " " << Phi_tr * 180.0 / 3.141592654 << endl;
 
 #ifdef TRANSFORM_DEBUG
 		cout<<"P_HCS2TCS() debug 2 By definition: Theta_tr="<<Theta_tr/deg<<"  Phi_tr="<<Phi_tr/deg<<endl;

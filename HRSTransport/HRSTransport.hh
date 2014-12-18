@@ -30,10 +30,10 @@ class HRSTransport
 #endif
 {
 public:
-	HRSTransport();
-	HRSTransport(const char* name);
-    HRSTransport(int setting);
-	~HRSTransport();
+  HRSTransport();
+  HRSTransport(const char* name);
+  HRSTransport(int setting);
+  ~HRSTransport();
 
     ///////////////////////////////////////////////////////////////////////////
 	// Transport particles through HRS using SNAKE model
@@ -49,10 +49,11 @@ public:
 	// May add more HRS packages later
 	///////////////////////////////////////////////////////////////////////////
 	virtual void RegisterModel();
-    void ChangeModel(int setting);
-	void SetArm(bool isleftarm) { bIsLeftArm = isleftarm; }
-	void SetHRSAngle(double value) { fHRSAngle = value; }
-
+  void ChangeModel(int setting);
+  void SetArm(bool isleftarm) { bIsLeftArm = isleftarm; }
+  void SetHRSAngle(double value) { fHRSAngle = value; }
+  void Acceptance_Check(double* vec, double* acc_check, bool* acc_bool);
+  
 	int GetModelIndex() { return iModelIndex; }
 
 	///////////////////////////////////////////////////////////////////////////
@@ -62,7 +63,7 @@ public:
 	// V5_fp = {x_fg, theta_fp, y_fp, phi_fp, delta@tg};
 	// delta does not change
 	///////////////////////////////////////////////////////////////////////////
-    bool Forward(const double* V5_tg, double* V5_fp);
+  bool Forward(const double* V5_tg, double* V5_fp);
 
     ///////////////////////////////////////////////////////////////////////////
 	// backward:

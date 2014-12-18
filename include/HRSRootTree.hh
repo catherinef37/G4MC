@@ -101,6 +101,37 @@ public:
 	double	Thetafp_tr;
 	double  Phifp_tr;
 
+        double  X_q1ex_tr;
+        double  Y_q1ex_tr;
+        double  a_q1ex_tr;
+        double  X_q2ex_tr;
+        double  Y_q2ex_tr;
+        double  a_q2ex_tr;
+        double  X_den_tr;
+        double  Y_den_tr;
+        double  a_den_tr;
+        double  X_dex_tr;
+        double  Y_dex_tr;
+        double  a_dex_tr;
+        double  X_q3en_tr;
+        double  Y_q3en_tr;
+        double  a_q3en_tr;
+        double  X_q3ex_tr;
+        double  Y_q3ex_tr;
+        double  a_q3ex_tr;
+        double  X_sen_tr;
+        double  Y_sen_tr;
+        double  a_sen_tr;
+        double  X_sm_tr;
+        double  Y_sm_tr;
+        double  a_sm_tr;
+        double  X_sex_tr;
+        double  Y_sex_tr;
+        double  a_sex_tr;
+        double  X_col_tr;
+        double  Y_col_tr;
+        double  a_col_tr;
+
 	double  Xpr_tr;
 	double  Ypr_tr;
 	double	Thetapr_tr;

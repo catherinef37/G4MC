@@ -31,8 +31,8 @@ public:
     GDHTransLargeX0();
     ~GDHTransLargeX0();
     
-    bool TransLeftHRS(double* vector_jjl);
-    bool TransRightHRS(double* vector_jjl);
+  bool TransLeftHRS(double* vector_jjl);
+  bool TransRightHRS(double* vector_jjl);
     void ReconLeftHRS(double* vector_jjl);
     void ReconRightHRS(double* vector_jjl);
 

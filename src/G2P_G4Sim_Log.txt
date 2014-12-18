@@ -14,3 +14,11 @@ G4MC -i -x 1
 ****************************VALUE**START*****************************
 PrintOpt(): The content of the arguments in the vector are:
 ****************************VALUE****END*****************************
+Thu Dec 11 10:32:28 2014
+	File "HRSUsage.ini" is not found. Don't know how to precess arguments.
+Thu Dec 11 10:32:28 2014
+The input command is:
+G4MC -i -x 1 
+****************************VALUE**START*****************************
+PrintOpt(): The content of the arguments in the vector are:
+****************************VALUE****END*****************************

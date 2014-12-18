@@ -20,7 +20,8 @@ INCDIR      := .
 OBJDIR      := obj.$(ARCH)
 
 ########################################################################
-MODELDIR    := HRSTransSTD:hamcPREXTrans:G2PTrans400016:G2PTrans484816:G2PTrans484816R00:GDHTransSTD:GDHTransLargeX0
+#MODELDIR    := HRSTransSTD:hamcPREXTrans:G2PTrans400016:G2PTrans484816:G2PTrans484816R00:GDHTransSTD:GDHTransLargeX0
+MODELDIR    := hamcPREXTrans
 INCDIR      := $(INCDIR):$(MODELDIR)
 
 ########################################################################

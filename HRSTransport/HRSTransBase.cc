@@ -22,6 +22,7 @@ void HRSTransBase::FPCorrRight(const double* V5tg, double* V5fp)
     // Nothing to do
 }
 
+
 void HRSTransBase::CoordsCorrection(double angle, double* v)
 {
     double cosangle = cos(angle);

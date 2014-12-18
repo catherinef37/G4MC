@@ -3,7 +3,7 @@
  /vis/geometry/set/forceSolid hallLogical 0  true 
  #/vis/geometry/set/forceWireframe hallLogical 0  false 
  #/vis/geometry/set/daughtersInvisible hallLogical 0  false 
-#--magneticPhys[0]  magneticLogical HeliumGas Ndaughter=8
+#--magneticPhys[0]  magneticLogical HeliumGas Ndaughter=25
    /vis/geometry/set/visibility magneticLogical 0 false 
    /vis/geometry/set/forceSolid magneticLogical 0  true 
    #/vis/geometry/set/forceWireframe magneticLogical 0  false 
@@ -83,11 +83,21 @@
        /vis/geometry/set/forceSolid DownBlockLogical 0  true 
        #/vis/geometry/set/forceWireframe DownBlockLogical 0  false 
        #/vis/geometry/set/colour DownBlockLogical 0 1 1 1 1
-#----virtualBoundaryPhys_LHRS[0]  HRSVBLogical Mylar Ndaughter=0 G4Color(0.8,0.8,0.2,1) SD=/septumWindow
-     /vis/geometry/set/visibility HRSVBLogical 0 true 
-     /vis/geometry/set/forceSolid HRSVBLogical 0  true 
-     #/vis/geometry/set/forceWireframe HRSVBLogical 0  false 
-     #/vis/geometry/set/colour HRSVBLogical 0 0.8 0.8 0.2 1
+#----septumPhys[0]  septumLogical SiliconSteel Ndaughter=0 G4Color(0.392157,0.584314,0.929412,1)
+     /vis/geometry/set/visibility septumLogical 0 true 
+     /vis/geometry/set/forceSolid septumLogical 0  true 
+     #/vis/geometry/set/forceWireframe septumLogical 0  false 
+     #/vis/geometry/set/colour septumLogical 0 0.392157 0.584314 0.929412 1
+#----septumCoilPhys[0]  septumCoilLogical Copper Ndaughter=0 G4Color(1,0.5,0.5,1)
+     /vis/geometry/set/visibility septumCoilLogical 0 true 
+     /vis/geometry/set/forceSolid septumCoilLogical 0  true 
+     #/vis/geometry/set/forceWireframe septumCoilLogical 0  false 
+     #/vis/geometry/set/colour septumCoilLogical 0 1 0.5 0.5 1
+#----virtualBoundaryPhys_LHRS[0]  septumWindowLogical Mylar Ndaughter=0 G4Color(0.8,0.8,0.2,1) SD=/septumWindow
+     /vis/geometry/set/visibility septumWindowLogical 0 true 
+     /vis/geometry/set/forceSolid septumWindowLogical 0  true 
+     #/vis/geometry/set/forceWireframe septumWindowLogical 0  false 
+     #/vis/geometry/set/colour septumWindowLogical 0 0.8 0.8 0.2 1
 #----LHRSContainerPhys[0]  LHRSContainerLogical Vacuum Ndaughter=7
      /vis/geometry/set/visibility LHRSContainerLogical 0 false 
      /vis/geometry/set/forceSolid LHRSContainerLogical 0  true 
