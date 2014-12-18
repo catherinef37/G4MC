@@ -6,6 +6,7 @@
 #include <cmath>
 
 #include "prex_forward_tuneX.h"
+//#include "prex_forward.hh"
 #include "hamcPREXTrans.hh"
 #include <iostream>
 
@@ -44,7 +45,7 @@ bool hamcPREXTrans::TransLeftHRS(double* pV5)
 	//Nickie adds this to take into account acceptance from septum
 	//x_test = x_sp_q1en_(vector_jjl, ii)*m2cm;
         //y_test = y_sp_q1en_(vector_jjl, ii)*m2cm;
-        //x_test = x_test - 0.9;                                                                                                                                                          
+        //x_test = x_test - 0.9;
         //if( (x_test*x_test + y_test*y_test) > (14.92*14.92) )
 	//return false;
 	
@@ -327,9 +328,9 @@ void hamcPREXTrans::Acceptance(double* pV5, double* acc_check, bool* acc_bool){
   //Nickie adds the septum cuts
   //sen: +0.088 < x < +0.382
   //-0.120 < y < 0.120
-  //sm: +0.088 < x < +0.382                                                                                                                                
-  //-0.120 < y < 0.120                                                                                                                                 
-  //sex: +0.088 < x < +0.382                                                                                                                                
+  //sm: +0.088 < x < +0.382
+  //-0.120 < y < 0.120
+  //sex: +0.088 < x < +0.382
   //-0.120 < y < 0.120  
 
   x_test = x_sp_sen_(vector_jjl, ii);
