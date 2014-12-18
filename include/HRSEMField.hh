@@ -11,7 +11,6 @@
 #include "G4ElectroMagneticField.hh"
 #include "BField_Helm.hh"   //Target Field class
 #include "BField_Septum.hh" //Septum Field class
-#include "BField_SBS.hh"    //SBS Field class
 
 class HRSEMFieldMessenger;
 class HRSEMField : public G4ElectroMagneticField
@@ -51,7 +50,6 @@ private:
 
 	BField_Helm*    mBField_Helm;
 	BField_Septum*  mBField_Septum;
-	BField_SBS*     mBField_SBS;
 
 	G4double ErDC;
 	G4double ErInner;

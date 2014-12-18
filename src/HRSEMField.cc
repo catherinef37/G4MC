@@ -14,7 +14,7 @@
 //
 //  Constructors:
 
-HRSEMField::HRSEMField():mBField_Helm(0), mBField_Septum(0), mBField_SBS(0)
+HRSEMField::HRSEMField():mBField_Helm(0), mBField_Septum(0)
 {
 	messenger = new HRSEMFieldMessenger(this); 
 
@@ -47,13 +47,6 @@ HRSEMField::HRSEMField():mBField_Helm(0), mBField_Septum(0), mBField_SBS(0)
 		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
 	}
 
-	int pSetupSuperBigBite=0;
-	gConfig->GetParameter("SetupSuperBigBite",pSetupSuperBigBite); 
-	if(pSetupSuperBigBite)
-	{
-		mBField_SBS = new BField_SBS();
-	}
-
 	ErDC = 0 *kilovolt/cm; 
 	ErInner = 0 *kilovolt/cm; 
 
@@ -71,7 +64,6 @@ HRSEMField::~HRSEMField()
 	delete messenger;
 	if(mBField_Helm)   delete mBField_Helm;
 	if(mBField_Septum) delete mBField_Septum;
-	if(mBField_SBS)    delete mBField_SBS;
 }
 
 
@@ -111,14 +103,6 @@ inline void HRSEMField::GetFieldValue(const G4double Point[4],G4double *Bfield) 
 			for(int i=0;i<3;i++) Bfield[i]+=pB[i]*tesla;
 		}
 
-		//SBS field read from map
-		if(mBField_SBS)
-		{
-			for(int i=0;i<3;i++) pB[i]=0.0;  //reset
-			if (! mBField_SBS->IsUniformField() )  mBField_SBS->GetBField(pPos,pB); 
-			else  mBField_SBS->GetUniformField(pB); 
-			for(int i=0;i<3;i++) Bfield[i]+=pB[i]*tesla;
-		}
 	}
 
 	//////////////////////////////////////////////////////////

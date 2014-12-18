@@ -400,7 +400,6 @@ void HRSPrimaryGeneratorAction::GetMomentum(int i)
 	else if(primaryEngine[i]=="HRSQuasiElasNucleon") {HRSQuasiElasNucleonEngine(i); return;}
 	else if(primaryEngine[i]=="Compton")     {ComptonEngine(i); return;}
 	else if(primaryEngine[i]=="TwoBody")     {TwoBodyEngine(i); return;}
-	else if(primaryEngine[i]=="BonusProton") {BoNuSProtonEngine(i); return;}
 	else if(primaryEngine[i]=="FastProton")  {FastProtonEngine(i); return;}
 	else if(primaryEngine[i]=="RootHisto")   {HRSHistoEngine(i); return;}
 	else if(primaryEngine[i]=="RootNtuple")  {HRSNtupleEngine(i); return;}
@@ -578,49 +577,6 @@ void HRSPrimaryGeneratorAction::FastProtonEngine(int index)
 	momentum3V[index].setRThetaPhi(dPtotal,dTheta,dPhi);
 }
 
-//same as fase proton but require it passes the BoNuS threshold
-void HRSPrimaryGeneratorAction::BoNuSProtonEngine(int index)
-{
-	G4double dPtotal=momentum3V[index].mag();
-	if(useMom3V[index] && dPtotal>=65.*MeV)  return;
-
-	G4double dTheta,dPhi;
-	double z0_mm=position3V.z()/mm;
-	if (thetaAngle[index]/deg<0.)
-	{//use random theta angle//Let low<=theta<high
-		//the inner R and outer R of drift region is 30.mm and 60.mm,
-		//I take the average 45. to be the exit window low boundary at the end plate
-		const double PI=3.1415926535*rad;
-		G4double tmpThetaHigh=PI-atan(45.0/(z0_mm+105.));
-		G4double tmpThetaLow=atan(45.0/(-z0_mm+105.0));
-		dTheta = mRand.fRand(tmpThetaLow,tmpThetaHigh);
-	}
-	else
-	{//use specify theta angle
-		dTheta=mRand.fGaus(thetaAngle[index],sigmaTheta[index]);
-	}
-
-	//phi distribution should be flat
-	if (phiAngle[index]/deg<-360.)
-	{//use random phi angle
-		dPhi = mRand.fRand(0.,360.) *deg;
-	}
-	else
-	{//use specify phi angle
-		dPhi = mRand.fGaus(phiAngle[index],sigmaPhi[index]);
-	}
-
-	//use random total momentum; Let Low(or Threshold)<=momentum<high
-	double pBoNuSThreshold=0.,xx=dTheta/deg;
-	double A[]={7.47E-07,-2.67E-04,3.74E-02,-2.44,128.0};
-	for(int ii=4;ii>=0;ii--) pBoNuSThreshold+=A[ii]*pow(xx,4-ii); 
-	pBoNuSThreshold*=MeV;
-
-	double pMin=(pBoNuSThreshold<momentumLow[index])?pBoNuSThreshold:momentumLow[index];
-	dPtotal = mRand.fRand(pMin,momentumHigh[index]);
-
-	momentum3V[index].setRThetaPhi(dPtotal,dTheta,dPhi);
-}
 
 void HRSPrimaryGeneratorAction::RandTCSThetaPhi(int i,double &theTheta,double &thePhi)
 {

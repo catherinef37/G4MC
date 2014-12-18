@@ -8,8 +8,6 @@ an input file 'Detector_CREX.ini'
 #ifndef CREX_Detector
 #define CREX_Detector 1
 
-#include "BigBiteMagField.hh"
-#include "BigBiteHit.hh"
 #include "HRSVisAttribute.hh"
 
 #include "G4VUserDetectorConstruction.hh"

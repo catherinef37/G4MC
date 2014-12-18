@@ -46,11 +46,6 @@
 #include "HRSStdSD.hh"
 #include "UsageManager.hh"
 
-#include "BigBiteDetectorConstruction.hh"
-#include "SBSDetectorConstruction.hh"
-#include "G2PDetectorConstruction.hh"
-#include "BoNuSDetectorConstruction.hh"
-#include "RTPCDetectorConstruction.hh"
 #include "CREXDetectorConstruction.hh"
 #include "HMSDetectorConstruction.hh"
 #include "LACDetectorConstruction.hh"
@@ -222,19 +217,12 @@ void HRSDetectorConstruction::GetConfig()
 	mRadiator2Pivot*=mm;
 
 	/////////////////////////////////////////////////////////////////////////
-	mSetupG2PGeometry=0;
-	gConfig->GetParameter("SetupG2PGeometry",mSetupG2PGeometry);
 
 	mSetupCREXGeometry=0;
 	gConfig->GetParameter("SetupCREXGeometry",mSetupCREXGeometry);
 
 	mSetupRTPCGeometry=0;
 	gConfig->GetParameter("SetupRTPCGeometry",mSetupRTPCGeometry);
-
-	mSetupBigBite=0;
-	gConfig->GetParameter("SetupBigBite",mSetupBigBite);
-
-	gConfig->GetParameter("SetupSuperBigBite",mSetupSuperBigBite);
 
 	gConfig->GetParameter("SetupHMS",mSetupHMS);
 
@@ -323,41 +311,6 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 		pSetupChicane=pSetupThirdArm=0;
 	}
 
-	if( mSetupBigBite==0 && mSetupSuperBigBite==0 && pSetupChicane==0 && 
-		(mSetupVirtualDetector==0 || mPivot2VDFace<8000*mm)  && mSetupHMS<=1 
-		&& mSetupLAC<1 )
-	{		
-		if(mSetupLHRS<2 && mSetupRHRS<2)
-		{
-			mFieldX=640.0*cm;
-			mFieldY=600.0*cm;
-			mFieldZ=800.0*cm;
-			if(pSetupThirdArm>0)
-			{
-				mFieldX=800.0*cm;
-				mFieldY=800.0*cm;
-			}
-			if(mSetupVirtualDetector>0 && mPivot2VDFace>4000*mm)
-			{
-				mFieldX=2*(mPivot2VDFace+2000*mm)*fabs(sin(mVDRotYAngle))+2000*mm;
-				mFieldY=mFieldX;
-				mFieldZ=2*(mPivot2VDFace+2000*mm)*fabs(cos(mVDRotYAngle))+2000*mm;
-				if(mFieldZ<800*cm) mFieldZ=800.0*cm;
-			}
-		}
-		else
-		{
-			mFieldX=mHallZ*max(fabs(sin(mLHRSAngle)),fabs(sin(mRHRSAngle)));
-			mFieldY=mFieldX;
-		}
-
-		mHallX=mFieldX+10*cm;
-		mHallY=mFieldY+10*cm;
-		mHallZ=mFieldZ+10*cm;		
-		G4cout<<"By Jixie: Since BigBite, SBS and Chicane are not used, shrink the hall to a smaller\n"
-			<<"size of "<< mHallX/m<<" X "<<mHallY/m<<" X "<<mHallZ/m
-			<<" (m), which might speed up a lot." <<G4endl;
-	}
 	///////////////////////////////////////////////////////////////////////////
 
 	// start to construct the geometries -----------------------------------------
@@ -434,36 +387,6 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 	if(mSetupRadiator) ConstructRadiator(magneticLogical);
 
 
-	/////////////////////////
-	//g2p geometries
-	/////////////////////////
-	//g2pscattering chamber, target, target coil, local dump, 
-	//g2p sieve, g2p septum, thirdarm, HRSVB, chicane, platform
-	if(mSetupG2PGeometry)
-	{
-		G2PDetectorConstruction* theG2P = new G2PDetectorConstruction(magneticLogical); 
-		theG2P->Construct();
-		//update the parameters
-		this->GetConfig(); 
-	}
-
-	/////////////////////////
-	//RTPC geometries
-	/////////////////////////
-	if (mSetupRTPCGeometry==1) 
-	{
-		BoNuSDetectorConstruction* theBoNuS6 = new BoNuSDetectorConstruction(magneticLogical); 
-		theBoNuS6->Construct();
-		//update the parameters
-		this->GetConfig(); 
-	}
-	if (mSetupRTPCGeometry==2) 
-	{
-		RTPCDetectorConstruction* theBoNuS12 = new RTPCDetectorConstruction(magneticLogical); 
-		theBoNuS12->Construct();
-		//update the parameters
-		this->GetConfig(); 
-	}
 
 	/////////////////////////
 	//CREX geometry
@@ -483,66 +406,8 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 	/////////////////////////
 	if(mSetupLHRS || mSetupRHRS)  this->ConstructHRS(magneticLogical);
 
-	/////////////////////////
-	// BigBite
-	/////////////////////////
-	if(mSetupBigBite) 
-	{
-#if defined G4DEBUG_GEOMETRY && (G4DEBUG_GEOMETRY>=2)
-
-		//after 1 day of debugging, I found that G4PVPlacement() only take a 
-		//G4RotationMatrix pointer as the first argument, not an object|instance
-		//in Geant4_9.X.X. That is why the bigbite detector never shows up in the 
-		//visualization in Geant4_9.4.3(but Geant4_8.x do accept an object .....)
-		//The following code is for this test
-		double dist2targ,detangle;
-		dist2targ = 200*cm;//110.*cm; //from front face to the target center 
-
-		detangle=270*deg;
-		G4RotationMatrix rotbigbite;
-		rotbigbite.rotateY(-detangle+90*deg); 
-		G4RotationMatrix* pRotBigBite=new G4RotationMatrix();
-		pRotBigBite->rotateY(-90*deg); 
-
-		G4double xmb = 10.*m; //
-		G4double ymb = 2.*m;  // Size of this box, large enough but no too big
-		G4double zmb = 2.*m;  //  
-		G4Box* mboxlong = new G4Box("motherboxlong",xmb/2,ymb/2,zmb/2);
-		G4Box* mboxsub = new G4Box("motherboxsub",xmb/2,ymb/2+1.0*cm,zmb/2+1.0*cm);
-		//this is the old method
-		//G4Box* mbox = new G4Box("motherbox",xmb/2,ymb/2,zmb/2);
-		G4SubtractionSolid* mbox = new G4SubtractionSolid("motherbox",
-			mboxlong,mboxsub,
-			0,G4ThreeVector(-(xmb/2-dist2targ),0,0));
-
-		G4LogicalVolume* logmb = new G4LogicalVolume(mbox, mMaterialManager->air,
-			"logmb", 0, 0, 0);
-		logmb->SetVisAttributes(OrangeVisAtt);
-
-		new G4PVPlacement(&rotbigbite,G4ThreeVector(0,0,0),
-			logmb,"MotherBox",magneticLogical,0,0);
-		new G4PVPlacement(pRotBigBite,G4ThreeVector(0,0,-3),
-			logmb,"MotherBox",magneticLogical,0,0);			
-#endif
-
-		BigBiteDetectorConstruction* theBB = new BigBiteDetectorConstruction(magneticLogical); 
-		theBB->Construct();
-		//update the parameters
-		this->GetConfig(); 
-	}
 
 	/////////////////////////
-
-	/////////////////////////
-	// SBS 
-	/////////////////////////
-	if(mSetupSuperBigBite)  
-	{
-		SBSDetectorConstruction* theSBS = new SBSDetectorConstruction(magneticLogical); 
-		theSBS->Construct();
-		//update the parameters
-		this->GetConfig(); 
-	}
 
 	/////////////////////////
 	// HMS 
@@ -627,46 +492,6 @@ G4VPhysicalVolume* HRSDetectorConstruction::Construct()
 			virtualBoundary0Logical,"virtualDetectorPhys",magneticLogical,0,0);
 		new G4PVPlacement(pRotVB,G4ThreeVector(pVBPosX,pVBPosY,pVBPosZ),			
 			virtualBoundary1Logical,"virtualBoundaryPhys",magneticLogical,0,0);
-	}
-
-	/////////////////////////
-	// G2P Virtual Detector, the 4th arm?
-	/////////////////////////
-	//bool mSetupVirtualDetector=true;  //will be read from Detector.ini
-	if(mSetupVirtualDetector)
-	{	
-		//double mVirtualDetectorWidth=260.0*mm;
-		//double mVirtualDetectorHeight=400.0*mm;
-		//double mVirtualDetectorThick=5.0*mm;
-		//double mVDRotYAngle=-15.0*deg;
-		//double mVDRotXAngle=-8.0*deg;
-		//double mPivot2VDFace=635.0*mm;
-		//string mVDPhysVolName="virtualBoundaryPhys";
-
-		G4VSolid* virtualDetectorSolid = new G4Box("virtualDetectorBox",mVirtualDetectorWidth/2.0,
-			mVirtualDetectorHeight/2.0,mVirtualDetectorThick/2.0);
-		G4LogicalVolume* virtualDetectorLogical = new G4LogicalVolume(virtualDetectorSolid,
-			mMaterialManager->heliumGas,"virtualDetectorLogical",0,0,0);
-		virtualDetectorLogical->SetVisAttributes(LightYellowVisAtt);  
-		SDman->AddNewDetector(virtualDetectorSD);
-		virtualDetectorLogical->SetSensitiveDetector(virtualDetectorSD);
-
-		G4RotationMatrix *pRotVD=new G4RotationMatrix();
-		pRotVD->rotateY(-mVDRotYAngle); 
-		pRotVD->rotateX(-mVDRotXAngle); 
-		G4ThreeVector pV3VDPos(0.0,0.0,mPivot2VDFace+mVirtualDetectorThick/2.);
-		pV3VDPos.transform(pRotVD->inverse());
-
-		//place a VD then the VB
-		new G4PVPlacement(pRotVD,G4ThreeVector(pV3VDPos.x()+mPivotXOffset,
-			pV3VDPos.y()+mPivotYOffset,pV3VDPos.z()+mPivotZOffset),
-			virtualDetectorLogical,"virtualDetectorPhys",magneticLogical,0,0);
-
-		pV3VDPos.set(0.0,0.0,mPivot2VDFace+1.5*mVirtualDetectorThick);
-		pV3VDPos.transform(pRotVD->inverse());
-		new G4PVPlacement(pRotVD,G4ThreeVector(pV3VDPos.x()+mPivotXOffset,
-			pV3VDPos.y()+mPivotYOffset,pV3VDPos.z()+mPivotZOffset),
-			virtualDetectorLogical,mVDPhysVolName,magneticLogical,0,0);
 	}
 
 
@@ -788,7 +613,7 @@ G4VPhysicalVolume* HRSDetectorConstruction::ConstructHRS(G4LogicalVolume* mother
 	//////////////////////////
 	bool pSetupQ1EntranceWindow=true;
 	//G2P and CREX have their own VB defined at a different location
-	if(mSetupG2PGeometry || mSetupCREXGeometry)  pSetupQ1EntranceWindow=false;
+	if( mSetupCREXGeometry)  pSetupQ1EntranceWindow=false;
 	if(pSetupQ1EntranceWindow) 
 	{
 		//this part is trying to place a virtual boundary at the Q1 entrance

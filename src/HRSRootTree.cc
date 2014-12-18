@@ -340,51 +340,6 @@ void HRSRootTree::Initilize()
 		gConfig->GetParameter("Pivot2LACFace",mPivot2LACFace); //mm
 	}
 
-	/////////////////////////////////////////////////////
-	//BigBite
-	gConfig->GetParameter("SetupBigBite",mSetupBigBite); 
-	if(mSetupBigBite)
-	{
-		gConfig->GetParameter("BigBiteAngle",mBigBiteAngle); //deg
-		mBigBiteAngle*=deg;
-		gConfig->GetParameter("BigBiteTiltAngle",mBigBiteTiltAngle); //deg
-		mBigBiteTiltAngle*=deg;
-		gConfig->GetParameter("Pivot2BigBiteFace",mPivot2BigBiteFace); //mm
-
-		gConfig->GetParameter("SetupHAND",mSetupHAND); 
-		gConfig->GetParameter("Pivot2HANDLeadWall",mPivot2HANDLeadWall); //mm
-	}
-
-	/////////////////////////////////////////////////////
-	//SBS
-	gConfig->GetParameter("SetupSuperBigBite",mSetupSuperBigBite); 
-	if(mSetupSuperBigBite)
-	{
-		gConfig->GetParameter("SuperBigBiteAngle",mSuperBigBiteAngle); //deg
-		mSuperBigBiteAngle*=deg;
-		gConfig->GetParameter("Pivot2SuperBigBiteFace",mPivot2SuperBigBiteFace); //mm
-
-		int pTosca_SBS_UseUniformB=0;
-		gConfig->GetParameter("Tosca_SBS_UseUniformB",pTosca_SBS_UseUniformB); 
-		mSBSFieldCurrentRatio=1.0;  
-		gConfig->GetParameter("Tosca_SBS_CurrentRatio",mSBSFieldCurrentRatio);
-		mUseSBSField=( pTosca_SBS_UseUniformB==0 && fabs(mSBSFieldCurrentRatio)>1.0E-08 )?1:0;
-		gConfig->GetParameter("Tosca_SBS_OriginX",mSBSFieldXOffset); //in cm
-		mSBSFieldXOffset*=10.0;
-		gConfig->GetParameter("Tosca_SBS_OriginY",mSBSFieldYOffset); //in cm
-		mSBSFieldYOffset*=10.0;
-		gConfig->GetParameter("Tosca_SBS_OriginZ",mSBSFieldZOffset); //in cm
-		mSBSFieldZOffset*=10.0;
-		gConfig->GetParameter("Tosca_SBS_RotAxis1",mSBSFieldRotAxis1); 
-		gConfig->GetParameter("Tosca_SBS_RotAngle1",mSBSFieldRotAngle1); //deg
-		mSBSFieldRotAngle1*=deg;
-		gConfig->GetParameter("Tosca_SBS_RotAxis2",mSBSFieldRotAxis2); 
-		gConfig->GetParameter("Tosca_SBS_RotAngle2",mSBSFieldRotAngle2); //deg
-		mSBSFieldRotAngle2*=deg;
-		gConfig->GetParameter("Tosca_SBS_RotAxis3",mSBSFieldRotAxis3); 
-		gConfig->GetParameter("Tosca_SBS_RotAngle3",mSBSFieldRotAngle3); //deg
-		mSBSFieldRotAngle3*=deg;
-	}
 
 	/////////////////////////////////////////////////////
 	//HMS
@@ -396,34 +351,6 @@ void HRSRootTree::Initilize()
 		gConfig->GetParameter("Pivot2HMSFace",mPivot2HMSFace); //mm
 		gConfig->GetParameter("HMSMomentum",mHMSMomentum); //GeV
 	}
-
-	/////////////////////////////////////////////////////
-	//G2P stuff
-	mSetupG2PGeometry=0;
-	gConfig->GetParameter("SetupG2PGeometry",mSetupG2PGeometry);
-
-	mThirdArmAngle=mThirdArmRotZAngle=mPivot2ThirdArmFace=0;
-	mSetupG2PTarget=mTargetType=0;
-	mSetupChicane=mSetupChicaneVD=0;
-
-	if(mSetupG2PGeometry)
-	{
-		gConfig->GetParameter("ThirdArmAngle",mThirdArmAngle); //deg
-		mThirdArmAngle*=deg;
-		gConfig->GetParameter("SetupThirdArmVD",mSetupThirdArmVD); 
-		gConfig->GetParameter("ThirdArmRotZAngle",mThirdArmRotZAngle); //deg
-		mThirdArmRotZAngle*=deg;
-		mThirdArmRotZAngle=-36.5*deg*mHelmCurrentRatio;
-		gConfig->GetParameter("Pivot2ThirdArmFace",mPivot2ThirdArmFace); //mm
-
-		gConfig->GetParameter("SetupG2PTarget",mSetupG2PTarget); 
-		gConfig->GetParameter("TargetType",mTargetType); 
-		gConfig->GetParameter("TargetL",mTargetL); //mm
-
-		gConfig->GetParameter("SetupChicane",mSetupChicane); 
-		gConfig->GetParameter("SetupChicaneVD",mSetupChicaneVD);
-	}
-
 	/////////////////////////////////////////////////////
 	mSetupCREXGeometry=0;
 	gConfig->GetParameter("SetupCREXGeometry",mSetupCREXGeometry);
@@ -434,14 +361,6 @@ void HRSRootTree::Initilize()
 	}
 
 	/////////////////////////////////////////////////////
-	mSetupRTPC=0;
-	gConfig->GetParameter("SetupRTPCGeometry",mSetupRTPC);
-	if(mSetupRTPC)
-	{
-		gConfig->GetParameter("RatioHe2DME",mRatioHe2DME); 
-		gConfig->GetParameter("TargetL",mTargetL); //mm
-	}
-
 
 	//need to update these parameters
 	G4RunManager *theRunManager=G4RunManager::GetRunManager(); 
@@ -555,7 +474,6 @@ void HRSRootTree::Initilize()
 		config->Branch("SeptumCurrentRatioR",&mSeptumCurrentRatioR,"SeptumCurrentRatioR/D");
 
 
-		config->Branch("SetupG2PTarget",&mSetupG2PTarget,"SetupG2PTarget/I");
 		config->Branch("TargetType",&mTargetType,"TargetType/I");
 
 		config->Branch("ThirdArmAngle",&mThirdArmAngle,"ThirdArmAngle/D");
@@ -596,32 +514,8 @@ void HRSRootTree::Initilize()
 		config->Branch("Pivot2LACFace",&mPivot2LACFace,"Pivot2LACFace/D");
 
 		/////////////////////////////////////////////////////
-		config->Branch("SetupBigBite",&mSetupBigBite,"SetupBigBite/I");
-		config->Branch("BigBiteAngle",&mBigBiteAngle,"BigBiteAngle/D");
-		config->Branch("BigBiteTiltAngle",&mBigBiteTiltAngle,"BigBiteTiltAngle/D");
-		config->Branch("Pivot2BigBiteFace",&mPivot2BigBiteFace,"Pivot2BigBiteFace/D");
-
 		config->Branch("SetupHAND",&mSetupHAND,"SetupHAND/I");
 		config->Branch("Pivot2HANDLeadWall",&mPivot2HANDLeadWall,"Pivot2HANDLeadWall/D");
-
-		/////////////////////////////////////////////////////
-		config->Branch("SetupSuperBigBite",&mSetupSuperBigBite,"SetupSuperBigBite/I");
-		config->Branch("SuperBigBiteAngle",&mSuperBigBiteAngle,"SuperBigBiteAngle/D");
-		config->Branch("Pivot2SuperBigBiteFace",&mPivot2SuperBigBiteFace,"Pivot2SuperBigBiteFace/D");
-
-
-		config->Branch("UseSBSField",&mUseSBSField,"UseSBSField/I");
-		config->Branch("SBSFieldXOffset",&mSBSFieldXOffset,"SBSFieldXOffset/D");
-		config->Branch("SBSFieldYOffset",&mSBSFieldYOffset,"SBSFieldYOffset/D");
-		config->Branch("SBSFieldZOffset",&mSBSFieldZOffset,"SBSFieldZOffset/D");
-		config->Branch("SBSFieldRotAxis1",&mSBSFieldRotAxis1,"SBSFieldRotAxis1/D");
-		config->Branch("SBSFieldRotAxis2",&mSBSFieldRotAxis2,"SBSFieldRotAxis2/D");
-		config->Branch("SBSFieldRotAxis3",&mSBSFieldRotAxis3,"SBSFieldRotAxis3/D");
-		config->Branch("SBSFieldRotAngle1",&mSBSFieldRotAngle1,"SBSFieldRotAngle1/D");
-		config->Branch("SBSFieldRotAngle2",&mSBSFieldRotAngle2,"SBSFieldRotAngle2/D");
-		config->Branch("SBSFieldRotAngle3",&mSBSFieldRotAngle3,"SBSFieldRotAngle3/D");
-		config->Branch("SBSFieldCurrentRatio",&mSBSFieldCurrentRatio,"SBSFieldCurrentRatio/D");
-
 
 		/////////////////////////////////////////////////////
 		config->Branch("SetupHMS",&mSetupHMS,"SetupHMS/I");
@@ -1359,92 +1253,6 @@ bool HRSRootTree::TransportThruVD(int i, double pEndPlaneAngle)
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-bool HRSRootTree::TransportThruBigBite(int i)
-{
-	MyTrack *pTrack=track[i];
-	if(pTrack->Pvb/keV<1.0) return false;
-
-	//double pEndPlaneAngle=mPGA->GetDetectorAngle(i);
-	double pEndPlaneAngle=mBigBiteAngle;
-
-	Transform::X_HCS2TCS(pTrack->X0-mPivotXOffset,pTrack->Y0-mPivotYOffset,
-		pTrack->Z0-mPivotZOffset, pEndPlaneAngle, pTrack->X0_tr, pTrack->Y0_tr,pTrack->Z0_tr);
-	Transform::P_HCS2TCS(pTrack->Theta0, pTrack->Phi0, pEndPlaneAngle, 
-		pTrack->Theta0_tr, pTrack->Phi0_tr);
-
-	////////////////////////////////////////////////////////////////////
-	//Project|Drift this X0_tr,Y0_tr to target plane
-	TVector3 X,P;  //ThreeVector in Hall system for Drift(), in unit of m, GeV
-	double pCharge = mPrimaryGeneratorAction->GetPDGCharge(i);  
-	double pMass = mPrimaryGeneratorAction->GetPDGMass(i)/GeV;  
-	if(!mUseHelmField || fabs(pCharge)<1.0E-8)
-	{
-		double tmpZtg_tr=0;
-		Transform::Project(pTrack->X0_tr, pTrack->Y0_tr,pTrack->Z0_tr, -pTrack->Z0_tr, pTrack->Theta0_tr, 
-			pTrack->Phi0_tr,pTrack->Xtg_tr,pTrack->Ytg_tr,tmpZtg_tr);
-
-		pTrack->Thetatg_tr=pTrack->Theta0_tr;
-		pTrack->Phitg_tr=pTrack->Phi0_tr;
-	}
-	else
-	{
-		//Drift from vertex plane to target plane
-		//need to drift forward if Z0_tr<0 or backward if Z0_tr>0
-
-		X.SetXYZ(pTrack->X0/1000.,pTrack->Y0/1000.,pTrack->Z0/1000.);
-		P.SetMagThetaPhi(pTrack->P0,pTrack->Theta0,pTrack->Phi0); 
-
-		int ret=0;
-		double pZtrLimit=0.0, pTLLimit=1.0;
-		if(pTrack->Z0_tr-pZtrLimit<-1.0E-6)
-		{
-			//forward
-			DriftSieve2Tg::Drift2Ztr(X,P,pEndPlaneAngle,pMass, pCharge,pZtrLimit,
-				pTLLimit,0.00005,mTargetZOffset/1000);				
-		}
-		else if(pTrack->Z0_tr-pZtrLimit>1.0E-6)
-		{
-			//backward
-			P*=-1;	//flip P for backward, make sure the particle is positron
-			DriftSieve2Tg::Drift2Ztr(X,P,pEndPlaneAngle,pMass,-pCharge,pZtrLimit,
-				pTLLimit,0.00005,mTargetZOffset/1000);				
-			P*=-1;  //flip it back
-		}
-		if(ret<0) return false;  
-
-		//now convert the result from HCS to TCS 
-		double tmpZtg_tr=0;
-		Transform::X_HCS2TCS(X.x()*1000-mPivotXOffset,X.y()*1000-mPivotYOffset, X.z()*1000-mPivotZOffset,
-			pEndPlaneAngle, pTrack->Xtg_tr,pTrack->Ytg_tr,tmpZtg_tr);
-		Transform::P_HCS2TCS(P.Theta(), P.Phi(), pEndPlaneAngle,pTrack->Thetatg_tr,pTrack->Phitg_tr);
-
-	}
-
-	////////////////////////////////////////////////////////////////////
-	//Convert HCS to TCS at VB
-	Transform::X_HCS2TCS(pTrack->Xvb-mPivotXOffset,pTrack->Yvb-mPivotYOffset,
-		pTrack->Zvb-mPivotZOffset, pEndPlaneAngle, pTrack->Xvb_tr, pTrack->Yvb_tr,pTrack->Zvb_tr);
-	Transform::P_HCS2TCS(pTrack->Thetavb, pTrack->Phivb, pEndPlaneAngle, 
-		pTrack->Thetavb_tr, pTrack->Phivb_tr);
-
-	//determine the TrackClass
-	if( pTrack->Pvb/GeV > 0.15)  pTrack->TrackClass=1;
-
-	if(pTrack->TrackClass==1)
-	{
-		if( (pTrack->P0 - pTrack->Pvb) / pTrack->P0 < 0.20 ) pTrack->TrackClass=2;
-	}
-
-	/*
-	//there is no reconstruction right now, the following should be replaced 
-	//with the real reconstruction code
-	pTrack->Theta_rec_tr=pTrack->Theta0_tr;
-	pTrack->Phi_rec_tr=pTrack->Phi0_tr;
-	Transform::P_TCS2HCS(pTrack->Theta_rec_tr, pTrack->Phi_rec_tr, pEndPlaneAngle, 
-	pTrack->Theta_rec, pTrack->Phi_rec);
-	*/
-	return true;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //Get the effective BPM vertical position when target field is on
@@ -1469,63 +1277,6 @@ double HRSRootTree::GetEffBPMVertical(double pX_BPM_tr_m,double pMomentum_GeV)
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//do the energy loss correction for the electron, only good for G2P
-double HRSRootTree::ElossCorr(double pMomentum_GeV)
-{
-	if(!mSetupG2PGeometry) return pMomentum_GeV;
-	//fit pol3 to P0-Pvb vs P0
-
-	double xx = pMomentum_GeV, pMomentum_corr=pMomentum_GeV,pEloss=0;
-
-	//the following is for 1 mm C12 target, With He4
-	//	Minimizer is Linear
-	//Chi2                      =      146.358
-	//NDf                       =           82
-	//p0                        =  0.000998404   +/-   0.000189069 
-	//p1                        =  0.000852627   +/-   0.000463301 
-	//p2                        =  -0.00028837   +/-   0.000316421 
-	//p3                        =  6.29983e-05   +/-   6.30386e-05 
-	double pPara_TgType3[]={0.000998404, 0.000852627, -0.00028837, 6.29983e-05};
-
-	//the following is the fit for 1 mm C12 and no He4
-	//	Chi2                      =      91.5804
-	//NDf                       =           82
-	//p0                        =  0.000585605   +/-   0.000165723 
-	//p1                        =  0.000206183   +/-   0.000410247 
-	//p2                        =  0.000117377   +/-   0.000278337 
-	//p3                        = -2.56432e-05   +/-   5.44367e-05 
-	double pPara_TgType30[]={0.000585605, 0.000206183, 0.000117377, -2.56432e-05};
-
-
-	//the following is for NH3 target, With He4
-	//NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-	//Minimizer is Linear
-	//Chi2                      =      66.6492
-	//NDf                       =           82
-	//p0                        =   0.00258358   +/-   0.000302646 
-	//p1                        =  0.000299926   +/-   0.000748339 
-	//p2                        =  0.000687104   +/-   0.000513689 
-	//p3                        = -0.000137723   +/-   0.000101663 
-	double pPara_TgType1[]={0.00258358, 0.000299926, 0.000687104, -0.000137723};
-
-	double *pPara=pPara_TgType30;
-	if(mSetupG2PTarget>=10) 
-	{
-		//for No He4 
-		pPara=pPara_TgType30;
-	}
-	else if(mSetupG2PTarget>=1)
-	{	
-		//With He4, not separate by target type any more, just use the target thickness
-		if(mTargetL<2.0)  pPara=pPara_TgType3;
-		else pPara=pPara_TgType1;
-	}
-
-	pEloss = pPara[0] + pPara[1]*xx + pPara[2]*xx*xx + pPara[3]*xx*xx*xx;
-	pMomentum_corr += pEloss;
-	return pMomentum_corr;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 //HRSRootTree::TransportThruHMS() has been rewritten. 
@@ -2206,14 +1957,6 @@ bool HRSRootTree::TransportThruHRS(int i)
 	pV5_rec[4]=pTrack->Delta;
 #endif
 
-	//G2P transverse setting
-	const int kG2pHelmAngle=90, kGepHelmAngle=6;
-	int iFieldRotation=90;
-	if (fabs(sin(mHelmRotAngle1)-sin(270.*deg))<0.001) iFieldRotation=kG2pHelmAngle;
-	else if (fabs(sin(mHelmRotAngle1)-sin(6.*deg))<0.001) iFieldRotation=kGepHelmAngle;
-	else if (fabs(sin(mHelmRotAngle1)-sin(0.*deg))<0.001) iFieldRotation=0;
-
-
 	bool bGoodParticle=false;
 	//need to set the HRS arm and angle, 
 	mHRSTranModel->SetArm((pIsLeftArm>0)?true:false); 
@@ -2564,7 +2307,7 @@ bool HRSRootTree::TransportThruHRS(int i)
 	//Energy loss correction
 	////////////////////////////////////////////////////////	
 
-	pTrack->P_rec = ElossCorr(pTrack->P_rec2tg);
+	//pTrack->P_rec = ElossCorr(pTrack->P_rec2tg);
 	//Delta is defined by (Pvb-pHRSMomentum)/pHRSMomentum
 	//therefore I do not want to correct Delta_rec after Eloss corr.
 	//pTrack->Delta_rec = (pTrack->P_rec-pHRSMomentum)/pHRSMomentum;
@@ -2979,7 +2722,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//Energy loss correction
 	////////////////////////////////////////////////////////	
 
-	pTrack->P_rec = ElossCorr(pTrack->P_rec2tg);
+	//pTrack->P_rec = ElossCorr(pTrack->P_rec2tg);
 	//Delta is defined by (Pvb-pHRSMomentum)/pHRSMomentum
 	//therefore I do not want to correct Delta_rec after Eloss corr.
 	//pTrack->Delta_rec = (pTrack->P_rec-pHRSMomentum)/pHRSMomentum;
@@ -3018,11 +2761,6 @@ void HRSRootTree::DoRootTree()
 				//if(mUseHelmField) bGoodParticle=TransportThruHRS(j);
 				//else bGoodParticle=TransportThruHRS_NoTgField(j);
 			//}
-			else if(track[j]->VBName.find("SBS") != string::npos)  
-			{
-				// Transportation through SuperBigBite
-				bGoodParticle=TransportThruVD(j,mSuperBigBiteAngle);
-			}
 			else if(track[j]->VBName.find("HMS") != string::npos)  
 			{
 				// Transportation through HMS
@@ -3037,11 +2775,6 @@ void HRSRootTree::DoRootTree()
 			{
 				// Transportation through a Virtual Plane
 				bGoodParticle=TransportThruVD(j,mLACAngle);
-			}
-			else if(track[j]->VBName.find("BB") != string::npos)  
-			{
-				// Transportation through BigBite
-				bGoodParticle=TransportThruBigBite(j);
 			}
 			else if(track[j]->VBName.find("RTPC") != string::npos)  
 			{
