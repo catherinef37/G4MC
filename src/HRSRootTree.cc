@@ -766,7 +766,6 @@ void HRSRootTree::Initilize()
 				tree[j]->Branch("Thetapr_tr",&(track[j]->Thetapr_tr),"Thetapr_tr/D");
 				tree[j]->Branch("Phipr_tr",&(track[j]->Phipr_tr),"Phipr_tr/D");
 
-
 				tree[j]->Branch("X_q1ex_tr",&(track[j]->X_q1ex_tr),"X_q1ex_tr/D");
 				tree[j]->Branch("Y_q1ex_tr",&(track[j]->Y_q1ex_tr),"Y_q1ex_tr/D");
 				tree[j]->Branch("a_q1ex_tr",&(track[j]->a_q1ex_tr),"a_q1ex_tr/D");
@@ -928,9 +927,6 @@ void HRSRootTree::Initilize()
 
 	mHRSTranModel = new HRSTransport();
 	mHRSTranModel->ChangeModel(mSnakeModel);
-	cout << "We are using model: " << mSnakeModel << endl;
-	cout << "We are using model: " << mSnakeModel << endl;
-	cout << "We are using model: " << mSnakeModel << endl;
 	cout << "We are using model: " << mSnakeModel << endl;
 	printf("HRSRootTree::Initialize(): Initializing SNAKE Models... done!\n");
 }
@@ -1683,8 +1679,10 @@ bool HRSRootTree::TransportThruHMS(int i)
 	// To use the transportation functions (from target plane to focus plane), 
 	// we have to project back to the target plane (Z_tg=0), all length in unit of mm
 	double Z_proj2tg_tr;
+
 	  Transform::Project(pTrack->Xvb_tr, pTrack->Yvb_tr, pTrack->Zvb_tr, -pTrack->Zvb_tr, pTrack->Thetavb_tr,
 			     pTrack->Phivb_tr, pTrack->X_proj2tg_tr, pTrack->Y_proj2tg_tr, Z_proj2tg_tr);
+
 
 	////////////////////////////////////////////////////////////////////////
 	//transport from tg_tr to fp_tr
@@ -2040,7 +2038,7 @@ bool HRSRootTree::TransportThruHMS(int i)
 
 bool HRSRootTree::TransportThruHRS(int i)
 {
-  cout << "Transporting through HRS." << endl;
+  //cout << "Transporting through HRS." << endl;
 	MyTrack *pTrack=track[i];
 	if(pTrack->Pvb/keV<1.0) return false;
 /*
@@ -2180,7 +2178,8 @@ bool HRSRootTree::TransportThruHRS(int i)
 	// *************************************************************************
 
 	pTrack->Delta = (pTrack->Pvb - pHRSMomentum) / pHRSMomentum;
-	cout << "Delta: " << pTrack->Delta << ", Pvb: " << pTrack->Pvb << ", pHRSMomentum: " << pHRSMomentum << endl;
+
+	//cout << "Delta: " << pTrack->Delta << ", Pvb: " << pTrack->Pvb << ", pHRSMomentum: " << pHRSMomentum << endl;
 	//We know that this particle will not go thrught HRS, stop here to save time
 	if(fabs(pTrack->Delta)>0.1) return false;
 
@@ -2631,6 +2630,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//C) Determine TrackClass, stop if it less than SkimLevel
 	// *************************************************************************
 
+
 	//cout << "THIS IS THE SEPTUM ANGLE!!!!" << endl;
 	//cout << pEndPlaneAngle * 180. / 3.141592654 << endl;
 	//cout << mPivotXOffset << " " << mPivotYOffset << " " << mPivotZOffset << " " << pEndPlaneAngle << " " << endl;
@@ -2686,7 +2686,6 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	  Transform::P_HCS2TCS(pTrack->Thetavb, pTrack->Phivb, pEndPlaneAngle, 
 			       pTrack->Thetavb_tr, pTrack->Phivb_tr);
 	}
-	
 
 	////////////////////////////////////////////////////////////////////
 	//Determine the TrackClass
@@ -2717,6 +2716,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//     reconstruct them to target plane (_rec2tg_tr)
 	//  C) Stop if fail to call SNAKE model
 	// *************************************************************************
+
 	//if( mSnakeModel==47 ) {
 	  //pTrack->Delta = (pTrack->P0 - pHRSMomentum) / pHRSMomentum;
 	  //pTrack->Delta = 0.;
@@ -2732,6 +2732,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	// To use the transportation functions (from target plane to focus plane), 
 	// we have to project it back to the target plane (Z_tg=0), all length in unit of mm
 	double Z_proj2tg_tr;
+
 	//cout << pTrack->Xvb_tr << " " << pTrack->Yvb_tr << " " << pTrack->Zvb_tr << " " <<  0 << " " << pTrack->Thetavb_tr << " ";
 	//cout << pTrack->Phivb_tr << " " <<  pTrack->X_proj2tg_tr << " " << pTrack->Y_proj2tg_tr << " " << Z_proj2tg_tr << endl;
 	//if( mSnakeModel==47 ) {
@@ -2786,6 +2787,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	//reconstructed values stored in pV5_rec
 
 	bGoodParticle=mHRSTranModel->Forward(pV5_proj2tg, pV5_fp);
+
 	double acc_check[20];
 	bool   acc_bool[10] = {false, false, false, false, false,
 			       false, false, false, false, false};
@@ -2842,7 +2844,6 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 		if (pIsLeftArm) mRecUseDBL->CalcTargetCoords(pV5_fp, pV5_rec_db);
 		else mRecUseDBR->CalcTargetCoords(pV5_fp, pV5_rec_db);
 	}
-	
 	//////////////////////////////////////////////////////////////////////
 
 	// *************************************************************************
@@ -2892,7 +2893,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	double XXS_208Pb    = mott * FFF;
 	//cout << "Cross section for 208Pb at " << QQ2 << " is " << XXS_208Pb << endl;
 	pTrack->rate_208Pb = XXS_208Pb;
-	
+
 	if (mUseOpticsDB==1) {
 		pTrack->Xtg_rec_db_tr = pV5_rec_db[0]*1000.;
 		pTrack->Thetatg_rec_db_tr = pV5_rec_db[1];
@@ -2908,7 +2909,7 @@ bool HRSRootTree::TransportThruHRS_NoTgField(int i)
 	pTrack->Delta_rec       = pV5_rec[4];
 
 	pTrack->P_rec2tg = pHRSMomentum*(1.0+pV5_rec[4]);	
-	
+
 	//By Jixie:
 	//People will be very interested to compare the reconstruction results among stop
 	//drifting at the following location: target plane, vertex plane and exact z0
@@ -2995,7 +2996,7 @@ void HRSRootTree::DoRootTree()
 	PartNum=mPrimaryGeneratorAction->GetParticleNum();
 	Ei=mPrimaryGeneratorAction->GetIncidentEnergy()/GeV;
 	Helicity=mPrimaryGeneratorAction->GetHelicity();
-	
+
 	//for (int j=0;j<MaxPrimaryNum;j++)   
 	for (int j=0;j<PartNum;j++)   //use this line to speed up
 	{	

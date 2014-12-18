@@ -63,8 +63,6 @@ bool hamcPREXTrans::TransLeftHRS(double* pV5)
 	//if( (x_test>522.0) || (x_test<498.1) || fabs(y_test) > fabs(-0.1924*x_test-19.24) )
 	//return false;
 
-	
-
 	//Target to dipole exit, trapezoid -46.19cm<x<46.19cm  |y| < -0.0161*x+12.5
 	x_test = x_sp_dex_(vector_jjl, ii)*m2cm;
 	y_test = y_sp_dex_(vector_jjl, ii)*m2cm;
@@ -247,7 +245,6 @@ bool hamcPREXTrans::TransRightHRS(double* pV5)
 void hamcPREXTrans::ReconLeftHRS(double* pV5){
   return;
 }
-
 /*
 {   
 	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};

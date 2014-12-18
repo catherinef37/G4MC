@@ -619,6 +619,7 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 	bool mSetupSeptumBlock=((mLHRSAngle-mLSeptumAngle)/deg>0.5)?true:false;
 	cout << mLHRSAngle-mLSeptumAngle << " = " << mLHRSAngle << " - " << mLSeptumAngle << " divided by " << deg << endl;
 	cout << mRHRSAngle-mRSeptumAngle << " = " << mRHRSAngle << " - " << mRSeptumAngle << " divided by " << deg << endl;
+
 	cout << "True or false? " << mSetupSeptumBlock << endl;
 	/////////////////////////////////////////////////
 	//From Hall A NIM Paper, the standard sieve slit
@@ -984,6 +985,7 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		HRSVBLogical->SetVisAttributes(LightYellowVisAtt); 
 
 
+
 		G4VSolid* TargetSolid = new G4Tubs("TargetTub",0.0,50*cm,
 			mHRSVBThick/2.0,0.0,360.0*deg);
 		G4LogicalVolume* TargetLogical = new G4LogicalVolume(TargetSolid,
@@ -1032,7 +1034,6 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		  //TargetLogical,"virtualBoundaryPhys_C",motherLogical,0,0,0);
 		  //cout << "The angle of the HRS is: " << -mLHRSAngle << endl;
 		  //}
-
 	}
 	else
 	{

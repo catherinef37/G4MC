@@ -369,12 +369,14 @@ void HRSPrimaryGeneratorAction::GetPosition()
 		//apply the raster and offset
 		tmpxx+=kTargetXOffset;
 		tmpyy+=kTargetYOffset;
+
 		tmpzz = mRand.fRand(gunZLow,gunZHigh);
 		//cout << "DOOOOOOOOP: " << tmpzz << " " << gunZLow << " " << gunZHigh << endl;
 	
 	}
 	position3V.set(tmpxx,tmpyy,tmpzz);
 	//cout << tmpxx << " " << tmpyy << " " << tmpzz << endl;
+
 }
 
 void HRSPrimaryGeneratorAction::GetMomentum(int i)
@@ -1082,6 +1084,7 @@ void HRSPrimaryGeneratorAction::BdLEngine(int index)
 
 void HRSPrimaryGeneratorAction::PREXEngine(int index)
 {
+
   //cout << "At the level of the generator!: " << momentum[index] << " " << thetaAngle[index] << " " << phiAngle[index] << " --------------------" << endl;
   
   double pPtot = momentum[index];
@@ -1110,6 +1113,7 @@ void HRSPrimaryGeneratorAction::PREXEngine(int index)
   
   //G4cout<<"Debug GetMomentum(): pTheta="<<pTheta/deg<<"deg  pPhi="<<pPhi/deg<<"deg \n";                                                                                               
   momentum3V[index].setRThetaPhi(pPtot,pTheta,pPhi);
+
 
 }
 

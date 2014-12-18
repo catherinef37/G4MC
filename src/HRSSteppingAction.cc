@@ -433,6 +433,7 @@ void HRSSteppingAction::FillRootArray(const G4Step* theStep)
 	{
 		//hit the virtualBoundary, record this step then kill this track
 	  //cout << "Recording at the virtual boundary!" << endl;
+
 		RootTrack->Xvb=xx;
 		RootTrack->Yvb=yy;
 		RootTrack->Zvb=zz;
