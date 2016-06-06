@@ -31,7 +31,7 @@
 #include "G4CashKarpRKF45.hh"
 #include "G4RKG3_Stepper.hh"
 #include "G4ios.hh"
-#include "QuadFringe.hh"
+//#include "QuadFringe.hh"
 
 #include <iostream>
 using namespace std;
@@ -70,7 +70,7 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   G4cout << "HRS angles: " << mLHRSAngle << " " << mRHRSAngle << G4endl;
 
   //G4cout << "Quad fringe?" << G4endl;
-  QuadFringe* fringe = new QuadFringe();
+  //QuadFringe* fringe = new QuadFringe();
   //G4cout << "Quad fringe!" << G4endl;
   fHRSEMFieldSetup=this;
   
@@ -274,13 +274,13 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   RROTATEQ3->rotateX(-45.0 * deg);
   RROTATEQ3->rotateY( mRHRSAngle);
   
-  fMagFieldFZBL1 = new BField_Quad(KAPPA1, LORIGINQ1, LROTATEQ1, fringe, pQ1Length, pQ1Radius, 1);
+  fMagFieldFZBL1 = new BField_Quad(KAPPA1, LORIGINQ1, LROTATEQ1, pQ1Length, pQ1Radius, 1);
   fEquationFZBL1 = new G4Mag_UsualEqRhs(fMagFieldFZBL1);	
   fStepperFZBL1  = new G4ClassicalRK4(fEquationFZBL1);
   fLocalFieldManagerFZBL1 = new G4FieldManager();
   fChordFinderFZBL1 = 0;
   UpdateFieldFZBL1();
-  fMagFieldFZBR1 = new BField_Quad(KAPPA1, RORIGINQ1, RROTATEQ1, fringe, pQ1Length, pQ1Radius, 1);
+  fMagFieldFZBR1 = new BField_Quad(KAPPA1, RORIGINQ1, RROTATEQ1, pQ1Length, pQ1Radius, 1);
   fEquationFZBR1 = new G4Mag_UsualEqRhs(fMagFieldFZBR1);	
   fStepperFZBR1  = new G4ClassicalRK4(fEquationFZBR1);
   fLocalFieldManagerFZBR1 = new G4FieldManager();
@@ -288,13 +288,13 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   UpdateFieldFZBR1();
   
   //Local field  FZB2, Q2
-  fMagFieldFZBL2 = new BField_Quad(KAPPA2, LORIGINQ2, LROTATEQ2, fringe, pQ2Length, pQ2Radius, 2);
+  fMagFieldFZBL2 = new BField_Quad(KAPPA2, LORIGINQ2, LROTATEQ2, pQ2Length, pQ2Radius, 2);
   fEquationFZBL2 = new G4Mag_UsualEqRhs(fMagFieldFZBL2);	
   fStepperFZBL2  = new G4ClassicalRK4(fEquationFZBL2);
   fLocalFieldManagerFZBL2 = new G4FieldManager();
   fChordFinderFZBL2 = 0;
   UpdateFieldFZBL2();
-  fMagFieldFZBR2 = new BField_Quad(KAPPA2, RORIGINQ2, RROTATEQ2, fringe, pQ2Length, pQ2Radius, 2);
+  fMagFieldFZBR2 = new BField_Quad(KAPPA2, RORIGINQ2, RROTATEQ2, pQ2Length, pQ2Radius, 2);
   fEquationFZBR2 = new G4Mag_UsualEqRhs(fMagFieldFZBR2);	
   fStepperFZBR2  = new G4ClassicalRK4(fEquationFZBR2);
   fLocalFieldManagerFZBR2 = new G4FieldManager();
@@ -313,7 +313,7 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   UpdateFieldFZBR3();
   
   //Local field  FZB4, Q3
-  fMagFieldFZBL4 = new BField_Quad(KAPPA3, LORIGINQ3, LROTATEQ3, fringe, pQ3Length, pQ3Radius, 3);
+  fMagFieldFZBL4 = new BField_Quad(KAPPA3, LORIGINQ3, LROTATEQ3, pQ3Length, pQ3Radius, 3);
   //fMagFieldFZBL4 = new BField_Quad(KAPPA3, ORIGINACTUAL, ROTATETEST);
   fEquationFZBL4 = new G4Mag_UsualEqRhs(fMagFieldFZBL4);	
   fStepperFZBL4  = new G4ClassicalRK4(fEquationFZBL4);
@@ -321,7 +321,7 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   fChordFinderFZBL4 = 0;
   UpdateFieldFZBL4();
   //Local field  FZB4, Q3
-  fMagFieldFZBR4 = new BField_Quad(KAPPA3, RORIGINQ3, RROTATEQ3, fringe, pQ3Length, pQ3Radius, 3);
+  fMagFieldFZBR4 = new BField_Quad(KAPPA3, RORIGINQ3, RROTATEQ3, pQ3Length, pQ3Radius, 3);
   //fMagFieldFZBR4 = new BField_Quad(KAPPA3, ORIGINACTUAL, ROTATETEST);
   fEquationFZBR4 = new G4Mag_UsualEqRhs(fMagFieldFZBR4);	
   fStepperFZBR4  = new G4ClassicalRK4(fEquationFZBR4);

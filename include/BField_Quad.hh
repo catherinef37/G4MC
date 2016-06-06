@@ -4,7 +4,7 @@
 #include "G4MagneticField.hh"
 #include "G4ThreeVector.hh"
 #include "G4RotationMatrix.hh"
-#include "QuadFringe.hh"
+//#include "QuadFringe.hh"
 #include "BField_Septum.hh"
 class BField_Quad : public G4MagneticField
 {
@@ -13,7 +13,7 @@ class BField_Quad : public G4MagneticField
   BField_Quad(G4double          pGradient, 
 	      G4ThreeVector     pOrigin, 
 	      G4RotationMatrix* pMatrix,
-	      QuadFringe*       pFringe,
+	      //QuadFringe*       pFringe,
 	      G4double          pLength,
   	      G4double          pRadius,
 	      G4int             pQuadNumber);
@@ -28,7 +28,7 @@ private:
   G4double          fGradient;
   G4ThreeVector     fOrigin;
   G4RotationMatrix* fpMatrix;
-  QuadFringe*       fQuadFringe;
+  //QuadFringe*       fQuadFringe;
   G4double          fLength;
   G4double          fRadius;
   G4int             fSnakeModel;

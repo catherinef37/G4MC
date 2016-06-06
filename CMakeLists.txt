@@ -11,9 +11,9 @@ enable_language (Fortran)
 #ROOT path
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 find_package(ROOT REQUIRED)
-find_package( PythonInterp REQUIRED )
-find_package(PythonLibs 2.7.5 EXACT REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIR})
+#find_package( PythonInterp REQUIRED )
+#find_package(PythonLibs 2.7.5 EXACT REQUIRED)
+#include_directories(${PYTHON_INCLUDE_DIR})
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR}
     ${PROJECT_SOURCE_DIR}/HRSTransport/
@@ -145,7 +145,8 @@ file(GLOB xsheaders ${PROJECT_SOURCE_DIR}/XSModel/*.hh
 add_executable(G4MC G4MC.cc ${sources} ${headers})
 add_library(HRSTransport ${transsources} ${transheaders})
 add_library(XSModel ${xssources} ${xsheaders})
-target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XSModel ${PYTHON_LIBRARIES})
+#target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XSModel ${PYTHON_LIBRARIES})
+target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XSModel)
 
 
 #g++ -I/usr/include/python2.7 -lpython2.7 ./fringe.C -o fringe

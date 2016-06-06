@@ -1,8 +1,8 @@
-#include "Python.h"
+//#include "Python.h"
 #include "BField_Quad.hh"
 #include "BField_Septum.hh"
 #include "G4RotationMatrix.hh"
-#include "QuadFringe.hh"
+//#include "QuadFringe.hh"
 #include "UsageManager.hh"
 //#define DEBUG_BFIELD_QUAD 0
 
@@ -13,12 +13,13 @@ extern UsageManager* gConfig;
 /////////////////////////////////////////////////////////////////////////
 
 BField_Quad::BField_Quad(G4double pGradient, G4ThreeVector
-			 pOrigin, G4RotationMatrix* pMatrix, QuadFringe* pQuadFringe, G4double pLength, G4double pRadius, G4int pQuadNumber)
+			 pOrigin, G4RotationMatrix* pMatrix, G4double pLength, G4double pRadius, G4int pQuadNumber)
+//pOrigin, G4RotationMatrix* pMatrix, QuadFringe* pQuadFringe, G4double pLength, G4double pRadius, G4int pQuadNumber)
 {
    fGradient    = pGradient ;
    fOrigin      = pOrigin ;
    fpMatrix     = pMatrix ;
-   fQuadFringe  = pQuadFringe;
+   //fQuadFringe  = pQuadFringe;
    fLength      = pLength;
    fRadius      = pRadius;
    fQuadNumber  = pQuadNumber;
