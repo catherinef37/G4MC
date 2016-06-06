@@ -1,0 +1,3 @@
+/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir
+/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/HRSTransport.dir
+/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/XSModel.dir

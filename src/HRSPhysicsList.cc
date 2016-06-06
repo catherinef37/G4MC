@@ -59,7 +59,8 @@ HRSPhysicsList::HRSPhysicsList():  G4VModularPhysicsList()
 	G4cout << "" << G4endl;
 
 	defaultCutValue = 0.7*mm; //by jixie
-	SetVerboseLevel(1);  //LEVEL 1 WILL PRINT WARNINGS
+	//SetVerboseLevel(1);  //LEVEL 1 WILL PRINT WARNINGS
+	SetVerboseLevel(0);  //LEVEL 1 WILL PRINT WARNINGS
 
 	// in Geant4.9.x, G4VUserPhysicsList::AddTransportation(); has been called 
 	// in G4VModularPhysicsList::ConstructProcess(), no need to invoke it again here
@@ -84,7 +85,8 @@ HRSPhysicsList::HRSPhysicsList():  G4VModularPhysicsList()
 	// Muon Physics
 	RegisterPhysics(  new HRSMuonPhysics("muon"));
 
-	int verboseLevel=1;
+	//int verboseLevel=1;
+	int verboseLevel=0;
 	//By Jixie: G4EmExtraPhysics is not working in this file, it caused a segmentation fault
 	//if used with my EM physics and general physics
 	//I need to figure it out later

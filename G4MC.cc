@@ -26,6 +26,8 @@
 #include "UsageManager.hh"
 #include "HRSGlobal.hh"
 
+#include <dlfcn.h>
+
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
 #endif
@@ -36,6 +38,7 @@ HRSRootTree* gHRSTree=0; //will be initialized in main() after G4RunManager star
 
 int main(int argc,char** argv)
 {
+  dlopen("libpython2.7.so", RTLD_NOW | RTLD_NOLOAD | RTLD_GLOBAL);
 	////////////////////////////////////////////////////////////////////
 	//take care of the arguments
 	////////////////////////////////////////////////////////////////////
@@ -169,7 +172,7 @@ int main(int argc,char** argv)
 
 #ifdef G4VIS_USE
 	delete visManager;
-	G4cout << "Vis manager deleted..." << G4endl;
+	//G4cout << "Vis manager deleted..." << G4endl;
 #endif
 
 	// Free the memory: user actions, physics_list and detector_description are
@@ -179,7 +182,7 @@ int main(int argc,char** argv)
 	delete pMaterialManager;
 
 	delete runManager;
-	G4cout << "Run manager deleted..." << G4endl;
+	//G4cout << "Run manager deleted..." << G4endl;
 
 	return 0;
 }

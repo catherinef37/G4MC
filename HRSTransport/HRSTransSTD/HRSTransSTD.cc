@@ -30,7 +30,7 @@ HRSTransSTD::~HRSTransSTD()
 
 bool HRSTransSTD::TransLeftHRS(double* pV5)
 {
-    float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+    float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	int iii = 5; int *ii = &iii;
 
 	float x_test, y_test;
@@ -87,7 +87,7 @@ bool HRSTransSTD::TransLeftHRS(double* pV5)
 
 bool HRSTransSTD::TransRightHRS(double* pV5)
 {
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	int iii = 5; int *ii = &iii;
 
 	float x_test, y_test;
@@ -145,7 +145,7 @@ bool HRSTransSTD::TransRightHRS(double* pV5)
 
 void HRSTransSTD::ReconLeftHRS(double* pV5)
 {   
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	int iii = 5; int *ii = &iii;
     int jjj = 1; int *jj = &jjj;
     
@@ -166,7 +166,7 @@ void HRSTransSTD::ReconLeftHRS(double* pV5)
 
 void HRSTransSTD::ReconRightHRS(double* pV5)
 {
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	int iii = 5; int *ii = &iii;
     int jjj = 1; int *jj = &jjj;
    

@@ -22,6 +22,7 @@
 #include "HRSTransBase.hh"
 //#include "HRSTransSTD.hh"
 #include "hamcPREXTrans.hh"
+#include "hamcCREXTrans.hh"
 //#include "G2PTrans400016.hh"
 //#include "G2PTrans484816.hh"
 //#include "G2PTrans484816R00.hh"
@@ -135,6 +136,38 @@ void HRSTransport::RegisterModel()
     mModelIndex["PREX"] = 47;
     mModel[47] = temp;
 
+    temp = new hamcCREXTrans();
+    mModelIndex["CREX"] = 48;
+    mModel[48] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["PREXFIELD"] = 49;
+    mModel[49] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["PREXSEPTUM"] = 50;
+    mModel[50] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["PREXDATA"] = 51;
+    mModel[51] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["gmp"] = 52;
+    mModel[52] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["CREXfield"] = 53;
+    mModel[53] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["PREXFIELD4DEGREES"] = 54;
+    mModel[54] = temp;
+
+    temp = new hamcPREXTrans();
+    mModelIndex["supercrex"] = 55;
+    mModel[55] = temp;
+
 }
 
 void HRSTransport::ChangeModel(int setting)
@@ -150,7 +183,7 @@ void HRSTransport::ChangeModel(int setting)
     }
     
     if (!found) {
-        printf("Can not found SNAKE model %d, no change.\n", setting);
+        printf("Can not find SNAKE model %d, no change.\n", setting);
         exit(-1);
     }
     else{
@@ -161,82 +194,94 @@ void HRSTransport::ChangeModel(int setting)
     }
 }
 
-void HRSTransport::Acceptance_Check(double* vec, double* acc_check, bool* acc_bool){
-  pModel->Acceptance(vec, acc_check, acc_bool);
+void HRSTransport::Acceptance_Check(double* vec, double* x_check, double* theta_check, double* y_check, double* phi_check, int* acc_bool){
+  pModel->Acceptance(vec, x_check, theta_check, y_check, phi_check, acc_bool);
+}
+
+void HRSTransport::Acceptance_Check_C(double* vec, double* x_check, double* theta_check, double* y_check, double* phi_check,int* acc_bool){
+  pModel->Acceptance_C(vec, x_check, theta_check, y_check, phi_check, acc_bool);
 }
 
 bool HRSTransport::Forward(const double* V5_tg, double* V5_fp)
 {
-    // Definition of variables
-    // V5_tg = {x_tg, theta_tg, y_tg, phi_tg, delta@tg};
-    // V5_fp = {x_fg, theta_fp, y_fp, phi_fp, delta@tg};
-    // delta does not change
-    double V5[5];
-    
-    V5[0] = V5_tg[0];
-    V5[1] = tan(V5_tg[1]);
-    V5[2] = V5_tg[2];
-    V5[3] = tan(V5_tg[3]);
-    V5[4] = V5_tg[4];
-
-    
-    /*
+  // Definition of variables
+  // V5_tg = {x_tg, theta_tg, y_tg, phi_tg, delta@tg};
+  // V5_fp = {x_fg, theta_fp, y_fp, phi_fp, delta@tg};
+  // delta does not change
+  double V5[5];
+  
+  V5[0] = V5_tg[0];
+  V5[1] = tan(V5_tg[1]);
+  V5[2] = V5_tg[2];
+  V5[3] = tan(V5_tg[3]);
+  V5[4] = V5_tg[4];
+  
+  
+  /*
     V5[0] = 0;
     V5[1] = 0;
     V5[2] = 0;
     V5[3] = 0;//tan( 7.5 * 3.141592654 / 180.);
     V5[4] = 0;
-    *///THIS WAS JUST AN IDIOT TEST
+  *///THIS WAS JUST AN IDIOT TEST
 #ifdef DEBUG_HRS_FORWARD
-    cout << "in:  " << V5_tg[0] << " " << V5_tg[1] << " " << V5_tg[2] << " " << V5_tg[3] << " " << V5_tg[4] << endl;
+  cout << "in:  " << V5_tg[0] << " " << V5_tg[1] << " " << V5_tg[2] << " " << V5_tg[3] << " " << V5_tg[4] << endl;
 #endif
-
+  
 #ifdef DEBUG_HRS_FORWARD
-    printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
+  printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
 #endif
-
-    bool bGoodParticle=false;
-    
-    if (bIsLeftArm) {
-      //cout << "In left arm." << endl;
-      if( iModelIndex!=47 ){
-	pModel->CoordsCorrection(fHRSAngle-fModelAngle, V5);
-      }else{
-	pModel->CoordsCorrection(0., V5);
-      }
-#ifdef DEBUG_HRS_FORWARD
-      printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
-#endif
-      //cout << fHRSAngle << " " << fModelAngle << endl;
-      bGoodParticle = pModel->TransLeftHRS(V5);
-      //pModel->FPCorrLeft(V5_tg, V5);
+  
+  bool bGoodParticle=false;
+  
+  if (bIsLeftArm) {
+    //cout << "In left arm." << endl;
+    if( iModelIndex == 47 || iModelIndex == 48 || iModelIndex == 50 ){
+      pModel->CoordsCorrection(0., V5);
+      //}if( iModelIndex == 50 ){
+      //do nothing!!
+    }else{
+      pModel->CoordsCorrection(fHRSAngle-fModelAngle, V5);
     }
-    else {
-      //cout << "In right arm." << endl;
-      if( iModelIndex!=47 ){
-	pModel->CoordsCorrection(fHRSAngle+fModelAngle, V5);
-      }else{
-	pModel->CoordsCorrection( 0, V5);
-      }
-
 #ifdef DEBUG_HRS_FORWARD
     printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
 #endif
     //cout << fHRSAngle << " " << fModelAngle << endl;
-    bGoodParticle = pModel->TransRightHRS(V5);
-        //pModel->FPCorrRight(V5_tg, V5);
+    bGoodParticle = pModel->TransLeftHRS(V5);
+    //pModel->FPCorrLeft(V5_tg, V5);
+  }
+  else {
+    //cout << "In right arm." << endl;
+    if( iModelIndex == 47 || iModelIndex == 48 || iModelIndex == 50){
+      pModel->CoordsCorrection( 0, V5);
+      //}if( iModelIndex == 50 ){
+      //do nothing!!
+    }else{
+      pModel->CoordsCorrection(fHRSAngle+fModelAngle, V5);
     }
-
-    V5_fp[0] = V5[0];
-    V5_fp[1] = atan(V5[1]);
-    V5_fp[2] = V5[2];
-    V5_fp[3] = atan(V5[3]);
-    V5_fp[4] = V5[4];
+    
 #ifdef DEBUG_HRS_FORWARD
-    cout << "out: " << V5_fp[0] << " " << V5_fp[1] << " " << V5_fp[2] << " " << V5_fp[3] << " " << V5_fp[4] << endl;
+    printf("HRSTransport: %e\t%e\t%e\t%e\t%e\n", V5[0], V5[1], V5[2], V5[3], V5[4]);
 #endif
-    //cout << "And bGoodParticle is " << bGoodParticle << endl;
-    return bGoodParticle;
+    //cout << fHRSAngle << " " << fModelAngle << endl;
+    if( iModelIndex != 50 ){
+      bGoodParticle = pModel->TransRightHRS(V5);
+    }else{
+      bGoodParticle = pModel->TransRightHRS_C(V5);
+    }
+    //pModel->FPCorrRight(V5_tg, V5);
+  }
+  
+  V5_fp[0] = V5[0];
+  V5_fp[1] = atan(V5[1]);
+  V5_fp[2] = V5[2];
+  V5_fp[3] = atan(V5[3]);
+  V5_fp[4] = V5[4];
+#ifdef DEBUG_HRS_FORWARD
+  cout << "out: " << V5_fp[0] << " " << V5_fp[1] << " " << V5_fp[2] << " " << V5_fp[3] << " " << V5_fp[4] << endl;
+#endif
+  //cout << "And bGoodParticle is " << bGoodParticle << endl;
+  return bGoodParticle;
 }
 
 bool HRSTransport::Backward(const double* V5_fp, double* V5_tg)

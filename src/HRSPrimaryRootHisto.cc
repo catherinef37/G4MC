@@ -27,13 +27,13 @@ HRSPrimaryRootHisto::HRSPrimaryRootHisto()
     //no need to initialize it since we don't know what kind of event the user will use
     //Initialize();
 
-    cout<<"HRSPrimaryRootHisto() construction done!"<<endl;
+    //cout<<"HRSPrimaryRootHisto() construction done!"<<endl;
 }
 
 HRSPrimaryRootHisto::~HRSPrimaryRootHisto()
 {
     if(mFile) {mFile->Close();mFile->Delete();} 
-    cout<<"delete HRSPrimaryRootHisto ... done!"<<endl;
+    //cout<<"delete HRSPrimaryRootHisto ... done!"<<endl;
 }
 
 void HRSPrimaryRootHisto::Initialize()

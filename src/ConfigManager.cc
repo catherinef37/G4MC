@@ -40,7 +40,7 @@ ConfigManager::~ConfigManager()
 {    
 	MapParam_s.clear();
 
-	cout << "deleting fConfigManager ......" << endl;
+	//cout << "deleting fConfigManager ......" << endl;
 	fConfigManager = 0;
 }
 
@@ -129,7 +129,7 @@ bool ConfigManager::ReadFile(const char *filename)
 		cout<<"***Error! Can not open parameter file \""<<filename<<"\"!"<<endl;
 		return false;
 	}
-	else  cout<<"Reading parameter file \""<<filename<<"\""<<endl;
+	//else  cout<<"Reading parameter file \""<<filename<<"\""<<endl;
 
 	int nline=0;
 	size_t found=0;
@@ -166,7 +166,7 @@ bool ConfigManager::ReadFile(const char *filename)
 		found=strValue.find(';');
 		if (found!=string::npos) strValue=strValue.substr(0,found);
 		Trim(strValue);	
-		cout<<setw(15)<<strName<<" = "<<strValue<<endl;
+		//cout<<setw(15)<<strName<<" = "<<strValue<<endl;
 		//store the value into the map
 		MapParam_s[strName]=strValue;
 
@@ -328,15 +328,15 @@ bool ConfigManager::SetParameter(std::string name,std::string value)
 	{
 		parameter=(*it).second; 
 		found=true;
-		std::cout<<"###SetParameter(name="<<name<<", valee="<<value
-			<<")  called!###"<<std::endl;
+		//std::cout<<"###SetParameter(name="<<name<<", valee="<<value
+		//<<")  called!###"<<std::endl;
 		it->second=value; 
 	}
 
 	if(!found) 
 	{
-		std::cout<<"SetParameter(name="<<name<<", valee="<<value
-			<<"): wrong parameter name!!! exit ... "<<std::endl;
+	  std::cout<<"SetParameter(name="<<name<<", valee="<<value
+		   <<"): wrong parameter name!!! exit ... "<<std::endl;
 		exit(-999);
 	}
 	return found;

@@ -63,8 +63,8 @@ int HRSRecUseDB::LoadDataBase()
         cout << "Can not open database file \"" << pDBName << "\" !" << endl;
         return -1;
     }
-    else
-        cout << "Reading database file \"" << pDBName << "\"" << endl;
+    //else
+      //cout << "Reading database file \"" << pDBName << "\"" << endl;
 
     TString tag(pPrefix);
     Ssiz_t pos = tag.Index(".");
@@ -139,7 +139,7 @@ int HRSRecUseDB::LoadDataBase()
 	matrix_map["P"] = &fPMatrixElems;
 	matrix_map["PTA"] = &fPTAMatrixElems;
 
-    cout << "Loading matrix ..." << endl;
+	//cout << "Loading matrix ..." << endl;
 
     // Read matrix elements line by line
     while (ifs.getline(buff, LEN) != NULL) {

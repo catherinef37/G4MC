@@ -52,7 +52,8 @@ public:
   void ChangeModel(int setting);
   void SetArm(bool isleftarm) { bIsLeftArm = isleftarm; }
   void SetHRSAngle(double value) { fHRSAngle = value; }
-  void Acceptance_Check(double* vec, double* acc_check, bool* acc_bool);
+  void Acceptance_Check(double* vec, double* x_check, double* theta_check, double* y_check, double* phi_check, int* acc_bool);
+  void Acceptance_Check_C(double* vec, double* x_check, double* theta_check, double* y_check, double* phi_check, int* acc_bool);
   
 	int GetModelIndex() { return iModelIndex; }
 

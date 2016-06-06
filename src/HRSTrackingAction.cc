@@ -21,13 +21,13 @@ HRSTrackingAction::HRSTrackingAction()
 	strOutParticle="all"; //output all particles by default
 	messenger=new HRSTrackingActionMessenger(this);
 
-	G4cout<<"HRSTrackingAction() construction done!"<<G4endl;
+	//G4cout<<"HRSTrackingAction() construction done!"<<G4endl;
 }
 
 HRSTrackingAction::~HRSTrackingAction()
 {
 	delete 	messenger;
-	G4cout<<"delete HRSTrackingAction ... done!"<<G4endl;
+	//G4cout<<"delete HRSTrackingAction ... done!"<<G4endl;
 }
 
 void HRSTrackingAction::PreUserTrackingAction(const G4Track* aTrack)

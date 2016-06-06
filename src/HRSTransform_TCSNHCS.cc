@@ -20,8 +20,8 @@ using namespace std;
 
 namespace Transform
 {
-	static const double deg=acos(0.0)/90.0;
-
+  //static const double deg=acos(0.0)/90.0;
+  static const double deg = 0.017453292519943;
 	//transorm from Hall coordinate to tranportation coordinate 
 	//assuming the collimator center is at hall center, if it is not, need to do translation
 	//all angles are in rad
@@ -74,6 +74,40 @@ namespace Transform
 
 	//transorm from Hall coordinate to tranpotrtation coordinate 
 	//all angles are in rad
+  void double_rot(double x, double y, double z, double chi, double psi, double &Theta_tr, double &Phi_tr){
+    //chi = chi * 3.141592654 / 180.;
+    //psi = psi * 3.141592654 / 180.;
+    
+    //if( x > 0 )//L OR R HRS
+      //psi = -psi;
+
+    //double x_ =                                 x * cos( psi ) + z * sin( psi )  ;
+    //double y_ = y * cos( chi ) - sin( chi ) * ( z * cos( psi ) - x * sin( psi ) );
+    //double z_ =-y * sin( chi ) + cos( chi ) * ( z * cos( psi ) - x * sin( psi ) );
+    double x_ = x *              cos( psi )                  + z *              sin( psi );
+    double y_ = x * sin( chi ) * sin( psi ) + y * cos( chi ) - z * sin( chi ) * cos( psi );
+    double z_ =-x * cos( chi ) * sin( psi ) + y * sin( chi ) + z * cos( chi ) * cos( psi );
+    
+    Theta_tr = - y_ / z_;
+    Phi_tr   =   x_ / z_;
+
+  }
+
+  void single_rot(double x, double y, double z, double psi, double &Theta_tr, double &Phi_tr){
+    //psi = psi * 3.141592654 / 180.;
+    
+    //if( x > 0 )//L OR R HRS
+    //psi = -psi;
+
+    double x_ =  x * cos( psi ) + z * sin( psi );
+    double y_ =  y;
+    double z_ =  z * cos( psi ) - x * sin( psi );
+    
+    Theta_tr = - y_ / z_;
+    Phi_tr   =   x_ / z_;
+
+  }
+
 	void  P_HCS2TCS(double Theta_hall, double Phi_hall, double EndPlaneTheta_hall, 
 		double &Theta_tr, double &Phi_tr)
 	{
@@ -113,8 +147,8 @@ namespace Transform
 		double x_tr=-y;
 		double y_tr=x * cosHRS - z * sinHRS;
 		double z_tr=x * sinHRS + z * cosHRS;
-		Theta_tr=atan(x_tr/z_tr);
-		Phi_tr=atan(y_tr/z_tr);
+		Theta_tr=-atan(x_tr/z_tr);
+		Phi_tr=-atan(y_tr/z_tr);
 		//cout << "Hall      coords: " << Theta_hall * 180.0 / 3.141592654 << " " << Phi_hall * 180.0 / 3.141592654 << endl;
 		//cout << "Transport coords: " << Theta_tr * 180.0 / 3.141592654 << " " << Phi_tr * 180.0 / 3.141592654 << endl;
 
@@ -184,7 +218,7 @@ namespace Transform
 		Phi_hall=atan2(y,x);
 
 		//only good for left arm, need to +180 for right arm
-		if(sin(EndPlaneTheta_hall)<0) Phi_hall=180*deg+Phi_hall;
+		if(sin(EndPlaneTheta_hall)<0) Phi_hall=180.*deg+Phi_hall;
 
 		cout<<"P_TCS2HCS() Debug 1: Theta_hall="<<Theta_hall/deg<<"  Phi_hall="<<Phi_hall/deg<<endl;	
 

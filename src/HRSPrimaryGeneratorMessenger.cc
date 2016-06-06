@@ -132,6 +132,39 @@ HRSPrimaryGeneratorMessenger::HRSPrimaryGeneratorMessenger(HRSPrimaryGeneratorAc
 		phiCmd[i]->SetGuidance("if phi<-360 then generate phi in [philow,phihigh],otherwise in [phi-sigmaphi,phi+sigmaphi]");
 		phiCmd[i]->SetParameterName("phi",false);
 		phiCmd[i]->SetDefaultUnit("deg");
+		//theta_tr
+		sprintf(strCmd,"/mydet/particle%d/theta_tr",i+1);
+		sprintf(strGuid,"Center theta_tr angle for primary particle %d",i+1);
+		theta_trCmd[i] = new G4UIcmdWithADoubleAndUnit(strCmd,this);
+		theta_trCmd[i]->SetGuidance(strGuid);
+		theta_trCmd[i]->SetGuidance("if theta_tr<0 then generate theta in range [thetalow,thetahigh],otherwise in range [theta-sigmatheta,ptot+sigmatheta]");
+		theta_trCmd[i]->SetParameterName("theta_tr",false);
+		theta_trCmd[i]->SetDefaultUnit("deg");
+		//phi_tr
+		sprintf(strCmd,"/mydet/particle%d/phi_tr",i+1);
+		sprintf(strGuid,"Center phi_tr for primary particle %d",i+1);
+		phi_trCmd[i] = new G4UIcmdWithADoubleAndUnit(strCmd,this);
+		phi_trCmd[i]->SetGuidance(strGuid);
+		phi_trCmd[i]->SetGuidance("if phi_tr<-360 then generate phi in [philow,phihigh],otherwise in [phi-sigmaphi,phi+sigmaphi]");
+		phi_trCmd[i]->SetParameterName("phi_tr",false);
+		phi_trCmd[i]->SetDefaultUnit("deg");
+
+		//theta_ctr
+		sprintf(strCmd,"/mydet/particle%d/theta_ctr",i+1);
+		sprintf(strGuid,"Center theta_ctr angle for primary particle %d",i+1);
+		theta_ctrCmd[i] = new G4UIcmdWithADoubleAndUnit(strCmd,this);
+		theta_ctrCmd[i]->SetGuidance(strGuid);
+		theta_ctrCmd[i]->SetGuidance("if theta_ctr<0 then generate theta in range [thetalow,thetahigh],otherwise in range [theta-sigmatheta,ptot+sigmatheta]");
+		theta_ctrCmd[i]->SetParameterName("theta_ctr",false);
+		theta_ctrCmd[i]->SetDefaultUnit("deg");
+		//phi_ctr
+		sprintf(strCmd,"/mydet/particle%d/phi_ctr",i+1);
+		sprintf(strGuid,"Center phi_ctr for primary particle %d",i+1);
+		phi_ctrCmd[i] = new G4UIcmdWithADoubleAndUnit(strCmd,this);
+		phi_ctrCmd[i]->SetGuidance(strGuid);
+		phi_ctrCmd[i]->SetGuidance("if phi_ctr<-360 then generate phi in [philow,phihigh],otherwise in [phi-sigmaphi,phi+sigmaphi]");
+		phi_ctrCmd[i]->SetParameterName("phi_ctr",false);
+		phi_ctrCmd[i]->SetDefaultUnit("deg");
 		//new momentun3V cmd
 		sprintf(strCmd,"/mydet/particle%d/momentum3V",i+1);
 		sprintf(strGuid,"Set 3-vector momentum for primary particle %d",i+1);
@@ -275,12 +308,68 @@ HRSPrimaryGeneratorMessenger::HRSPrimaryGeneratorMessenger(HRSPrimaryGeneratorAc
 	gunZHighCmd->SetDefaultValue(0.);
 	gunZHighCmd->SetDefaultUnit("mm");
 
+	gunXCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunX",this);
+	gunXCmd->SetGuidance("X position of particle gun");
+	gunXCmd->SetGuidance(strRandomTrig);
+	gunXCmd->SetParameterName("x",false);
+	gunXCmd->SetDefaultValue(    0.0);
+	gunXCmd->SetDefaultUnit("mm");
+
+	gunYCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunY",this);
+	gunYCmd->SetGuidance("Y position of particle gun");
+	gunYCmd->SetGuidance(strRandomTrig);
+	gunYCmd->SetParameterName("y",false);
+	gunYCmd->SetDefaultValue(    0.0);
+	gunYCmd->SetDefaultUnit("mm");
+
 	gunZCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunZ",this);
 	gunZCmd->SetGuidance("Z position of particle gun");
 	gunZCmd->SetGuidance(strRandomTrig);
 	gunZCmd->SetParameterName("z",false);
 	gunZCmd->SetDefaultValue(-3200.0);
 	gunZCmd->SetDefaultUnit("mm");
+
+	gunX_trCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunX_tr",this);
+	gunX_trCmd->SetGuidance("X position of particle gun in transport coordinates");
+	gunX_trCmd->SetGuidance(strRandomTrig);
+	gunX_trCmd->SetParameterName("x_tr",false);
+	gunX_trCmd->SetDefaultValue(    0.0);
+	gunX_trCmd->SetDefaultUnit("mm");
+
+	gunY_trCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunY_tr",this);
+	gunY_trCmd->SetGuidance("Y position of particle gun in transport coordinates");
+	gunY_trCmd->SetGuidance(strRandomTrig);
+	gunY_trCmd->SetParameterName("y_tr",false);
+	gunY_trCmd->SetDefaultValue(    0.0);
+	gunY_trCmd->SetDefaultUnit("mm");
+
+	gunZ_trCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunZ_tr",this);
+	gunZ_trCmd->SetGuidance("Z position of particle gun in transport coordinates");
+	gunZ_trCmd->SetGuidance(strRandomTrig);
+	gunZ_trCmd->SetParameterName("z_tr",false);
+	gunZ_trCmd->SetDefaultValue(-3200.0);
+	gunZ_trCmd->SetDefaultUnit("mm");
+
+	gunX_ctrCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunX_ctr",this);
+	gunX_ctrCmd->SetGuidance("X position of particle gun in transport coordinates at col");
+	gunX_ctrCmd->SetGuidance(strRandomTrig);
+	gunX_ctrCmd->SetParameterName("x_ctr",false);
+	gunX_ctrCmd->SetDefaultValue(    0.0);
+	gunX_ctrCmd->SetDefaultUnit("mm");
+
+	gunY_ctrCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunY_ctr",this);
+	gunY_ctrCmd->SetGuidance("Y position of particle gun in transport coordinates at col");
+	gunY_ctrCmd->SetGuidance(strRandomTrig);
+	gunY_ctrCmd->SetParameterName("y_ctr",false);
+	gunY_ctrCmd->SetDefaultValue(    0.0);
+	gunY_ctrCmd->SetDefaultUnit("mm");
+
+	gunZ_ctrCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunZ_ctr",this);
+	gunZ_ctrCmd->SetGuidance("Z position of particle gun in transport coordinates at col");
+	gunZ_ctrCmd->SetGuidance(strRandomTrig);
+	gunZ_ctrCmd->SetParameterName("z_ctr",false);
+	gunZ_ctrCmd->SetDefaultValue(-3200.0);
+	gunZ_ctrCmd->SetDefaultUnit("mm");
 
 	gunRLowCmd = new G4UIcmdWithADoubleAndUnit("/mydet/gunRLow",this);
 	gunRLowCmd->SetGuidance("The lower limit of the particle gun. If raster mode is circle (1), it is the inner radius.");
@@ -424,7 +513,7 @@ HRSPrimaryGeneratorMessenger::HRSPrimaryGeneratorMessenger(HRSPrimaryGeneratorAc
 	PhotonEFracMaxCmd->SetParameterName("PhotonEFracMax",false);
 	PhotonEFracMaxCmd->SetRange("PhotonEFracMax <= 1.0");
 
-	G4cout<<"HRSPrimaryGeneratorMessenger() construction done!"<<G4endl;
+	//G4cout<<"HRSPrimaryGeneratorMessenger() construction done!"<<G4endl;
 }
 
 HRSPrimaryGeneratorMessenger::~HRSPrimaryGeneratorMessenger()
@@ -447,6 +536,10 @@ HRSPrimaryGeneratorMessenger::~HRSPrimaryGeneratorMessenger()
 		delete momentumLowCmd[i];
 		delete thetaCmd[i];
 		delete phiCmd[i];
+		delete theta_trCmd[i];
+		delete phi_trCmd[i];
+		delete theta_ctrCmd[i];
+		delete phi_ctrCmd[i];
 		delete momentum3VCmd[i];
 
 		delete particleNameCmd[i];
@@ -467,7 +560,15 @@ HRSPrimaryGeneratorMessenger::~HRSPrimaryGeneratorMessenger()
 	delete particleNumCmd;
 	delete gunZLowCmd;
 	delete gunZHighCmd;
+	delete gunXCmd;
+	delete gunYCmd;
 	delete gunZCmd;
+	delete gunX_trCmd;
+	delete gunY_trCmd;
+	delete gunZ_trCmd;
+	delete gunX_ctrCmd;
+	delete gunY_ctrCmd;
+	delete gunZ_ctrCmd;
 	delete gunRLowCmd;
 	delete gunRHighCmd;
 	delete fixedPointBL3VCmd;
@@ -489,7 +590,7 @@ HRSPrimaryGeneratorMessenger::~HRSPrimaryGeneratorMessenger()
 	delete PhotonEFracMinCmd;
 	delete PhotonEFracMaxCmd;
 
-	G4cout<<"delete HRSPrimaryGeneratorMessenger ... done!"<<G4endl;
+	//G4cout<<"delete HRSPrimaryGeneratorMessenger ... done!"<<G4endl;
 }
 
 void HRSPrimaryGeneratorMessenger::SetNewValue(G4UIcommand * command,G4String newValue)
@@ -526,9 +627,58 @@ void HRSPrimaryGeneratorMessenger::SetNewValue(G4UIcommand * command,G4String ne
 		if( command==momentumCmd[i] )
 		{ target->SetTotalMomentum(i,momentumCmd[i]->GetNewDoubleValue(newValue)); }
 		if( command==thetaCmd[i] )
-		{ target->SetTheta(i,thetaCmd[i]->GetNewDoubleValue(newValue)); }
+		{
+		  target->SetTheta(i,thetaCmd[i]->GetNewDoubleValue(newValue));
+		  //cout << "Generating: " << scientific << setprecision(15) << thetaCmd[i]->GetNewDoubleValue(newValue) << endl;
+		}
 		if( command==phiCmd[i] )
-		{ target->SetPhi(i,phiCmd[i]->GetNewDoubleValue(newValue)); }
+		{
+		  target->SetPhi(i,phiCmd[i]->GetNewDoubleValue(newValue));
+		  //cout << "Generating: " << scientific << setprecision(15) << phiCmd[i]->GetNewDoubleValue(newValue) << endl;
+		}
+
+		if( command==theta_trCmd[i] ){
+		  G4double psi   = 5.0 * deg;
+		  G4double chi   =-theta_trCmd[i]->GetNewDoubleValue(newValue);
+		  G4double theta = acos(   cos( chi ) * cos( psi ) );
+		  G4double phi   = atan( - tan( chi ) / sin( psi ) );
+		  target->SetTheta(i,theta);
+		  target->SetPhi  (i,phi + pi);
+		  //cout << "Generating: " << scientific << setprecision(15) << theta << " " << scientific << setprecision(15) << phi + pi << endl;
+		}
+		if( command==phi_trCmd[i] ){
+
+		  target->SetTheta(i,-phi_trCmd[i]->GetNewDoubleValue(newValue) + 5.0 * pi / 180.);
+		  target->SetPhi  (i,pi);
+		  //cout << "Generating: " << scientific << setprecision(15) << phi_trCmd[i]->GetNewDoubleValue(newValue) + 5.0 * pi / 180. << " " << scientific << setprecision(15) << pi << endl;
+		}
+
+		if( command==theta_ctrCmd[i] ){
+		  G4double PivotToColFace = 1.38 * m;
+		  G4double psi = 12.5 * pi / 180.;
+		  target->SetGunX( - PivotToColFace * sin( psi ) );
+		  target->SetGunY( 0. );
+		  target->SetGunZ( + PivotToColFace * cos( psi ) );
+
+		  //G4double psi   = 12.5 * deg;
+		  G4double chi   = -theta_ctrCmd[i]->GetNewDoubleValue(newValue);
+		  G4double theta = acos(   cos( chi ) * cos( psi ) );
+		  G4double phi   = atan( - tan( chi ) / sin( psi ) );
+		  target->SetTheta(i,theta);
+		  target->SetPhi  (i,phi + pi);
+		  //cout << "Generating: " << scientific << setprecision(15) << theta << " " << scientific << setprecision(15) << phi + pi << endl;
+		}
+		if( command==phi_ctrCmd[i] ){
+		  G4double PivotToColFace = 1.38 * m;
+		  G4double psi = 12.5 * pi / 180.;
+		  target->SetGunX( - PivotToColFace * sin( psi ) );
+		  target->SetGunY( 0. );
+		  target->SetGunZ( + PivotToColFace * cos( psi ) );
+
+		  target->SetTheta(i,-phi_ctrCmd[i]->GetNewDoubleValue(newValue) + 12.5 * pi / 180.);
+		  target->SetPhi  (i,pi);
+		  //cout << "Generating: " << scientific << setprecision(15) << phi_ctrCmd[i]->GetNewDoubleValue(newValue) + 12.5 * pi / 180. << " " << scientific << setprecision(15) << pi << endl;
+		}
 
 		if( command==momentum3VCmd[i] )
 		{ target->SetMomentum3V(i,momentum3VCmd[i]->GetNew3VectorValue(newValue)); }
@@ -573,11 +723,63 @@ void HRSPrimaryGeneratorMessenger::SetNewValue(G4UIcommand * command,G4String ne
 
 	//vertex
 	if( command==gunZLowCmd )
-	{ target->SetGunZLow(gunZLowCmd->GetNewDoubleValue(newValue)); }
+	  { target->SetGunZLow(gunZLowCmd->GetNewDoubleValue(newValue)); }
 	if( command==gunZHighCmd )
-	{ target->SetGunZHigh(gunZHighCmd->GetNewDoubleValue(newValue)); }
+	  { target->SetGunZHigh(gunZHighCmd->GetNewDoubleValue(newValue)); }
+	if( command==gunXCmd )
+	  { target->SetGunX(gunXCmd->GetNewDoubleValue(newValue)); }
+	if( command==gunYCmd )
+	  { target->SetGunY(gunYCmd->GetNewDoubleValue(newValue)); }
 	if( command==gunZCmd )
-	{ target->SetGunZ(gunZCmd->GetNewDoubleValue(newValue)); }
+	  { target->SetGunZ(gunZCmd->GetNewDoubleValue(newValue)); }
+
+	if( command==gunX_trCmd ){
+	  G4double chi = 90.0 * pi / 180.;
+	  G4double psi =  5.0 * pi / 180.;
+	  G4double myx =-gunX_trCmd->GetNewDoubleValue(newValue);
+	  target->SetGunX( myx * cos( psi ) * cos( chi ) );
+	  target->SetGunY( myx *              sin( chi ) );
+	  target->SetGunZ(-myx * sin( psi ) * cos( chi ) + target->GetGunZ() );
+
+	}
+	if( command==gunY_trCmd ){
+	  G4double chi = 90.0 * pi / 180.;
+	  G4double psi =  5.0 * pi / 180.;
+	  G4double myy =-gunY_trCmd->GetNewDoubleValue(newValue);
+	  target->SetGunX(-myy * cos( psi ) * sin( chi ) );
+	  target->SetGunY( myy *              cos( chi ) );
+	  target->SetGunZ( myy * sin( psi ) * sin( chi ) + target->GetGunZ() );
+
+	}
+	if( command==gunZ_trCmd ){
+	  //For the moment, this command does nothing.
+	}
+	if( command==gunX_ctrCmd ){
+	  G4double PivotToColFace = 1.38 * m;
+	  G4double chi = 90.0 * pi / 180.;
+	  G4double psi = 12.5 * pi / 180.;
+	  G4double myx = -gunX_ctrCmd->GetNewDoubleValue(newValue);
+	  target->SetGunX( myx * cos( psi ) * cos( chi ) - PivotToColFace * sin( psi ) );
+	  target->SetGunY( myx *              sin( chi ) );
+	  target->SetGunZ(-myx * sin( psi ) * cos( chi ) + PivotToColFace * cos( psi ) );
+	  //target->SetTheta(i,psi);
+	  //target->SetPhi  (i,pi);
+
+	}
+	if( command==gunY_ctrCmd ){
+	  G4double PivotToColFace = 1.38 * m;
+	  G4double chi = 90.0 * pi / 180.;
+	  G4double psi = 12.5 * pi / 180.;
+	  G4double myy = -gunY_ctrCmd->GetNewDoubleValue(newValue);
+	  target->SetGunX(-myy * cos( psi ) * sin( chi ) - PivotToColFace * sin( psi ) );
+	  target->SetGunY( myy *              cos( chi ) );
+	  target->SetGunZ(-myy * sin( psi ) * sin( chi ) + PivotToColFace * cos( psi ) );
+	  //target->SetTheta(i,psi);
+	  //target->SetPhi  (i,pi);
+	}
+	if( command==gunZ_ctrCmd ){
+	  //For the moment, this command does nothing.
+	}
 
 	if( command==gunRLowCmd )
 	{ target->SetGunRLow(gunRLowCmd->GetNewDoubleValue(newValue)); }
@@ -714,8 +916,14 @@ G4String HRSPrimaryGeneratorMessenger::GetCurrentValue(G4UIcommand * command)
 	{ cv = gunZLowCmd->ConvertToString(target->GetGunZLow(),"mm"); }
 	if( command==gunZHighCmd )
 	{ cv = gunZHighCmd->ConvertToString(target->GetGunZHigh(),"mm"); }
+	if( command==gunXCmd )
+	{ cv = gunXCmd->ConvertToString(target->GetGunX(),"mm"); }
+	if( command==gunYCmd )
+	{ cv = gunYCmd->ConvertToString(target->GetGunY(),"mm"); }
 	if( command==gunZCmd )
 	{ cv = gunZCmd->ConvertToString(target->GetGunZ(),"mm"); }
+
+
 
 	if( command==gunRLowCmd )
 	{ cv = gunRLowCmd->ConvertToString(target->GetGunRLow(),"mm"); }

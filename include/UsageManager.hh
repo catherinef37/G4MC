@@ -135,7 +135,7 @@ public:
 	template <typename T>
 	bool SetParameter(const std::string name,T value)
 	{	
-		bool found=false;
+	  //bool found=false;
 		char tmpstr[255];
 		//std::cout<<"\n$$$$$$$$$this type is "<<typeid(value).name()<<"$$$$$$$$$"<<std::endl;
 		if(typeid(value)==typeid(float)    || typeid(value)==typeid(double)) 
@@ -152,7 +152,7 @@ public:
 		else 
 		{
 			std::cout<<"Unknown input type \""<<typeid(value).name()<<std::endl;
-			found=false;
+			//found=false;
 		}
 		std::string valuestr(tmpstr);
 		return SetParameter(name,valuestr);
@@ -165,7 +165,7 @@ public:
 	template <typename T>
 	bool SetArgument(const std::string name,T value)
 	{	
-		bool found=false;
+	  bool found=false;
 
 		if(typeid(value)==typeid(float)    || typeid(value)==typeid(double)) 
 		{

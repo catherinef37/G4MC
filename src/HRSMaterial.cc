@@ -24,7 +24,7 @@ HRSMaterial* HRSMaterial::GetHRSMaterialManager()
 { 
 	if(!fHRSMaterialManager) 
 	{
-		G4cout<<"Errro! No instance of HRSMaterial found! \n"
+	  G4cout<<"Errro! No instance of HRSMaterial found! \n"
 			<<"Use HRSMaterial::HRSMaterial() to build one in HRSDetectorConstruction::Construt()!"
 			<<G4endl;
 	}
@@ -43,13 +43,13 @@ HRSMaterial::HRSMaterial()
 
 	ConstructMaterials();
 	fHRSMaterialManager=this;
-	std::cout<<"HRSMaterial() construction done!"<<std::endl;
+	//std::cout<<"HRSMaterial() construction done!"<<std::endl;
 }
 
 HRSMaterial::~HRSMaterial()
 {
 	DestroyMaterials(); 
-	std::cout<<"delete HRSMaterial ...done!"<<std::endl;
+	//std::cout<<"delete HRSMaterial ...done!"<<std::endl;
 }
 
 
@@ -137,6 +137,8 @@ void HRSMaterial::ConstructMaterials()
 	a = 28.97 *g/mole;
 	vacuum = new G4Material(name="Vacuum",z=1,a,density,kStateGas,temperature,pressure);
 
+	//G4cout << "Vacuum: " << z << " " << density << " " << kStateGas << " " << temperature << " " << pressure << G4endl;
+	//Vacuum: 1 1.05941e+07 3 293.15 0.832133
 	// Air
 	density = 1.29*mg/cm3;
 	air = new G4Material(name="Air", density, nElem=2);
@@ -272,6 +274,11 @@ void HRSMaterial::ConstructMaterials()
 	density = 2.267 *g/cm3;
 	carbon = new G4Material(name="Carbon", z=6., a, density);
 
+	//Define diamond
+	a = 12.01 * g/mole;
+	density = 3.515*g/cm3;
+	diamond = new G4Material("Diamond", z=6, a, density);
+
 	//mylar
 	density = 1.39*g/cm3;
 	mylar = new G4Material(name="Mylar", density, nElem=2);
@@ -362,6 +369,7 @@ void HRSMaterial::ConstructMaterials()
 	//lead
 	a = 207.2*g/mole;
 	density = 11.34*g/cm3;
+	//G4cout << "A gram is " << g << G4endl;
 	lead = new G4Material(name="Lead", z=82., a, density);
 
 	//lead208

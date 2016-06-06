@@ -6716,6 +6716,7 @@ c
       x_sp_fp     =x_sp_fp     
      9  +coeff( 90)    *x22    *x41*x52
 c
+c      print *, "We are at the end of x_sp_fp"
       return
       end
       function t_sp_fp     (x,m)

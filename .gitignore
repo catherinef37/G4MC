@@ -1,1 +1,10 @@
 *~
+*#*#
+CREX_Project/*
+HRSTransport/hamcPREXTrans/ztheta.py
+*.o
+HRSTransport/hamcPREXTrans/*.dat
+HRSTransport/hamcPREXTrans/*.pl
+HRSTransport/hamcPREXTrans/*.png
+.gitignoreold
+build/

@@ -17,9 +17,10 @@
 #include "G4FieldManager.hh"
 #include "G4Field.hh"
 #include "TString.h"
+#include "HRSBeamTarget.hh"
+#include "HRSVertex.hh"
 
 extern UsageManager* gConfig;
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //PARIS deuteron wave function, fit pol8 (<160 MeV) and pol3 (>150 MeV)
@@ -129,7 +130,7 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	const G4Field *theField = G4TransportationManager::GetTransportationManager()->GetFieldManager()->GetDetectorField();
 	theField->GetFieldValue(tmpPoint,kEMFieldAtTg);
 
-	rasterMode=1;
+	rasterMode=2;
 	//the following has been defined for G2P
 	//In scatter chamber coordinate system
 	kRasterR=10.0*mm;		//raster size
@@ -157,9 +158,10 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	//set default values
 	position3V.set(kTargetXOffset,kTargetYOffset,kTargetZOffset);
 
-	gunZLow=kZLow;
-	gunZHigh=kZHigh;
-	gunZ=kZLowTrig-10.0*cm;
+	//cout << "This is the initial value of gunZ: " << gunZ << endl;
+	//gunZLow=kZLow;//turn back on later? Nickie's edit to make it obey macro
+	//gunZHigh=kZHigh;
+	//gunZ=kZLowTrig-10.0*cm;
 
 	gunRLow=0.0*mm;
 	gunRHigh=kRasterR;
@@ -179,6 +181,8 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 		detectorAngle[ii]=(ii%2)?kRSeptumAngle:kLSeptumAngle;
 	}
 	//primaryEngine[0]="HRSElasEl"; this is default
+
+	G4cout << "The beam energy is: " << beamEnergy << G4endl;
 
 	//defalut value for primaries, 
 	//random energy, random theta, random phi,random vertex, raster on
@@ -215,8 +219,8 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 
 	fixedPointBL3V.set(0.,0.,kTargetZOffset);
 	slopeBL3V.set(0.,0.,kTargetZOffset);
-	vertexFlag=1;
-	//vertexFlag=2;
+	//vertexFlag=1;
+	vertexFlag=2;
 
 	//random event generator based on real data
 	bUseRootHisto=false;
@@ -246,14 +250,14 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	incidentEnergy=beamEnergy;
 	nThrown=helicity=0;
 
-	G4cout<<"HRSPrimaryGeneratorAction() construction done!"<<G4endl;
+	//G4cout<<"HRSPrimaryGeneratorAction() construction done!"<<G4endl;
 }
 
 HRSPrimaryGeneratorAction::~HRSPrimaryGeneratorAction()
 {
 	delete particleGun;
 	delete gunMessenger;
-	G4cout<<"delete HRSPrimaryGeneratorAction ... done!"<<G4endl;
+	//G4cout<<"delete HRSPrimaryGeneratorAction ... done!"<<G4endl;
 }
 
 	
@@ -276,7 +280,7 @@ void HRSPrimaryGeneratorAction::GetPosition()
 	//       You can set the beam line to any direction and go throught any pivot point, 
 	//       if z is out of range, a random z will be used. otherwise it is a fixed point
 	//case 3:use the fixed vertex point, no raster will be used
-
+  //cout << vertexFlag << endl;
 	if(vertexFlag==3) return;
 
 	G4double tmprr,tmpphiphi,tmpxx=0.,tmpyy=0.,tmpzz=0.;
@@ -300,11 +304,13 @@ void HRSPrimaryGeneratorAction::GetPosition()
 	}
 	else if(rasterMode==2)  // 2 is rectangle, gunRLow is half X, gunRHigh is half Y
 	{
-		tmpxx = mRand.fRand()*gunRLow;
-		tmpyy = mRand.fRand()*gunRHigh; 
-
-		if(mRand.fRand()>0.5) tmpxx = -1.0*tmpxx;
-		if(mRand.fRand()>0.5) tmpyy = -1.0*tmpyy;
+	  tmpxx = mRand.fRand()*gunRLow ;
+	  tmpyy = mRand.fRand()*gunRHigh;
+	  tmpzz = mRand.fRand(gunZLow,gunZHigh);
+	  if(mRand.fRand()>0.5) tmpxx = -1.0*tmpxx;
+	  if(mRand.fRand()>0.5) tmpyy = -1.0*tmpyy;
+	  //G4cout << "test0: " << tmpxx << " " << tmpyy << " " << tmpzz << G4endl;
+	  
 	}
 	else
 	{
@@ -340,94 +346,160 @@ void HRSPrimaryGeneratorAction::GetPosition()
 
 	if(vertexFlag==2)
 	{
-		tmpzz = slopeBL3V.z()*mm;
-		if (tmpzz<kZLowTrig || tmpzz>kZHighTrig)
-		{//use random z position
-			//tmpzz = G4UniformRand()*(gunZHigh-gunZLow)+gunZLow;
-			tmpzz = mRand.fRand(gunZLow,gunZHigh);
-		}
+	  //tmpzz = slopeBL3V.z()*mm;
+		//if (tmpzz<kZLowTrig || tmpzz>kZHighTrig)
+		//{//use random z position
+		//tmpzz = G4UniformRand()*(gunZHigh-gunZLow)+gunZLow;
+		//tmpzz = mRand.fRand(gunZLow,gunZHigh);
+		//}
 
-		double tmpxx0=fixedPointBL3V.x()+slopeBL3V.x()*(tmpzz-fixedPointBL3V.z());
-		double tmpyy0=fixedPointBL3V.y()+slopeBL3V.y()*(tmpzz-fixedPointBL3V.z());
+	  //double tmpxx0=fixedPointBL3V.x()+slopeBL3V.x()*(tmpzz-fixedPointBL3V.z());
+	  //double tmpyy0=fixedPointBL3V.y()+slopeBL3V.y()*(tmpzz-fixedPointBL3V.z());
 
 		//apply the raster and offset
-		tmpxx+=tmpxx0+kTargetXOffset;
-		tmpyy+=tmpyy0+kTargetYOffset;
+	  //tmpxx+=tmpxx0+kTargetXOffset;
+	  //tmpyy+=tmpyy0+kTargetYOffset;
+		//cout << "test1: " << tmpxx << " " << tmpyy << " " << tmpzz << endl;
 		//G4cout<<"debug: Use slopeBL3V="<<slopeBL3V<<"mm"
 		//	<<" ==> vertex=("<<tmpxx<<", "<<tmpyy<<", "<<tmpyy<<")" <<G4endl;
 	}
 	else  if(vertexFlag==1)
 	{
+	  //cout << "DOOOOOOOOP: " << gunZ << " " << gunZLow << " " << gunZHigh << endl;
 		tmpzz = gunZ;
-		if (tmpzz<kZLowTrig || tmpzz>kZHighTrig)
+		if ( gunZLow != gunZHigh )
+		  //if (tmpzz<kZLowTrig || tmpzz>kZHighTrig)
 		{//use random z position
 			//tmpzz = G4UniformRand()*(gunZHigh-gunZLow)+gunZLow;
 			tmpzz = mRand.fRand(gunZLow,gunZHigh);
 			//cout << "DOOOOOOOOP: " << tmpzz << " " << gunZLow << " " << gunZHigh << endl;
 		}
-
+		tmpxx = gunX;
+		tmpyy = gunY;
 		//apply the raster and offset
 		tmpxx+=kTargetXOffset;
 		tmpyy+=kTargetYOffset;
 
-		tmpzz = mRand.fRand(gunZLow,gunZHigh);
+		//tmpzz = mRand.fRand(gunZLow,gunZHigh);
 		//cout << "DOOOOOOOOP: " << tmpzz << " " << gunZLow << " " << gunZHigh << endl;
-	
+		//cout << "DOOOOOOOOP: " << tmpxx << " " << tmpyy << " " << tmpzz << endl;
+		
 	}
 	position3V.set(tmpxx,tmpyy,tmpzz);
-	//cout << tmpxx << " " << tmpyy << " " << tmpzz << endl;
+	//cout << "TEST2: " << tmpxx << " " << tmpyy << " " << tmpzz << endl;
 
 }
 
 void HRSPrimaryGeneratorAction::GetMomentum(int i)
 {
-	//get the momentum,
-	//if useMom3V[i] is true, use 3-vector momentum3V[i] directorly
-	//otherwise get the momentum from total momentum,theta and phi commands
-	//Be sure the folowing randomize trigger:
-	//  in case momentum[i]<0, generate total P randomly
-	//  in case thetaAngle[i]<0, generate theta randomly
-	//  in case phiAngle[i]<-360, generate phi randomly
+  //get the momentum,
+  //if useMom3V[i] is true, use 3-vector momentum3V[i] directorly
+  //otherwise get the momentum from total momentum,theta and phi commands
+  //Be sure the folowing randomize trigger:
+  //  in case momentum[i]<0, generate total P randomly
+  //  in case thetaAngle[i]<0, generate theta randomly
+  //  in case phiAngle[i]<-360, generate phi randomly
+  
+  G4double pPtot=momentum3V[i].mag();
+  if(useMom3V[i] && pPtot>=keV) return;
+  
+  //comparing string is very slow ...... need to improve this
+  if(primaryEngine[i]=="Uniform")			 {/*do nothing, jump over this if block;*/;}
+  else if(primaryEngine[i]=="HRSElasEl")           {HRSElasElectronEngine(i);return;}
+  else if(primaryEngine[i]=="HRSElasNucleus") {HRSElasNucleusEngine(i); return;}
+  else if(primaryEngine[i]=="HRSQuasiElasEl") {HRSQuasiElasElectronEngine(i); return;}
+  else if(primaryEngine[i]=="HRSQuasiElasNucleon") {HRSQuasiElasNucleonEngine(i); return;}
+  else if(primaryEngine[i]=="Compton")     {ComptonEngine(i); return;}
+  else if(primaryEngine[i]=="TwoBody")     {TwoBodyEngine(i); return;}
+  else if(primaryEngine[i]=="FastProton")  {FastProtonEngine(i); return;}
+  else if(primaryEngine[i]=="RootHisto")   {HRSHistoEngine(i); return;}
+  else if(primaryEngine[i]=="RootNtuple")  {HRSNtupleEngine(i); return;}
+  else if(primaryEngine[i]=="H90UserFit")  {H90UserFitEngine(i); return;}
+  else if(primaryEngine[i]=="BdL")         {BdLEngine(i); return;}
+  else if(primaryEngine[i]=="PREX")         {PREXEngine(i); return;}
+  else 
+    {
+      G4cout<<"Warning: Unknown event generator \""<<primaryEngine[i]
+	    <<"\". Assuming 'Uniform' !"<<endl; 
+    }
+  
+  G4double pTheta=0.0,pPhi=0.0;
+  G4int pass    = 0; //only pass if rejection sampling is
+  //G4cout << "standard PREX generator" << G4endl;
+  G4double msth = 0.;
+  G4double msph = 0.;
 
-	G4double pPtot=momentum3V[i].mag();
-	if(useMom3V[i] && pPtot>=keV) return;
+  do{
+    //Uniform Engine in HCS or TCS
+    
+    if(randomizeInTCS[i]>0) RandTCSThetaPhi(i,pTheta,pPhi);
+    else RandHCSThetaPhi(i,pTheta,pPhi);
 
-	//comparing string is very slow ...... need to improve this
-	if(primaryEngine[i]=="Uniform")			 {/*do nothing, jump over this if block;*/;}
-	else if(primaryEngine[i]=="HRSElasEl")           {HRSElasElectronEngine(i);return;}
-	else if(primaryEngine[i]=="HRSElasNucleus") {HRSElasNucleusEngine(i); return;}
-	else if(primaryEngine[i]=="HRSQuasiElasEl") {HRSQuasiElasElectronEngine(i); return;}
-	else if(primaryEngine[i]=="HRSQuasiElasNucleon") {HRSQuasiElasNucleonEngine(i); return;}
-	else if(primaryEngine[i]=="Compton")     {ComptonEngine(i); return;}
-	else if(primaryEngine[i]=="TwoBody")     {TwoBodyEngine(i); return;}
-	else if(primaryEngine[i]=="FastProton")  {FastProtonEngine(i); return;}
-	else if(primaryEngine[i]=="RootHisto")   {HRSHistoEngine(i); return;}
-	else if(primaryEngine[i]=="RootNtuple")  {HRSNtupleEngine(i); return;}
-	else if(primaryEngine[i]=="H90UserFit")  {H90UserFitEngine(i); return;}
-	else if(primaryEngine[i]=="BdL")         {BdLEngine(i); return;}
-	else if(primaryEngine[i]=="PREX")         {PREXEngine(i); return;}
-	else 
-	{
-		G4cout<<"Warning: Unknown event generator \""<<primaryEngine[i]
-		<<"\". Assuming 'Uniform' !"<<endl; 
-	}
-
-	//Uniform Engine in HCS or TCS
-	G4double pTheta=0.0,pPhi=0.0;
-	if(randomizeInTCS[i]>0) RandTCSThetaPhi(i,pTheta,pPhi);
-	else RandHCSThetaPhi(i,pTheta,pPhi);
-
-	if (momentum[i]<=0.*GeV)
-	{//use random total momentum; Let low<=total momentum<high
-		pPtot = mRand.fRand(momentumLow[i],momentumHigh[i]);
-	}
-	else
-	{//use specify total momentum and smear it with sigma
-		pPtot = mRand.fGaus(momentum[i],sigmaMomentum[i]);
-	}
-
-	//G4cout<<"Debug GetMomentum(): pTheta="<<pTheta/deg<<"deg  pPhi="<<pPhi/deg<<"deg \n";
-	momentum3V[i].setRThetaPhi(pPtot,pTheta,pPhi);
+    //G4cout << "MOMENTUM HIGH" << momentumHigh[i] << G4endl;
+    
+    if (momentum[i]<=0.*GeV)
+      {//use random total momentum; Let low<=total momentum<high
+	pPtot = mRand.fRand(momentumLow[i],momentumHigh[i]);
+      }
+    else
+      {//use specify total momentum and smear it with sigma
+	pPtot = mRand.fGaus(momentum[i],sigmaMomentum[i]);
+      }
+    int phionly = 0;
+    //G4cout<<"Debug GetMomentum(): pTheta="<<pTheta/deg<<"deg  pPhi="<<pPhi/deg<<"deg \n";
+    if(phionly){
+      G4double yrandlimit = 10.;
+      G4double yrand  = mRand.fRand(-yrandlimit,yrandlimit);
+      //pTheta = abs(asin( yrand / sqrt( yrandlimit * yrandlimit + yrand * yrand ) / cos( pPhi ) ) );
+      G4double rscale = yrandlimit * yrandlimit; //arbitrary
+      G4double psi = 5. * 3.141592654 / 180.;
+      G4double zrand = sqrt( ( rscale * rscale - yrand * yrand ) * cos(psi) * cos(psi) );
+      G4double xrand = -zrand * tan(psi);
+      pTheta = acos( zrand / rscale );
+      pPhi   = atan( xrand / yrand ) + 3.141592654 / 2.;
+      if( pPhi < 3.141592654 / 2. || pPhi > 3.141592654 * 3. / 2. )
+	pPhi += 3.141592654;
+      //cout << yrand << " " << pPtot << " " << pTheta << " " << pPhi << endl;
+    }
+    
+    G4double XS_208Pb = 0.;
+    G4int radiate = 1;
+    
+    if( radiate ) {
+      //G4cout << "radiating with theta = " << pTheta << " rad," << pTheta * 180. / pi << " deg" << G4endl;
+      fBeamTarg = HRSBeamTarget::GetBeamTarget();
+      fBeamTarg->SetScatAngle(pTheta);
+      
+      //Float_t travel = 0.5 * mm;
+      Float_t travel = position3V.z() - gunZHigh;
+      //G4cout << position3V.z() << " " << gunZLow << " " << gunZHigh << G4endl;
+      HRSVertex myvertex = fBeamTarg->SampleVertex(travel);
+      //G4cout << "The energy is: " << myvertex.fBeamE * MeV << G4endl;
+      //G4cout << pPtot << " ";
+      pPtot = myvertex.fBeamE;
+      msth = myvertex.fmsth;
+      msph = myvertex.fmsph;
+      XS_208Pb = myvertex.XS_208Pb;
+      pass     = myvertex.pass;
+      //G4cout << "PASS: " << pass << G4endl;
+    }else{
+      pass = 1;
+    }
+  }while(pass == 0);
+  //G4cout << "XS: " << XS_208Pb <<endl;
+  //G4cout << travel << " " << pPtot << G4endl;
+  //G4cout << "ms: " << msth << " " << msph << G4endl;
+  //G4cout << "Angles: " << pTheta << " " << pPhi << G4endl;
+  momentum3V[i].setRThetaPhi(pPtot,pTheta,pPhi);
+  
+  if( ( pTheta + msth < 3.141592654 ) && ( pTheta + msth > 0. ) &&
+      ( pPhi + msph ) > 0 && ( pPhi + msph ) < 3.141592654 * 2. ){
+    momentum3V[i].setRThetaPhi(pPtot,pTheta + msth,pPhi + msph);
+    //momentum3V[i].setRThetaPhi(pPtot,pTheta,pPhi);
+  }else{
+    momentum3V[i].setRThetaPhi(pPtot,pTheta,pPhi);
+  }
+  
 }
 
 
@@ -1040,6 +1112,7 @@ void HRSPrimaryGeneratorAction::BdLEngine(int index)
 
 void HRSPrimaryGeneratorAction::PREXEngine(int index)
 {
+
 
   //cout << "At the level of the generator!: " << momentum[index] << " " << thetaAngle[index] << " " << phiAngle[index] << " --------------------" << endl;
   

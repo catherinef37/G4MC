@@ -31,7 +31,7 @@ G2PTrans484816R00::~G2PTrans484816R00()
 
 bool G2PTrans484816R00::TransLeftHRS(double* pV5)
 {
-    float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+    float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
     int ii=5;
 
     // float x_test, y_test;
@@ -128,7 +128,7 @@ bool G2PTrans484816R00::TransRightHRS(double* pV5)
 
 void G2PTrans484816R00::ReconLeftHRS(double* pV5)
 {   
-    float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+    float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
     int ii=5;
     
     vector_jjl[1]   = vector_jjl[1] - txfit_l5p77(vector_jjl,ii);

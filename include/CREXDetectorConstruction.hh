@@ -31,7 +31,8 @@ public:
 private:
 	void ConstructMaterial();
 	G4VPhysicalVolume* ConstructTargetChamber(G4LogicalVolume *pMotherLogVol);
-	G4VPhysicalVolume* ConstructTarget(G4LogicalVolume *pMotherLogVol);
+	G4VPhysicalVolume* ConstructPREXTarget(G4LogicalVolume *pMotherLogVol);
+	G4VPhysicalVolume* ConstructCREXTarget(G4LogicalVolume *pMotherLogVol);
 	G4VPhysicalVolume* ConstructSeptumNSieve(G4LogicalVolume *pMotherLogVol);
 	G4VPhysicalVolume* ConstructDVCSSolenoid(G4LogicalVolume *pMotherLogVol);
 
@@ -41,7 +42,7 @@ private:
 
 	HRSMaterial* mMaterialManager;
 	//Declaration of all materials 
-	G4Material *calcium,*air,*vacuum,*stainlesssteel,*aluminum,*heliumGas;
+  G4Material *calcium,*air,*vacuum,*stainlesssteel,*aluminum,*heliumGas,*lead,*diamond,*lead208;
 	G4Material *theTargetMaterial;
 
 	G4LogicalVolume* mMotherLogVol;
@@ -55,7 +56,7 @@ private:
 	double mScatChamberRin,mScatChamberRout,mScatChamberL;
 	double mScatChamberEntranceWindowThick,mScatChamberExitWindowThick;
 
-	int    mSetupCREXTarget,mTargetType;
+        int    mSetupPREXTarget,mSetupCREXTarget,mTargetType;
 	double mTargetW,mTargetH,mTargetL;
 	
 	double mUpBlockRin,mUpBlockThick;

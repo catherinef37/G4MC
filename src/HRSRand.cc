@@ -21,7 +21,7 @@ HRSRand::HRSRand(unsigned seed)
 	}
 	else Seed=seed;
 
-	printf("\n***HRSRand::HRSRand(): set the random seed to %d ***\n",Seed);
+	//printf("\n***HRSRand::HRSRand(): set the random seed to %d ***\n",Seed);
 	srand(Seed);
 
 	mSeedLR=rand();

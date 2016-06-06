@@ -38,6 +38,9 @@ public:
 	G4UIcmdWithoutParameter*   UpdateCmd;
 	G4UIcmdWith3VectorAndUnit *BField3VFZB1Cmd;
 	G4UIcmdWith3VectorAndUnit *BField3VFZB2Cmd;
+	G4UIcmdWith3VectorAndUnit *BField3VFZB3Cmd;
+  G4UIcmdWith3VectorAndUnit *BField3VFZB3enCmd;
+	G4UIcmdWith3VectorAndUnit *BField3VFZB4Cmd;
 
 };
 

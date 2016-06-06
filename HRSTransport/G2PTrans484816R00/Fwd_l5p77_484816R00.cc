@@ -3,7 +3,7 @@
 namespace S484816R00
 {
     float x_l5p77_fp           (float *x,int m){
-        int ncoeff= 23;
+        //int ncoeff= 23;
         float avdat= -0.4057213E-03;
         float xmin[10]={
              0.00000E+00,-0.42213E-01, 0.00000E+00,-0.20331E-01,-0.46868E-01,
@@ -79,7 +79,7 @@ namespace S484816R00
         return v_x_l5p77_fp           ;
     }
     float t_l5p77_fp           (float *x,int m){
-        int ncoeff= 46;
+        //int ncoeff= 46;
         float avdat= -0.9912001E-03;
         float xmin[10]={
              0.00000E+00,-0.42213E-01, 0.00000E+00,-0.20331E-01,-0.46868E-01,
@@ -190,7 +190,7 @@ namespace S484816R00
         return v_t_l5p77_fp           ;
     }
     float y_l5p77_fp           (float *x,int m){
-        int ncoeff= 84;
+        //int ncoeff= 84;
         float avdat= -0.5412241E-02;
         float xmin[10]={
              0.00000E+00,-0.42213E-01, 0.00000E+00,-0.20331E-01,-0.46868E-01,
@@ -359,7 +359,7 @@ namespace S484816R00
         return v_y_l5p77_fp           ;
     }
     float p_l5p77_fp           (float *x,int m){
-        int ncoeff= 39;
+        //int ncoeff= 39;
         float avdat= -0.1528836E-02;
         float xmin[10]={
              0.00000E+00,-0.42213E-01, 0.00000E+00,-0.20331E-01,-0.46868E-01,
@@ -462,7 +462,7 @@ namespace S484816R00
         return v_p_l5p77_fp           ;
     }
     float l_l5p77_fp           (float *x,int m){
-        int ncoeff= 31;
+        //int ncoeff= 31;
         float avdat= -0.1067273E-01;
         float xmin[10]={
              0.00000E+00,-0.42213E-01, 0.00000E+00,-0.20331E-01,-0.46868E-01,

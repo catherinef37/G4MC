@@ -40,20 +40,35 @@ HRSEMFieldSetupMessenger::HRSEMFieldSetupMessenger(HRSEMFieldSetup* pmsg)
   MinStepCmd->SetParameterName("min step",false,false);
   MinStepCmd->SetDefaultUnit("mm");
   MinStepCmd->AvailableForStates(G4State_Idle);  
-
+  /*
   BField3VFZB1Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB1Field3V",this);  
-  BField3VFZB1Cmd->SetGuidance("Set the uniform magnetic field for FZB1");
+  BField3VFZB1Cmd->SetGuidance("Set the quad    magnetic field for FZB1");
   BField3VFZB1Cmd->SetParameterName("Bx","By","Bz",false);
   BField3VFZB1Cmd->SetDefaultUnit("tesla");  
   BField3VFZB1Cmd->SetUnitCandidates("tesla kilogauss gause");
   BField3VFZB1Cmd->AvailableForStates(G4State_Idle);  
 
   BField3VFZB2Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB2Field3V",this);  
-  BField3VFZB2Cmd->SetGuidance("Set the uniform magnetic field for FZB2");
+  BField3VFZB2Cmd->SetGuidance("Set the quad    magnetic field for FZB2");
   BField3VFZB2Cmd->SetParameterName("Bx","By","Bz",false);
   BField3VFZB2Cmd->SetDefaultUnit("tesla");  
   BField3VFZB2Cmd->SetUnitCandidates("tesla kilogauss gause");
   BField3VFZB2Cmd->AvailableForStates(G4State_Idle);  
+  */
+  BField3VFZB3Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB3Field3V",this);  
+  BField3VFZB3Cmd->SetGuidance("Set the uniform magnetic field for FZB3");
+  BField3VFZB3Cmd->SetParameterName("Bx","By","Bz",false);
+  BField3VFZB3Cmd->SetDefaultUnit("tesla");  
+  BField3VFZB3Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BField3VFZB3Cmd->AvailableForStates(G4State_Idle);  
+  /*
+  BField3VFZB4Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB4Field3V",this);  
+  BField3VFZB4Cmd->SetGuidance("Set the quad    magnetic field for FZB4");
+  BField3VFZB4Cmd->SetParameterName("Bx","By","Bz",false);
+  BField3VFZB4Cmd->SetDefaultUnit("tesla");  
+  BField3VFZB4Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BField3VFZB4Cmd->AvailableForStates(G4State_Idle);  
+  */
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,8 +79,10 @@ HRSEMFieldSetupMessenger::~HRSEMFieldSetupMessenger()
   delete UpdateCmd;
   delete MinStepCmd;
   delete HRSFieldDir;
-  delete BField3VFZB1Cmd;
-  delete BField3VFZB2Cmd;
+  //delete BField3VFZB1Cmd;
+  //delete BField3VFZB2Cmd;
+  delete BField3VFZB3Cmd;
+  //delete BField3VFZB4Cmd;
  
 }
 
@@ -87,14 +104,22 @@ void HRSEMFieldSetupMessenger::SetNewValue( G4UIcommand* command, G4String newVa
   { 
     fEMFieldSetup->SetMinStep(MinStepCmd->GetNewDoubleValue(newValue));
   }
-  else if( command == BField3VFZB1Cmd )
-  { 
-    fEMFieldSetup->SetBField3VFZB1(BField3VFZB1Cmd->GetNew3VectorValue(newValue));
-  }
-  else if( command == BField3VFZB2Cmd )
-  { 
-    fEMFieldSetup->SetBField3VFZB2(BField3VFZB2Cmd->GetNew3VectorValue(newValue));
-  }
+  //else if( command == BField3VFZB1Cmd )
+    //{ 
+    //fEMFieldSetup->SetBField3VFZB1(BField3VFZB1Cmd->GetNew3VectorValue(newValue));
+    //}
+  //else if( command == BField3VFZB2Cmd )
+  //{ 
+  //fEMFieldSetup->SetBField3VFZB2(BField3VFZB2Cmd->GetNew3VectorValue(newValue));
+  //}
+  //else if( command == BField3VFZB3Cmd )
+    //{ 
+    //fEMFieldSetup->SetBField3VFZB3(BField3VFZB3Cmd->GetNew3VectorValue(newValue));
+    //}
+  //else if( command == BField3VFZB4Cmd )
+  //{ 
+  //fEMFieldSetup->SetBField3VFZB4(BField3VFZB4Cmd->GetNew3VectorValue(newValue));
+  //}
 }
 
 //

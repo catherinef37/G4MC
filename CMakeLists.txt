@@ -11,6 +11,9 @@ enable_language (Fortran)
 #ROOT path
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 find_package(ROOT REQUIRED)
+find_package( PythonInterp REQUIRED )
+find_package(PythonLibs 2.7.5 EXACT REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIR})
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR}
     ${PROJECT_SOURCE_DIR}/HRSTransport/
@@ -20,6 +23,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR}
     ${PROJECT_SOURCE_DIR}/HRSTransport/GDHTransLargeX0/
     ${PROJECT_SOURCE_DIR}/HRSTransport/GDHTransSTD/
     ${PROJECT_SOURCE_DIR}/HRSTransport/hamcPREXTrans/
+    ${PROJECT_SOURCE_DIR}/HRSTransport/hamcCREXTrans/
     ${PROJECT_SOURCE_DIR}/HRSTransport/HRSTransSTD/
 
     ${PROJECT_SOURCE_DIR}/XSModel/Bosted/
@@ -27,6 +31,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR}
     ${PROJECT_SOURCE_DIR}/XSModel/Elas/
     ${PROJECT_SOURCE_DIR}/XSModel/QFS_N_EPC/
     ${PROJECT_SOURCE_DIR}/XSModel/Wiser
+
     )
 
 
@@ -62,7 +67,10 @@ include_directories(${PROJECT_SOURCE_DIR}/include ${ROOT_INCLUDE_DIR})
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
+file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.f
+	  ${PROJECT_SOURCE_DIR}/src/*.cc
+	  	  
+)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
 file(GLOB transsources ${PROJECT_SOURCE_DIR}/HRSTransport/*.cc 
@@ -81,6 +89,9 @@ file(GLOB transsources ${PROJECT_SOURCE_DIR}/HRSTransport/*.cc
                        ${PROJECT_SOURCE_DIR}/HRSTransport/hamcPREXTrans/*.cc
                        ${PROJECT_SOURCE_DIR}/HRSTransport/hamcPREXTrans/*.f
 
+                       ${PROJECT_SOURCE_DIR}/HRSTransport/hamcCREXTrans/*.cc
+                       ${PROJECT_SOURCE_DIR}/HRSTransport/hamcCREXTrans/*.f
+
                        ${PROJECT_SOURCE_DIR}/HRSTransport/HRSTransSTD/*.cc
                        ${PROJECT_SOURCE_DIR}/HRSTransport/HRSTransSTD/*.f
                        )
@@ -97,6 +108,8 @@ file(GLOB transheaders ${PROJECT_SOURCE_DIR}/HRSTransport/*.hh
                        ${PROJECT_SOURCE_DIR}/HRSTransport/GDHTransSTD/*.hh
 
                        ${PROJECT_SOURCE_DIR}/HRSTransport/hamcPREXTrans/*.hh
+
+                       ${PROJECT_SOURCE_DIR}/HRSTransport/hamcCREXTrans/*.hh
 
                        ${PROJECT_SOURCE_DIR}/HRSTransport/HRSTransSTD/*.hh
     )
@@ -126,16 +139,16 @@ file(GLOB xsheaders ${PROJECT_SOURCE_DIR}/XSModel/*.hh
     ${PROJECT_SOURCE_DIR}/XSModel/Wiser/*.hh
     )
 
-
-
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(G4MC G4MC.cc ${sources} ${headers})
 add_library(HRSTransport ${transsources} ${transheaders})
 add_library(XSModel ${xssources} ${xsheaders})
-target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XSModel)
+target_link_libraries(G4MC ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} HRSTransport XSModel ${PYTHON_LIBRARIES})
 
+
+#g++ -I/usr/include/python2.7 -lpython2.7 ./fringe.C -o fringe
 #----------------------------------------------------------------------------
 # For internal Geant4 use - but has no effect if you build this
 # example standalone

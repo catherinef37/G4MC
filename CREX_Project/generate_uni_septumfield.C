@@ -8,17 +8,17 @@ int main(){
   ofstream OUTFILE;
   OUTFILE.open("uni_septumfield.dat");
 
-  float x_min = -42.0; // cm
-  float x_max =  42.0; // cm
-  float x_step=   0.5; // cm
+  float x_min = -40.0; // cm
+  float x_max =  40.0; // cm
+  float x_step=   2.0; // cm
   int   x_bins= ( x_max - x_min ) / x_step + 1;
-  float y_min = - 9.5; // cm
-  float y_max =   9.5; // cm
-  float y_step=   0.5; // cm
+  float y_min = - 14.0; // cm
+  float y_max =   14.0; // cm
+  float y_step=   2.0; // cm
   int   y_bins= ( y_max - y_min ) / y_step + 1;
-  float z_min =   0.0; // cm
-  float z_max = 100.0; // cm
-  float z_step=   1.0; // cm
+  float z_min =- 100.0; // cm
+  float z_max =  100.0; // cm
+  float z_step=   4.0; // cm
   int   z_bins= ( z_max - z_min ) / z_step + 1;
 
   float q     = 1.602; // C - need 10^-19
@@ -59,9 +59,11 @@ int main(){
 	//cout << B << endl;
 	//OUTFILE << x_min + i * x_step << " " << y_min + j * y_step << " " << z_min + k * z_step << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 	//if( z_min + k * z_step < 50.){
-	if( z_min + k * z_step < l * 100. ){
+	//if( z_min + k * z_step < l * 100. ){
+	if(  fabs( x_min + i * x_step ) >  8.4 && fabs( x_min + i * x_step ) < 38.8 &&
+	     fabs( y_min + j * y_step ) < 12.2 && fabs( z_min + k * z_step ) < 37.0  ){
 	  //OUTFILE << x_min + i * x_step << " " << y_min + j * y_step << " " << z_min + k * z_step << " " << 0.0 << " " << -B << " " << 0.0 << endl;
-	  OUTFILE << x_min + i * x_step << " " << y_min + j * y_step << " " << z_min + k * z_step << " " << 0.0 << " " << 0 << " " << 0.0 << endl;
+	  OUTFILE << x_min + i * x_step << " " << y_min + j * y_step << " " << z_min + k * z_step << " " << 0.0 << " " << -0.485 << " " << 0.0 << endl;
 	}else{
 	  OUTFILE << x_min + i * x_step << " " << y_min + j * y_step << " " << z_min + k * z_step << " " << 0.0 << " " << 0 << " " << 0.0 << endl;
 	}

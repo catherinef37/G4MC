@@ -19,7 +19,7 @@ HRSRunAction::HRSRunAction()
 {
 	timer = new G4Timer;
 	bRunActionVerbose=true;
-	G4cout<<"HRSRunAction() construction done!"<<G4endl;
+	//G4cout<<"HRSRunAction() construction done!"<<G4endl;
 }
 
 //..............................................................................
@@ -27,7 +27,7 @@ HRSRunAction::HRSRunAction()
 HRSRunAction::~HRSRunAction()
 {
 	delete timer;
-	G4cout<<"delete HRSRunAction ... done!"<<G4endl;
+	//G4cout<<"delete HRSRunAction ... done!"<<G4endl;
 }
 
 //..............................................................................
@@ -37,7 +37,7 @@ void HRSRunAction::BeginOfRunAction(const G4Run* aRun)
 	if(bRunActionVerbose && gHRSTree->GetTotalEvtID()>100*aRun->GetRunID() )
 	{
 		char strLog[255];
-		sprintf(strLog,"### Run %d start...\n",aRun->GetRunID());
+		//sprintf(strLog,"### Run %d start...\n",aRun->GetRunID());
 		WriteLog(strLog);
 		timer->Start();
 	}
@@ -50,12 +50,12 @@ void HRSRunAction::EndOfRunAction(const G4Run* aRun)
 	if(bRunActionVerbose && gHRSTree->GetTotalEvtID()>100*aRun->GetRunID() )
 	{
 		timer->Stop();
-		G4cout << "### Number of event = " << aRun->GetNumberOfEvent()
-			<< " " << *timer << G4endl;
+		//G4cout << "### Number of event = " << aRun->GetNumberOfEvent()
+		//<< " " << *timer << G4endl;
 		char strLog[255];
-		sprintf(strLog,"### Processed %d events in run %d. Total= %d  root= %d \n",
-			aRun->GetNumberOfEvent(),aRun->GetRunID(),gHRSTree->GetTotalEvtID(),
-			gHRSTree->GetRootEvtID());    
+		//sprintf(strLog,"### Processed %d events in run %d. Total= %d  root= %d \n",
+		//aRun->GetNumberOfEvent(),aRun->GetRunID(),gHRSTree->GetTotalEvtID(),
+		//gHRSTree->GetRootEvtID());    
 		WriteLog(strLog);
 	}
 }

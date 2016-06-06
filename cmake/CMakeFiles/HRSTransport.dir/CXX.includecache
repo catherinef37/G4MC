@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../HRSTransport/HRSTransBase.hh
+
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/crex_4degr.hh
+
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/hamcCREXTrans.cc
+cmath
+-
+crex_4degr.hh
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/crex_4degr.hh
+hamcCREXTrans.hh
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/hamcCREXTrans.hh
+iostream
+-
+
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/hamcCREXTrans.hh
+HRSTransBase.hh
+/home/Nickie/JLab/HallA/G4MC/HRSTransport/hamcCREXTrans/HRSTransBase.hh
+

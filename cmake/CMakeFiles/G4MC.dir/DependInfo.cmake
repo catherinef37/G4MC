@@ -1,0 +1,115 @@
+# The set of languages for which implicit dependencies are needed:
+SET(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/Nickie/JLab/HallA/G4MC/G4MC.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/G4MC.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/BField_Helm.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/BField_Helm.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/BField_Septum.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/BField_Septum.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/BField_Tosca.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/BField_Tosca.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/CREXDetectorConstruction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/CREXDetectorConstruction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/ConfigManager.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/ConfigManager.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/Drift_Sieve2Tg.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/Drift_Sieve2Tg.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/ElectroNuclearPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/ElectroNuclearPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/GlobalDebuger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/GlobalDebuger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HMSDetectorConstruction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HMSDetectorConstruction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSAnalysisManager.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSAnalysisManager.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSCalorimeterHit.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSCalorimeterHit.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSCalorimeterSD.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSCalorimeterSD.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSDCHit.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSDCHit.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSDCSD.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSDCSD.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSDetectorConstruction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSDetectorConstruction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEMField.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEMField.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEMFieldMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEMFieldMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEMFieldSetup.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEMFieldSetup.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEMFieldSetupMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEMFieldSetupMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEMPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEMPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEventAction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEventAction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSEventActionMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSEventActionMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSGeneralPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSGeneralPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSGlobal.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSGlobal.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSHadronPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSHadronPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSIonPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSIonPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSMaterial.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSMaterial.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSMuonPhysics.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSMuonPhysics.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSNtReader.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSNtReader.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSParticleGun.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSParticleGun.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSPhysicsList.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSPhysicsList.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSPrimaryGeneratorAction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSPrimaryGeneratorAction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSPrimaryGeneratorMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSPrimaryGeneratorMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSPrimaryRootEvent.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSPrimaryRootEvent.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSPrimaryRootHisto.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSPrimaryRootHisto.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSRand.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSRand.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSRecUseDB.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSRecUseDB.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSRootTree.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSRootTree.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSRunAction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSRunAction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSStdHit.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSStdHit.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSStdSD.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSStdSD.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSSteppingAction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSSteppingAction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSSteppingActionMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSSteppingActionMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSSteppingVerbose.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSSteppingVerbose.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTrackInformation.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTrackInformation.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTrackingAction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTrackingAction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTrackingActionMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTrackingActionMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTrajectory.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTrajectory.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTranUseSNAKE.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTranUseSNAKE.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSTransform_TCSNHCS.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSTransform_TCSNHCS.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/HRSVisAttribute.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/HRSVisAttribute.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/LACDetectorConstruction.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/LACDetectorConstruction.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/PhysicsList.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/PhysicsList.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/PhysicsListMessenger.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/PhysicsListMessenger.cc.o"
+  "/home/Nickie/JLab/HallA/G4MC/src/UsageManager.cc" "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/G4MC.dir/src/UsageManager.cc.o"
+  )
+SET(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+SET(CMAKE_TARGET_DEFINITIONS
+  "G4INTY_USE_QT"
+  "G4INTY_USE_XT"
+  "G4UI_USE"
+  "G4UI_USE_QT"
+  "G4UI_USE_TCSH"
+  "G4VERBOSE"
+  "G4VIS_USE"
+  "G4VIS_USE_OPENGL"
+  "G4VIS_USE_OPENGLQT"
+  "G4VIS_USE_OPENGLX"
+  "G4VIS_USE_RAYTRACERX"
+  "G4_STORE_TRAJECTORY"
+  )
+
+# Targets to which this target links.
+SET(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/HRSTransport.dir/DependInfo.cmake"
+  "/home/Nickie/JLab/HallA/G4MC/cmake/CMakeFiles/XSModel.dir/DependInfo.cmake"
+  )
+
+# The include file search paths:
+SET(CMAKE_C_TARGET_INCLUDE_PATH
+  "../include"
+  "/home/Nickie/JLab/Software/root/include"
+  "../HRSTransport"
+  "../HRSTransport/G2PTrans400016"
+  "../HRSTransport/G2PTrans484816"
+  "../HRSTransport/G2PTrans484816R00"
+  "../HRSTransport/GDHTransLargeX0"
+  "../HRSTransport/GDHTransSTD"
+  "../HRSTransport/hamcPREXTrans"
+  "../HRSTransport/hamcCREXTrans"
+  "../HRSTransport/HRSTransSTD"
+  "../XSModel/Bosted"
+  "../XSModel/Compton"
+  "../XSModel/Elas"
+  "../XSModel/QFS_N_EPC"
+  "../XSModel/Wiser"
+  "/home/Nickie/JLab/Software/geant4.9.6.p03/include/Geant4"
+  "/home/Nickie/JLab/Software/CLHEP/include"
+  "/home/Nickie/JLab/Software/xerces-c-src_2_8_0/include"
+  "/usr/include/QtCore"
+  "/usr/include/QtGui"
+  "/usr/include/QtOpenGL"
+  )
+SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_ASM_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

@@ -58,13 +58,13 @@ HRSEventAction::HRSEventAction()
 	verboseLevel = 0;
 	messenger = new HRSEventActionMessenger(this);
 
-	G4cout<<"HRSEventAction() construction done!"<<G4endl;
+	//G4cout<<"HRSEventAction() construction done!"<<G4endl;
 }
 
 HRSEventAction::~HRSEventAction()
 {
 	delete messenger;
-	G4cout<<"delete HRSEventAction ... done!"<<G4endl;
+	//G4cout<<"delete HRSEventAction ... done!"<<G4endl;
 }
 
 void HRSEventAction::BeginOfEventAction(const G4Event* evt)
@@ -84,8 +84,8 @@ void HRSEventAction::BeginOfEventAction(const G4Event* evt)
 	G4int prec = G4cout.precision(3);
 	G4ThreeVector pPosition = evt->GetPrimaryVertex(0)->GetPosition();
 	G4cout<<"\n>>>Begin of Event "<<setw(6)<<evt->GetEventID() 
-		<< std::fixed<<":  Vertex=" << pPosition<< "mm"<<G4endl;
-	G4cout<< "***********************************************************************************************\n";
+	      << std::fixed<<":  Vertex=" << pPosition<< "mm"<<G4endl;
+	//G4cout<< "***********************************************************************************************\n";
 	for(int i=0;i<evt->GetNumberOfPrimaryVertex();i++)
 	{
 		G4PrimaryParticle* primary = evt->GetPrimaryVertex(i)->GetPrimary(0);

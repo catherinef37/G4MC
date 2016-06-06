@@ -26,7 +26,7 @@ HRSPrimaryRootEvent::HRSPrimaryRootEvent()
 		mNtuple[i]=0;mCurrentEntry[i]=0;
 	}
 
-    cout<<"HRSPrimaryRootEvent() construction done!"<<endl;
+	//cout<<"HRSPrimaryRootEvent() construction done!"<<endl;
 }
 
 HRSPrimaryRootEvent::~HRSPrimaryRootEvent()
@@ -35,7 +35,7 @@ HRSPrimaryRootEvent::~HRSPrimaryRootEvent()
 	{
 		if(mNtuple[i]) delete mNtuple[i];
 	}
-    cout<<"delete HRSPrimaryRootEvent ... done!"<<endl;
+	//cout<<"delete HRSPrimaryRootEvent ... done!"<<endl;
 }
 
 

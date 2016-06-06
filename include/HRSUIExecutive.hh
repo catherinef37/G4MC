@@ -92,8 +92,8 @@ public:
 	HRSUIExecutive(G4int argc, char** argv, int usegui=0)
 	{
 		session=0; shell=0; isGUI=false;
-		G4UImanager* pUImanager =0;
-		pUImanager = G4UImanager::GetUIpointer();
+		//G4UImanager* pUImanager =0;
+		//pUImanager = G4UImanager::GetUIpointer();
 
 		if(usegui)
 		{

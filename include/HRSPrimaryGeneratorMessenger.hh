@@ -53,6 +53,10 @@ private: //commands
 	G4UIcmdWithADoubleAndUnit*  momentumCmd[MaxPrimaryNum];
 	G4UIcmdWithADoubleAndUnit*  thetaCmd[MaxPrimaryNum];
 	G4UIcmdWithADoubleAndUnit*  phiCmd[MaxPrimaryNum];
+	G4UIcmdWithADoubleAndUnit*  theta_trCmd[MaxPrimaryNum];
+	G4UIcmdWithADoubleAndUnit*  phi_trCmd[MaxPrimaryNum];
+	G4UIcmdWithADoubleAndUnit*  theta_ctrCmd[MaxPrimaryNum];
+	G4UIcmdWithADoubleAndUnit*  phi_ctrCmd[MaxPrimaryNum];
 	G4UIcmdWith3VectorAndUnit*  momentum3VCmd[MaxPrimaryNum];
 
 	/////////////////////particle type cmds////////////////////////////
@@ -64,7 +68,15 @@ private: //commands
 	//random
 	G4UIcmdWithADoubleAndUnit*  gunZLowCmd;
 	G4UIcmdWithADoubleAndUnit*  gunZHighCmd;
-	G4UIcmdWithADoubleAndUnit*  gunZCmd;
+	G4UIcmdWithADoubleAndUnit*  gunXCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunYCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunZCmd;
+	G4UIcmdWithADoubleAndUnit*  gunX_trCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunY_trCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunZ_trCmd;
+	G4UIcmdWithADoubleAndUnit*  gunX_ctrCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunY_ctrCmd;
+  	G4UIcmdWithADoubleAndUnit*  gunZ_ctrCmd;
 	G4UIcmdWithADoubleAndUnit*  gunRLowCmd;
 	G4UIcmdWithADoubleAndUnit*  gunRHighCmd;
 	G4UIcmdWith3VectorAndUnit*  fixedPointBL3VCmd;

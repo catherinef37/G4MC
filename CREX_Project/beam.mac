@@ -19,29 +19,40 @@
 /tracking/noSecondary 1
 ###################################
 
-/vis/viewer/set/viewpointThetaPhi 3.14 0.
+#/vis/viewer/set/viewpointThetaPhi 3.14 0.
 
-#/mydet/gunRLow 0.0 mm
+/mydet/gunRLow 0.0 mm
 /mydet/gunRHigh 0.0 mm
-/mydet/gunZLow  -110.5 cm
-/mydet/gunZHigh -109.5 cm
+#/mydet/gunZLow  -110.5 cm
+#/mydet/gunZHigh -109.5 cm
+#/mydet/gunZLow  -105.7 cm
+#/mydet/gunZHigh -104.7 cm
+/mydet/gunZHigh -104.716 cm
+/mydet/gunZLow -105.216 cm
 #trigger the random momentum and vertex generator
 #/mydet/particle1/momentum 2.2 GeV
 /mydet/particle1/momentum 1.06 GeV
 #/mydet/particle1/momentum 5.0 GeV
-#/mydet/particle1/theta 4.5 deg
-#/mydet/particle1/theta 6.5 deg
+#/mydet/particle1/theta 5 deg
+/mydet/particle1/thetaLow 4 deg
+/mydet/particle1/thetaHigh 7 deg
+#/mydet/particle1/thetaLow 3 deg
+#/mydet/particle1/thetaHigh 14 deg
 #/mydet/particle1/theta 12.5 deg
 #/mydet/particle1/phi 0. deg
 #/mydet/particle1/phi 180. deg
+/mydet/particle1/phiLow 160. deg
+/mydet/particle1/phiHigh 200. deg
+#/mydet/particle1/phiLow 90. deg
+#/mydet/particle1/phiHigh 270. deg
 #This is the one I normally use
 #/mydet/gunZ  -87.693 cm
 #This is the one I normally use
 #/mydet/gunZ  -83.3 cm
 #the entry below comes from ELOG2941
 #/mydet/gunZ -110 cm
-#/mydet/gunRLow  0 cm
-#/mydet/gunRHigh 2.5 cm
+/mydet/gunRLow  2 mm
+/mydet/gunRHigh 2 mm
 #/mydet/gunZ  0 cm
 #/mydet/gunZ  -100. cm
 
@@ -56,10 +67,10 @@
 #/mydet/particle1/engine HRSQuasiElasEl
 #/mydet/particle1/momentumLow 1.00 GeV
 #/mydet/particle1/momentumHigh 1.12 GeV
-/mydet/particle1/thetaLow 3 deg
-/mydet/particle1/thetaHigh 28 deg
-/mydet/particle1/phiLow 90. deg
-/mydet/particle1/phiHigh 270. deg
+#/mydet/particle1/thetaLow 3 deg
+#/mydet/particle1/thetaHigh 28 deg
+#/mydet/particle1/phiLow 90. deg
+#/mydet/particle1/phiHigh 270. deg
 #/mydet/particle1/thetaLow 4.5 deg
 #/mydet/particle1/thetaHigh 5.5 deg
 #/mydet/particle1/phiLow 160. deg
@@ -68,4 +79,8 @@
 #/mydet/particle1/randomizeInTCS 0
 
 #/mydet/particle1/detectorAngle 5.69 deg
-/run/beamOn 100000
+#/run/beamOn 100000
+#/run/beamOn 50000
+#/run/beamOn 1000
+#/run/beamOn 1000000
+/run/beamOn 100

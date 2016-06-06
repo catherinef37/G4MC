@@ -3,7 +3,7 @@
 namespace S484816R00
 {
     float txfit_l5p77          (float *x,int m){
-        int ncoeff=  2;
+      //int ncoeff=  2;
         float avdat= -0.5051652E-02;
         float xmin[10]={
             -0.69016E+00, 0.00000E+00, 0.00000E+00, 0.00000E+00, 0.00000E+00,
@@ -39,7 +39,7 @@ namespace S484816R00
         return v_txfit_l5p77          ;
     }
     float delta_l5p77          (float *x,int m){
-        int ncoeff= 18;
+        //int ncoeff= 18;
         float avdat=  0.5034296E-03;
         float xmin[10]={
             -0.70542E+00,-0.22107E-01,-0.46979E-01,-0.30069E-01, 0.00000E+00,
@@ -111,7 +111,7 @@ namespace S484816R00
         return v_delta_l5p77          ;
     }
     float theta_l5p77          (float *x,int m){
-        int ncoeff= 40;
+        //int ncoeff= 40;
         float avdat= -0.3971255E-03;
         float xmin[10]={
             -0.70542E+00,-0.22107E-01,-0.46979E-01,-0.30069E-01, 0.00000E+00,
@@ -216,7 +216,7 @@ namespace S484816R00
         return v_theta_l5p77          ;
     }
     float phi_l5p77            (float *x,int m){
-        int ncoeff= 70;
+        //int ncoeff= 70;
         float avdat=  0.1560849E-02;
         float xmin[10]={
             -0.70542E+00,-0.22107E-01,-0.46979E-01,-0.30069E-01, 0.00000E+00,

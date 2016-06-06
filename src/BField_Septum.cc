@@ -6,6 +6,7 @@
 
 #include "BField_Septum.hh"
 #include "UsageManager.hh"
+#include "G4UImanager.hh"
 
 #include <iostream>
 #include <stdio.h>
@@ -21,7 +22,7 @@
 
 
 //#define CREATE_MAP_NTUPLE 1
-//#define BFIELD_SEPTUM_DEBUG 0
+//#define BFIELD_SEPTUM_DEBUG 1
 
 #ifdef BFIELD_SEPTUM_DEBUG
 #include "GlobalDebuger.hh"
@@ -138,7 +139,9 @@ BField_Septum::BField_Septum(double pMomentumL,double pMomentumR,
 
 	//update the Current Ratio if necessary
 	if(fabs(pMomentumL)>1.0E-5 || fabs(pMomentumR)>1.0E-5) 
-		SetMomentum(pMomentumL,pMomentumR);
+	  SetMomentum(pMomentumL,pMomentumR);
+	//SetMomentum(mDefaultMomentumL,mDefaultMomentumR);
+	//
 }
 
 BField_Septum::~BField_Septum()
@@ -164,12 +167,14 @@ BField_Septum::~BField_Septum()
 /////////////////////////////////////////////////////////////////////
 void   BField_Septum::SetMomentum(double pMomentumL,double pMomentumR)
 { 
+  //G4cout << "Both momenta are being called to be reset " << pMomentumL << " " << pMomentumR << G4endl;
 	SetMomentumL(pMomentumL);
 	SetMomentumR(pMomentumR);
 }
 
 void   BField_Septum::SetMomentumL(double pMomentumL)
 { 
+  //G4cout << "L momentum is being called to be reset " << pMomentumL << G4endl;
 	//update the Current Ratio if necessary
 	double RatioL=pMomentumL/mDefaultMomentumL;
 	if(fabs(RatioL)<0.00001) RatioL=0.0;
@@ -178,6 +183,7 @@ void   BField_Septum::SetMomentumL(double pMomentumL)
 
 void   BField_Septum::SetMomentumR(double pMomentumR)
 { 
+  //G4cout << "R momentum is being called to be reset " << pMomentumR << G4endl;
 	//update the Current Ratio if necessary
 	double RatioR=pMomentumR/mDefaultMomentumR;
 	if(fabs(RatioR)<0.00001) RatioR=0.0;
@@ -188,17 +194,19 @@ void   BField_Septum::SetMomentumR(double pMomentumR)
 /////////////////////////////////////////////////////////////////////
 void   BField_Septum::SetCurrentRatio(double valL, double valR)
 { 
+  //G4cout << "Both currents are being called to be reset " << valL << " " << valR << G4endl;
 	SetCurrentRatioL(valL);
 	SetCurrentRatioR(valR);
 }	
 
 void   BField_Septum::SetCurrentRatioL(double valL)
 { 
+  //G4cout << "L current is being called to be reset " << valL << G4endl;
 	if(fabs(mCurrentRatioL-valL)>1.0E-05)
 	{
 		mCurrentRatioL=valL;
-		cout<<"\n##BField_Septum::SetCurrentRatioL(rL): Left septum current ratio is set to "
-			<<mCurrentRatioL<<endl;
+		//cout<<"\n##BField_Septum::SetCurrentRatioL(rL): Left septum current ratio is set to "
+		//<<mCurrentRatioL<<endl;
 		
 		UsageManager *pConfig=UsageManager::GetUsageManager();
 		//all these 3 methods work
@@ -213,11 +221,12 @@ void   BField_Septum::SetCurrentRatioL(double valL)
 }
 void   BField_Septum::SetCurrentRatioR(double valR)
 { 
-	if(fabs(mCurrentRatioR-valR)>1.0E-05)
+  //G4cout << "R current is being called to be reset " << valR << G4endl;
+  if(fabs(mCurrentRatioR-valR)>1.0E-05)
 	{
 		mCurrentRatioR=valR;
-		cout<<"\n##BField_Septum::SetCurrentRatioR(rR): Right septum current ratio is set to "
-			<<mCurrentRatioR<<endl;
+		//cout<<"\n##BField_Septum::SetCurrentRatioR(rR): Right septum current ratio is set to "
+		//  <<mCurrentRatioR<<endl;
 		
 		UsageManager *pConfig=UsageManager::GetUsageManager();
 		pConfig->SetParameter("Septum_CurrentRatioR",mCurrentRatioR);
@@ -356,7 +365,7 @@ bool BField_Septum::ReadMap(const char *filename)
 	UsageManager::WriteLog(strLog);
 
 	ifstream ins;
-	int indexX=0,indexY,indexZ=0,col=0;
+	int indexX=0,indexY=0,indexZ=0,col=0;
 	double tempLine[10];
 	ins.open(filename);
 	if (ins.fail())
@@ -382,10 +391,13 @@ bool BField_Septum::ReadMap(const char *filename)
 
 		istringstream s1(tempname);
 		for(col=0;col<mNPara;col++)    s1>>tempLine[col];
-
+		
 		//check for X, Y and Z
+		//cout << "Check: " << mNPara << " " << tempLine[0] << " " << mXmin << " " << mXmax << " " << tempLine[1] << " " << mYmin << " " << mYmax << " " << tempLine[2] << " " << mZmin << " " << mZmax << endl;
+
 		if (tempLine[0]>=mXmin && tempLine[0]<=mXmax && tempLine[1]>=mYmin && tempLine[1]<=mYmax &&
-			tempLine[2]>=mZmin && tempLine[2]<=mZmax)
+		tempLine[2]>=mZmin && tempLine[2]<=mZmax)
+		  //if(1)
 		{//store the value
 
 			//in case there is an empty line, r=Btot=0.0
@@ -398,9 +410,9 @@ bool BField_Septum::ReadMap(const char *filename)
 			}
 			else 
 			{
-				indexX=int((tempLine[0]-mXmin)/mStepX);
-				indexY=int((tempLine[1]-mYmin)/mStepY);
-				indexZ=int((tempLine[2]-mZmin)/mStepZ);
+			  indexX=int((tempLine[0]-mXmin)/mStepX);
+			  indexY=int((tempLine[1]-mYmin)/mStepY);
+			  indexZ=int((tempLine[2]-mZmin)/mStepZ);
 				for(col=0;col<mNPara;col++)
 				{
 					mBField[indexX][indexY][indexZ][col]=tempLine[col];
@@ -430,7 +442,8 @@ bool BField_Septum::ReadMap(const char *filename)
 
 
 #ifdef BFIELD_SEPTUM_DEBUG
-	if(Global_Debug_Level>=4)
+	//if(Global_Debug_Level>=4)
+	if(1)
 	{
 		printf("The Magnetic field Map is:\n");		
 		printf("       x         y        z       Bx       By       Bz        r        Br        Btot\n");
@@ -474,12 +487,13 @@ bool BField_Septum::ReadMap(const char *filename)
 	}
 	file->Write();
 	file->Close();
-	cout << "Close root file " << rootfile <<endl;  
+	//cout << "Close root file " << rootfile <<endl;  
 	file->Delete();
 #endif
 
 #ifdef BFIELD_SEPTUM_DEBUG
-	if(Global_Debug_Level>=4)
+	//if(Global_Debug_Level>=4)
+	if(1)
 	{
 		printf("The Magnetic field Map is:\n");
 		printf("      x         y        z        Bx        By        Bz\n");
@@ -697,85 +711,108 @@ void BField_Septum::Transform_Field2Lab(const double FieldP[3],double LabP[3])
 
 
 /////////////////////////////////////////////////////////////////////
-bool BField_Septum::GetBField(double Pos[3],double B[3])
-{//input x,y,z in centimeter, return B field in Tesla
-	int i;
+bool BField_Septum::GetBField(double Pos[3],double B[3]){
+  //input x,y,z in centimeter, return B field in Tesla
+  int i;
+  //G4cout << "fancy get" << G4endl;
+  /*
+    if(mUseUniformB==1)
+    {
+    if( abs( Pos[0] ) > 8.4 && abs( Pos[0] < 38.8 ) && abs( Pos[1] < 12.2 ) && abs( Pos[2] < 37.0 ) ){// Make sure you are in the septum - quite ideal...
+    for (i=0;i<3;i++) B[i]=mUniformB[i];
+    return true;
+    }else{
+    for (i=0;i<3;i++) B[i] = 0.0;
+    return true;
+    }
+    }
+  */
+  
+  double pPos[3],pB[3]={0,0,0},flag[3]={1.0,1.0,1.0};
+  //shift and rotate the origin to the field coordinate
+  if(mDoShift || mDoRotation) Transform_Lab2Field(Pos,pPos);
+  else{
+    for (i=0;i<3;i++) pPos[i]=Pos[i];
 
-	if(mUseUniformB==1)
-	{
-		for (i=0;i<3;i++) B[i]=mUniformB[i];
-		return true;
-	}
-
-	double pPos[3],pB[3]={0,0,0},flag[3]={1.0,1.0,1.0};
-	//shift and rotate the origin to the field coordinate
-	if(mDoShift || mDoRotation) Transform_Lab2Field(Pos,pPos);
-	else
-	{
-		for (i=0;i<3;i++) pPos[i]=Pos[i];
-	}
-
-	if( (fabs(mCurrentRatioL)<1.0E-8 && pPos[0]>=0) || 
-		(fabs(mCurrentRatioR)<1.0E-8 && pPos[0]<0) )
-	{
-		for (i=0;i<3;i++) B[i]=0.0;
-		return true;
-	}
-
-	//the map provide fields for the whole range of x and y, but only half of z
-	//field is y direction. Need to flip for -z 
-	//if z<0, flip Bz. Bx does not need to flip 
-	if (pPos[2]<0) {flag[2]*=-1.0;}
-
-	//Note that the map is only covers z>0, I have to take the absolute values
-	double pPosAtMap[]={pPos[0],pPos[1],fabs(pPos[2])};
-	if(!Interpolation(pPosAtMap,pB,1)) {B[0]=B[1]=B[2]=0.0; return false;}
-
-#ifdef BFIELD_SEPTUM_DEBUG
-	if(Global_Debug_Level>=3)
-	{
-		printf("Input position(x,y,z) in cm=(%f, %f, %f):==>\n",Pos[0],Pos[1],Pos[2]);
-		printf("Map position(x,y,z) in cm=(%f, %f, %f);\n",pPos[0],pPos[1],pPos[2]);
-		printf("The raw magnetic field in Tesla without apply Septum_CurrentRatio:\n");
-		printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",
-			pB[0]*=flag[0],pB[1]*=flag[1],pB[2]*=flag[2]);
-	}
-#endif
-
-	//apply real current ratio and the flag
-	for (i=0;i<3;i++) 
-	{
-		if(pPos[0]>=0) B[i]=pB[i]*mCurrentRatioL*flag[i];
-		else B[i]=pB[i]*mCurrentRatioR*flag[i];
-	}
-#ifdef BFIELD_SEPTUM_DEBUG
-	if(Global_Debug_Level>=2)
-	{
-		printf("The magnetic field in Tesla after apply Septum_CurrentRatio: \n");
-		printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",B[0],B[1],B[2]);
-	}
-#endif
-
-	//rotate back to the Hall coordinate
-	if(mDoRotation) 
-	{
-		Rotate_Field2Lab(B,B);
-
-#ifdef BFIELD_SEPTUM_DEBUG
-		if(Global_Debug_Level>=2)
-		{
-			printf("The magnetic field in Tesla after apply Rotation: \n");
-			printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",B[0],B[1],B[2]);
-		}
-#endif
-	}
-
+    if(mUseUniformB==1){
+      if( abs( Pos[0] ) > 8.4 && abs( Pos[0] ) < 38.8 && abs( Pos[1] ) < 12.2 && abs( Pos[2] ) < 37.0 ){// Make sure you are in the septum - quite ideal...
+	for (i=0;i<3;i++) B[i]=mUniformB[i];
 	return true;
+      }else{
+	for (i=0;i<3;i++) B[i] = 0.0;
+	return true;
+      }
+    }
+
+  }
+  
+  if( (fabs(mCurrentRatioL)<1.0E-8 && pPos[0]>=0) || 
+      (fabs(mCurrentRatioR)<1.0E-8 && pPos[0]<0) ){
+    for (i=0;i<3;i++) B[i]=0.0;
+    return true;
+  }
+  
+  //the map provide fields for the whole range of x and y, but only half of z
+  //field is y direction. Need to flip for -z 
+  //if z<0, flip Bz. Bx does not need to flip //Not true for Nickie's version! comment out
+  //if (pPos[2]<0) {flag[2]*=-1.0;}
+  
+  //Note that the map is only covers z>0, I have to take the absolute values // This is no longer true for me... Nickie - 24 Aug, 2015
+  //double pPosAtMap[]={pPos[0],pPos[1],fabs(pPos[2])};
+  double pPosAtMap[]={pPos[0],pPos[1],pPos[2]};
+  
+  if(!Interpolation(pPosAtMap,pB,1)) {B[0]=B[1]=B[2]=0.0; return false;}
+  
+#ifdef BFIELD_SEPTUM_DEBUG
+  if(Global_Debug_Level>=3){
+    printf("Input position(x,y,z) in cm=(%f, %f, %f):==>\n",Pos[0],Pos[1],Pos[2]);
+    printf("Map position(x,y,z) in cm=(%f, %f, %f);\n",pPos[0],pPos[1],pPos[2]);
+    printf("The raw magnetic field in Tesla without apply Septum_CurrentRatio:\n");
+    printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",
+	   pB[0]*=flag[0],pB[1]*=flag[1],pB[2]*=flag[2]);
+  }
+#endif
+  
+  //apply real current ratio and the flag
+  /*
+  G4cout << "Nickie is double checking: " << G4endl;
+  G4cout << mCurrentRatioL << " " << mCurrentRatioR << G4endl;
+  G4cout << B[0] << " " << B[1] << " " << B[2] << G4endl;
+  */
+  for (i=0;i<3;i++) {
+    //G4cout << flag[i] << G4endl;
+    if(pPos[0]>=0) B[i]=pB[i]*mCurrentRatioL*flag[i];
+    else B[i]=pB[i]*mCurrentRatioR*flag[i];
+  }
+
+  //G4cout << B[0] << " " << B[1] << " " << B[2] << G4endl;
+
+#ifdef BFIELD_SEPTUM_DEBUG
+  if(Global_Debug_Level>=2){
+    printf("The magnetic field in Tesla after apply Septum_CurrentRatio: \n");
+    printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",B[0],B[1],B[2]);
+  }
+#endif
+  
+  //rotate back to the Hall coordinate
+  if(mDoRotation){
+    Rotate_Field2Lab(B,B);
+    
+#ifdef BFIELD_SEPTUM_DEBUG
+    if(Global_Debug_Level>=2){
+      printf("The magnetic field in Tesla after apply Rotation: \n");
+      printf("(B_x=%7.5f, B_y=%7.5f, B_z=%7.5f);\n",B[0],B[1],B[2]);
+    }
+#endif
+  }
+  
+  return true;
 }
 
 /////////////////////////////////////////////////////////////////////
 bool BField_Septum::GetBField(float fPos[3],float fB[3])
 {//input x,y,z in centimeter
+  G4cout << "simple get" << G4endl;
 	bool status=false;
 	double dPos[3],dB[3];
 	int i;
@@ -817,7 +854,8 @@ void BField_Septum::CreateNtuple(const char *rootfile,int verbose,double xmin,do
 	field->Branch("Bz",&Bz,"Bz/D");
 	field->Branch("Btot",&Btot,"Btot/D");
 
-	if(verbose)
+	//if(verbose)
+	if(1)
 	{
 		printf("The Magnetic field Map is:\n");
 		printf("       x         y        z       Bx       By       Bz        r        Br        Btot\n");

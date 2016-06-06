@@ -91,7 +91,8 @@ PhysicsList::PhysicsList(G4String phys) : G4VModularPhysicsList()
   cutForElectron  = defaultCutValue;
   cutForPositron  = defaultCutValue;
   cutForProton    = defaultCutValue;
-  verboseLevel    = 1;
+  //verboseLevel    = 1;
+  verboseLevel    = 0;
 
   pMessenger = new PhysicsListMessenger(this);
 

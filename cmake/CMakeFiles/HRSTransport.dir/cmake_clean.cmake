@@ -1,0 +1,38 @@
+FILE(REMOVE_RECURSE
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransport.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransBase.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans400016/G2PTrans400016.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans400016/Fwd_l5p65_400016.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans400016/Bwd_l5p65_400016.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816/G2PTrans484816.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816/Bwd_r5p65_484816.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816/Fwd_r5p65_484816.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816R00/G2PTrans484816R00.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816R00/Fwd_l5p77_484816R00.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/G2PTrans484816R00/Bwd_l5p77_484816R00.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransLargeX0/GDHTransLargeX0.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransLargeX0/Fwd_R6_LargeX0_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransLargeX0/Bwd_R6_LargeX0_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransSTD/GDHTransSTD.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransSTD/Bwd_L6_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransSTD/Fwd_L6_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransSTD/Bwd_R6_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/GDHTransSTD/Fwd_R6_GDH.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/hamcPREXTrans/hamcPREXTrans.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/hamcPREXTrans/prex_forward_tuneX.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/hamcPREXTrans/prex_forward.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/hamcCREXTrans/hamcCREXTrans.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/hamcCREXTrans/crex_4degr.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransSTD/HRSTransSTD.cc.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransSTD/Fwd_l12p5_STD.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransSTD/Bwd_r12p5_STD.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransSTD/Fwd_r12p5_STD.f.o"
+  "CMakeFiles/HRSTransport.dir/HRSTransport/HRSTransSTD/Bwd_l12p5_STD.f.o"
+  "libHRSTransport.pdb"
+  "libHRSTransport.a"
+)
+
+# Per-language clean rules from dependency scanning.
+FOREACH(lang CXX Fortran)
+  INCLUDE(CMakeFiles/HRSTransport.dir/cmake_clean_${lang}.cmake OPTIONAL)
+ENDFOREACH(lang)

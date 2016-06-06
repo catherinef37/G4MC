@@ -39,12 +39,12 @@ HRSEMField::HRSEMField():mBField_Helm(0), mBField_Septum(0)
 		double pLHRSMomentum,pRHRSMomentum;
 		gConfig->GetArgument("LHRSMomentum",pLHRSMomentum); 
 		gConfig->GetArgument("RHRSMomentum",pRHRSMomentum);
-		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
+		//cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
 		string pSeptumFieldIni=gConfig->GetArgument("SeptumFieldIni");
-		string pSeptumFieldMap=gConfig->GetArgument("SeptumFieldMap");
+		string pSeptumFieldMap=gConfig->GetArgument("SeptumFieldMap");	
 		mBField_Septum = new BField_Septum(pLHRSMomentum,pRHRSMomentum,
-			pSeptumFieldIni.c_str(),pSeptumFieldMap.c_str());
-		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << endl;
+						   pSeptumFieldIni.c_str(),pSeptumFieldMap.c_str());
+		cout << "LHRSMomentum and RHRSMomentum are: " << pLHRSMomentum << " and " << pRHRSMomentum << " when making the septum" << endl;
 	}
 
 	ErDC = 0 *kilovolt/cm; 

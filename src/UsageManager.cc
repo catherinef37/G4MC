@@ -62,7 +62,7 @@ UsageManager::~UsageManager()
 	VBranch.clear();
 	MapParam_s.clear();
 
-	cout << "deleting UsageManager ......" << endl;
+	//cout << "deleting UsageManager ......" << endl;
 	fUsageManager = 0;
 }
 
@@ -73,8 +73,8 @@ void UsageManager::WriteLog(const char *str,const char *filename, int unit)
 	FILE *gLog=fopen(filename,"a+");
 	time_t TimeNow;
 	time( &TimeNow );
-	if(unit!=0) printf("%s\t%s\n",ctime(&TimeNow),str);
-	fprintf(gLog,"%s\t%s\n",ctime(&TimeNow),str);
+	//if(unit!=0) printf("%s\t%s\n",ctime(&TimeNow),str);
+	//fprintf(gLog,"%s\t%s\n",ctime(&TimeNow),str);
 	fclose(gLog);
 }
 
@@ -539,8 +539,8 @@ void UsageManager::ReadIni(const char *inifile)
 	}
 	else
 	{
-		sprintf(strLog,"UsageManager::ReadIni() is trying to read file \"%s\" ",inifile);
-		WriteLog(strLog);
+	  //sprintf(strLog,"UsageManager::ReadIni() is trying to read file \"%s\" ",inifile);
+	  WriteLog(strLog);
 	}
 
 	string value;
@@ -669,7 +669,7 @@ void UsageManager::ProcessArgv(int argc, char **argv)
 	}
 #endif
 
-	int marker;
+	//int marker;
 	branch *br=0;
 	char *argptr;
 	for (int i=1; i<argc; i++)
@@ -687,7 +687,7 @@ void UsageManager::ProcessArgv(int argc, char **argv)
 			//////////////////////////////////////////////////////////////////////
 			//reset the branch
 			br=0;
-			marker=i;
+			//marker=i;
 			size_t b,j;
 			for(b=0;b<VBranch.size();b++)
 			{//locate the branch
@@ -747,6 +747,7 @@ void UsageManager::ProcessArgv(int argc, char **argv)
 			//argc_given is used in BuildMap(), should not be updated
 			br->argc_require=(int)j;
 			//
+			/*
 #ifdef USAGEMANAGER_DEBUG
 			if(Global_Debug_Level>=3)
 			{
@@ -756,7 +757,7 @@ void UsageManager::ProcessArgv(int argc, char **argv)
 				STOP4DEBUG;
 			}
 #endif
-
+			*/
 			//////////////////////////////////////////////////////////////////////
 		}//end if (*argptr == '-')
 		else
@@ -989,7 +990,7 @@ bool UsageManager::ReadFile(const char *filename)
 		cout<<"***Error: Can not open parameter file \""<<filename<<"\"!"<<endl;
 		return false;
 	}
-	else  cout<<"Reading parameter file \""<<filename<<"\""<<endl;
+	//else  cout<<"Reading parameter file \""<<filename<<"\""<<endl;
 
 	int nline=0;
 	size_t found=0;
@@ -1026,7 +1027,7 @@ bool UsageManager::ReadFile(const char *filename)
 		found=strValue.find(';');
 		if (found!=string::npos) strValue=strValue.substr(0,found);
 		Trim(strValue);	
-		cout<<setw(25)<<strName<<" = "<<strValue<<endl;
+		//cout<<setw(25)<<strName<<" = "<<strValue<<endl;
 		//store the value into the map
 		MapParam_s[strName]=strValue;
 
@@ -1204,8 +1205,8 @@ bool UsageManager::SetParameter(std::string name,std::string value)
 	{
 		it->second=value; 
 		found=true;
-		std::cout<<"###SetParameter(name="<<name<<", value="<<value
-			<<")  called!###"<<std::endl;
+		//std::cout<<"###SetParameter(name="<<name<<", value="<<value
+		//<<")  called!###"<<std::endl;
 	}
 
 	if(!found) 

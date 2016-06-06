@@ -46,6 +46,7 @@ public:
 	G4Material* calcium;
 	G4Material* iron;
 	G4Material* carbon;
+	G4Material* diamond;
 
 	G4Material* tantalum;
 	G4Material* tungsten;

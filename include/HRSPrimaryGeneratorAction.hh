@@ -15,6 +15,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4ThreeVector.hh"
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include "HRSBeamTarget.hh"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +58,9 @@ public:
 
 	virtual void GeneratePrimaries(G4Event*);
 
+
 private:
+  HRSBeamTarget *fBeamTarg;
 	void   GetMomentum(int index);	//the result will be stored at momentum3V, ekin and momentum_direction;
 	void   GetPosition();  //the result will be stored at postion3V
 	void   BoNuSProtonEngine(int index);
@@ -155,7 +158,7 @@ private:
 
 	G4int          rasterMode;	
 	G4int          vertexFlag;	 //3:fixed point 3V; 2: Random BeamLine 1: Ramdom RZ
-	G4double       gunZLow,gunZHigh,gunZ;
+        G4double       gunZLow,gunZHigh,gunX,gunY,gunZ;
 	G4double       gunRLow,gunRHigh;
 	G4ThreeVector  position3V;
 	G4ThreeVector  fixedPointBL3V; //keep the fixed point(x0,y0,z0) in mm
@@ -323,6 +326,14 @@ public:
 	{
 		gunZHigh = val;
 	}
+	inline void SetGunX(G4double val)
+	{
+		gunX = val;
+	}
+	inline void SetGunY(G4double val)
+	{
+		gunY = val;
+	}
 	inline void SetGunZ(G4double val)
 	{
 		gunZ = val;
@@ -334,6 +345,14 @@ public:
 	inline G4double GetGunZHigh() const
 	{
 		return gunZHigh/mm;
+	}
+	inline G4double GetGunX() const
+	{
+		return gunX/mm;
+	}
+	inline G4double GetGunY() const
+	{
+		return gunY/mm;
 	}
 	inline G4double GetGunZ() const
 	{

@@ -93,9 +93,9 @@ for( my $k = 0; $k < $n[2]; $k++ ) {
 	    $my_x /= 10;
 	    $my_y /= 10;
 	    $my_z /= 10;
-	    $x[$index2] *= 1;#4.7760707;
-	    $y[$index2] *= 1;#4.7760707;
-	    $z[$index2] *= - 1;#4.7760707;
+	    #$x[$index2] *= 1;#4.7760707;
+	    #$y[$index2] *= 1;#4.7760707;
+	    #$z[$index2] *= -1;#4.7760707;
 	    #if ( $my_y >= 0 ) {
 	    #print OUTFILE "$my_x $my_z $my_y $x[$index2] $z[$index2] $y[$index2]\n";
 	    print OUTFILE "$my_x $my_y $my_z $x[$index2] $y[$index2] $z[$index2]\n";

@@ -25,6 +25,9 @@ namespace Transform
 	void P_HCS2TCS(double Theta_hall, double Phi_hall, double EndPlaneTheta_hall, 
 		double &Theta_tr, double &Phi_tr);
 
+  void double_rot(double x, double y, double z, double chi, double psi, double &Theta_tr, double &Phi_tr);
+  void single_rot(double x, double y, double z, double psi, double &Theta_tr, double &Phi_tr);
+
 	//transorm from tranpotrtation coordinate to hall coordinate 
 	//all angles are in rad
 	void X_TCS2HCS(double x_tr, double y_tr, double z_tr,double EndPlaneTheta_hall,

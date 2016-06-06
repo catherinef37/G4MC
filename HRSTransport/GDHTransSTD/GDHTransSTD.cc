@@ -79,7 +79,7 @@ GDHTransSTD::~GDHTransSTD()
 /////////////////////////////////////////////////////////////////////////////
 bool GDHTransSTD::TransRightHRS(double* pV5)
 {
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	float x_test, y_test;
 	int ii=5;
 
@@ -173,7 +173,7 @@ bool GDHTransSTD::TransRightHRS(double* pV5)
 
 bool GDHTransSTD::TransLeftHRS(double* pV5)
 {
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	float x_test, y_test;
 	int ii=5;
 
@@ -329,7 +329,7 @@ bool GDHTransSTD::TransLeftHRS(double* pV5)
 /////////////////////////////////////////////////////////////////////////////////////
 void GDHTransSTD::ReconRightHRS(double *pV5)
 {
-	float vector_jjl[]={pV5[0],pV5[1],pV5[2],pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],(float)pV5[2],(float)pV5[3],(float)pV5[4]};
 	int ii=5,jj=1;
 	/* Orthogonalize theta as JJL asks*/
 	vector_jjl[1]   = vector_jjl[1] - r6_txfit_(vector_jjl,&jj);
@@ -350,7 +350,7 @@ void GDHTransSTD::ReconRightHRS(double *pV5)
 void GDHTransSTD::ReconLeftHRS(double *pV5)
 {
 	//in order to call right arm routines, need to flip y, phi 
-	float vector_jjl[]={pV5[0],pV5[1],-pV5[2],-pV5[3],pV5[4]};
+	float vector_jjl[]={(float)pV5[0],(float)pV5[1],-(float)pV5[2],-(float)pV5[3],(float)pV5[4]};
 	int ii=5,jj=1;
 
 	/* Orthogonalize theta as JJL asks*/

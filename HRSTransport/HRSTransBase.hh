@@ -9,9 +9,11 @@ public:
   
   virtual bool TransLeftHRS(double* v) = 0;
   virtual bool TransRightHRS(double* v) = 0;
+  virtual bool TransRightHRS_C(double* v) = 0;
   virtual void ReconLeftHRS(double* v) = 0;
   virtual void ReconRightHRS(double* v) = 0;
-  virtual void Acceptance(double* v, double* acc_check, bool* acc_bool) = 0;
+  virtual void Acceptance(double* v, double* x_check, double* theta_check, double* y_check, double* phi_check, int* acc_bool) = 0;
+  virtual void Acceptance_C(double* v, double* x_check, double* theta_check, double* y_check, double* phi_check, int* acc_bool) = 0;
 
   virtual double GetAngle() = 0;
   

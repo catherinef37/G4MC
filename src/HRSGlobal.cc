@@ -21,8 +21,8 @@ void WriteLog(const char *str,const char *filename, int unit)
 	FILE *gLog=fopen(filename,"a+");
 	time_t TimeNow;
 	time( &TimeNow );
-	if(unit!=0) printf("%s\t%s\n",ctime(&TimeNow),str);
-	fprintf(gLog,"%s\t%s\n",ctime(&TimeNow),str);
+	//if(unit!=0) printf("%s\t%s\n",ctime(&TimeNow),str);
+	//fprintf(gLog,"%s\t%s\n",ctime(&TimeNow),str);
 	fclose(gLog);
 }
 
@@ -32,7 +32,7 @@ void InitLogStream(ofstream &logstream,const char *filename)
 	if(!logstream.is_open()) logstream.open(filename,ios_base::app);
 	time_t TimeNow;
 	time( &TimeNow );
-	logstream<<ctime(&TimeNow);  //ctime already have a change line appended to the end
+	//logstream<<ctime(&TimeNow);  //ctime already have a change line appended to the end
 }
 
 

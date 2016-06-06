@@ -129,7 +129,7 @@ namespace  ElasModel
 		/* Formula are from Alexandre Deur thesis */
 
 		double Mtg=0.93889;
-		double Ef, nu, tau, Q2, Q2fm;
+		double Ef, nu, tau, Q2;//, Q2fm;
 		double XSmott, recoil, Gep, Gmp, W1, W2, XS;
 
 		/* mili barn value in GeV */
@@ -141,7 +141,7 @@ namespace  ElasModel
 		nu  = Ei - Ef;
 		tau = nu / (2.0 * Mtg);   //this is Q^2/(4M^2)
 		Q2  = nu * 2.0 * Mtg;
-		Q2fm = Q2 / (0.1973269631 * 0.1973269631);
+		//Q2fm = Q2 / (0.1973269631 * 0.1973269631);
 
 		double alpha = 1.0 / 137.035999679;
 		/* Mott cross section */
@@ -335,8 +335,9 @@ namespace  ElasModel
 		// Note that here F.F(Q2=0)=1, not Z
 		// MT  = 180947.88              ! MeV
 
-		double Z,A,Q2FM,XB,XC,XF,FF;
-		Z   = 73.;
+		//double Z,A,Q2FM,XB,XC,XF,FF;
+	  double A,Q2FM,XB,XC,XF,FF;
+		//Z   = 73.;
 		A   = 180.94788;
 
 		Q2FM= Q2/0.1973/0.1973;      //! Convert fom GeV^2 to fm^-2

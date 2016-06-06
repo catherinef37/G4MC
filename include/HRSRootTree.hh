@@ -47,119 +47,306 @@ class HRSPrimaryGeneratorAction;
 class MyTrack
 {
 public:
-	int	   PdgId;	//pdg code for this particle
-	int	   TrackId;
-	int    TrackClass;
-	/*
-	#    Flag to identify a good track. For all HRS track. the conditions are:
-	#    (A) hit virtual boundary;
-	#    (B) pow(Thetavb_tr-0.0)/0.060,2.0)+pow(Phivb_tr-0.0)/0.035,2.0)<1.0 
-	#    (C) dPOverP0 Cut: (P0-Pvb)/P0<0.05
-	#    (D) pow(Thetavb_tr-0.0)/0.050,2.0)+pow(Phivb_tr-0.0)/0.028,2.0)<1.0 && (P0-Pvb)/P0<0.04
-	#    -1 garbage: can not hit the virtual boundary
-	#    0 barely normal: A satisfied 
-	#    1 normal: A, B satisfied
-	#    2 good: A, B, C satisfied
-	#    3 gold: A, B, C, D satisfied
-	#    will plus 4 if it can be transported to the focus plane 
-	*/
+  int	   PdgId;	//pdg code for this particle
+  int	   TrackId;
+  int    TrackClass;
+  /*
+    #    Flag to identify a good track. For all HRS track. the conditions are:
+    #    (A) hit virtual boundary;
+    #    (B) pow(Thetavb_tr-0.0)/0.060,2.0)+pow(Phivb_tr-0.0)/0.035,2.0)<1.0 
+    #    (C) dPOverP0 Cut: (P0-Pvb)/P0<0.05
+    #    (D) pow(Thetavb_tr-0.0)/0.050,2.0)+pow(Phivb_tr-0.0)/0.028,2.0)<1.0 && (P0-Pvb)/P0<0.04
+    #    -1 garbage: can not hit the virtual boundary
+    #    0 barely normal: A satisfied 
+    #    1 normal: A, B satisfied
+    #    2 good: A, B, C satisfied
+    #    3 gold: A, B, C, D satisfied
+    #    will plus 4 if it can be transported to the focus plane 
+  */
+  
+  double  XS_208Pb;
+  
+  double  X0;
+  double  Y0;
+  double  Z0;
+  double  P0;
+  double  Theta0;
+  double  Phi0;
+  double  X0_tr;
+  double  Y0_tr;
+  double  Z0_tr;
+  double  Theta0_tr;
+  double  Phi0_tr;
+  double  P0_tr;
+  
+  //the image of X0_tr,Y0_tr on target plane
+  double  Xtg_tr;		
+  double  Ytg_tr;
+  double  Thetatg_tr;		
+  double  Phitg_tr;
+  double  Ptg_tr;
+  
+  double  X_vb;
+  double  Y_vb;
+  double  Z_vb;
+  double  P_vb;
+  double  Theta_vb;
+  double  Phi_vb;
+  double  X_vb_tr;
+  double  Y_vb_tr;
+  double  Z_vb_tr;
+  double  Theta_vb_tr;
+  double  Phi_vb_tr;
+  double  P_vb_tr;
+  
+  double  X_vdc;
+  double  Y_vdc;
+  double  Z_vdc;
+  double  Theta_vdc;
+  double  Phi_vdc;
+  double  P_vdc;
+  double  X_vdc_tr;
+  double  Y_vdc_tr;
+  double  Z_vdc_tr;
+  double  Theta_vdc_tr;
+  double  Phi_vdc_tr;
+  double  P_vdc_tr;
 
-        double  rate_208Pb;
+  double  X_qz1;
+  double  Y_qz1;
+  double  Z_qz1;
+  double  Theta_qz1;
+  double  Phi_qz1;
+  double  P_qz1;
+  double  X_qz1_tr;
+  double  Y_qz1_tr;
+  double  Z_qz1_tr;
+  double  Theta_qz1_tr;
+  double  Phi_qz1_tr;
+  double  P_qz1_tr;
 
-	double  X0;
-	double  Y0;
-	double  Z0;
-	double  P0;
-	double  Theta0;
-	double  Phi0;
-	double  X0_tr;
-	double  Y0_tr;
-	double  Z0_tr;
-	double	Theta0_tr;
-	double  Phi0_tr;
+  double  X_qz2;
+  double  Y_qz2;
+  double  Z_qz2;
+  double  Theta_qz2;
+  double  Phi_qz2;
+  double  P_qz2;
+  double  X_qz2_tr;
+  double  Y_qz2_tr;
+  double  Z_qz2_tr;
+  double  Theta_qz2_tr;
+  double  Phi_qz2_tr;
+  double  P_qz2_tr;
 
-	//the image of X0_tr,Y0_tr on target plane
-	double  Xtg_tr;		
-	double  Ytg_tr;
-	double  Thetatg_tr;		
-	double  Phitg_tr;
+  double  X_fp;
+  double  Y_fp;
+  double  Z_fp;
+  double  Theta_fp;
+  double  Phi_fp;
+  double  P_fp;
+  double  X_fp_tr;
+  double  Y_fp_tr;
+  double  Z_fp_tr;
+  double  Theta_fp_tr;
+  double  Phi_fp_tr;
+  double  P_fp_tr;
+  
+  double  X_fpr_tr;
+  double  Y_fpr_tr;
+  double  Z_fpr_tr;
+  double  Theta_fpr_tr;
+  double  Phi_fpr_tr;
+  double  P_fpr_tr;
+  
+  double  X_pr_tr;
+  double  Y_pr_tr;
+  double  Z_pr_tr;
+  double  Theta_pr_tr;
+  double  Phi_pr_tr;
+  double  P_pr_tr;
+  
+  double  X_q1en_tr;
+  double  Y_q1en_tr;
+  double  Z_q1en_tr;
+  double  Theta_q1en_tr;
+  double  Phi_q1en_tr;
+  double  P_q1en_tr;
 
-	double  Xvb;
-	double  Yvb;
-	double  Zvb;
-	double  Pvb;
-	double  Thetavb;
-	double  Phivb;
-	double  Xvb_tr;
-	double  Yvb_tr;
-	double  Zvb_tr;
-	double	Thetavb_tr;
-	double  Phivb_tr;
+  int     a_q1en_tr;
+  double  X_q1ex_tr;
+  double  Y_q1ex_tr;
+  double  Z_q1ex_tr;
+  double  Theta_q1ex_tr;
+  double  Phi_q1ex_tr;
+  double  P_q1ex_tr;
 
-	double  Xfp_tr;
-	double  Yfp_tr;
-	double	Thetafp_tr;
-	double  Phifp_tr;
+  int     a_q1ex_tr;
+  double  X_q2en_tr;
+  double  Y_q2en_tr;
+  double  Z_q2en_tr;
+  double  Theta_q2en_tr;
+  double  Phi_q2en_tr;
+  double  P_q2en_tr;
 
-        double  X_q1ex_tr;
-        double  Y_q1ex_tr;
-        double  a_q1ex_tr;
-        double  X_q2ex_tr;
-        double  Y_q2ex_tr;
-        double  a_q2ex_tr;
-        double  X_den_tr;
-        double  Y_den_tr;
-        double  a_den_tr;
-        double  X_dex_tr;
-        double  Y_dex_tr;
-        double  a_dex_tr;
-        double  X_q3en_tr;
-        double  Y_q3en_tr;
-        double  a_q3en_tr;
-        double  X_q3ex_tr;
-        double  Y_q3ex_tr;
-        double  a_q3ex_tr;
-        double  X_sen_tr;
-        double  Y_sen_tr;
-        double  a_sen_tr;
-        double  X_sm_tr;
-        double  Y_sm_tr;
-        double  a_sm_tr;
-        double  X_sex_tr;
-        double  Y_sex_tr;
-        double  a_sex_tr;
-        double  X_col_tr;
-        double  Y_col_tr;
-        double  a_col_tr;
+  int     a_q2en_tr;
+  double  X_q2ex_tr;
+  double  Y_q2ex_tr;
+  double  Z_q2ex_tr;
+  double  Theta_q2ex_tr;
+  double  Phi_q2ex_tr;
+  double  P_q2ex_tr;
 
-	double  Xpr_tr;
-	double  Ypr_tr;
-	double	Thetapr_tr;
-	double  Phipr_tr;
+  int     a_q2ex_tr;
+  double  X_den_tr;
+  double  Y_den_tr;
+  double  Z_den_tr;
+  double  Theta_den_tr;
+  double  Phi_den_tr;
+  double  P_den_tr;
 
-	//reconstructed variables at target plane
-	double  Xtg_rec_tr;
-	double  Ytg_rec_tr;
-	double	Thetatg_rec_tr;
-	double  Phitg_rec_tr;
+  int     a_den_tr;
+  double  X_dex_tr;
+  double  Y_dex_tr;
+  double  Z_dex_tr;
+  double  Theta_dex_tr;
+  double  Phi_dex_tr;
+  double  P_dex_tr;
 
-	double  Xtg_rec_db_tr;
-	double  Ytg_rec_db_tr;
-	double	Thetatg_rec_db_tr;
-	double  Phitg_rec_db_tr;
+  int     a_dex_tr;
+  double  X_q3en_tr;
+  double  Y_q3en_tr;
+  double  Z_q3en_tr;
+  double  Theta_q3en_tr;
+  double  Phi_q3en_tr;
+  double  P_q3en_tr;
 
-	double  X_rec_tr;
-	double  Y_rec_tr;
-	double  Z_rec_tr;
-	double	Theta_rec_tr;
-	double  Phi_rec_tr;
-	double  X_rec;
-	double  Y_rec;
-	double  Z_rec;
-	double  P_rec;
-	double  Theta_rec;
-	double  Phi_rec;
+  int     a_q3en_tr;
+  double  X_q3ex_tr;
+  double  Y_q3ex_tr;
+  double  Z_q3ex_tr;
+  double  Theta_q3ex_tr;
+  double  Phi_q3ex_tr;
+  double  P_q3ex_tr;
 
+  int     a_q3ex_tr;
+  double  X_sen_tr;
+  double  Y_sen_tr;
+  double  Z_sen_tr;
+  double  Theta_sen_tr;
+  double  Phi_sen_tr;
+  double  P_sen_tr;
+
+  int     a_sen_tr;
+  double  X_sm_tr;
+  double  Y_sm_tr;
+  double  Z_sm_tr;
+  double  Theta_sm_tr;
+  double  Phi_sm_tr;
+  double  P_sm_tr;
+
+  int     a_sm_tr;
+  double  X_sex_tr;
+  double  Y_sex_tr;
+  double  Z_sex_tr;
+  double  Theta_sex_tr;
+  double  Phi_sex_tr;
+  double  P_sex_tr;
+
+  int     a_sex_tr;
+  double  X_col_tr;
+  double  Y_col_tr;
+  double  Z_col_tr;
+  double  Theta_col_tr;
+  double  Phi_col_tr;
+  double  P_col_tr;
+
+  int     a_col_tr;
+
+  double  X_q1en;
+  double  Y_q1en;
+  double  Z_q1en;
+  double  Theta_q1en;
+  double  Phi_q1en;
+  double  X_q1ex;
+  double  Y_q1ex;
+  double  Z_q1ex;
+  double  Theta_q1ex;
+  double  Phi_q1ex;
+  double  X_q2en;
+  double  Y_q2en;
+  double  Z_q2en;
+  double  Theta_q2en;
+  double  Phi_q2en;
+  double  X_q2ex;
+  double  Y_q2ex;
+  double  Z_q2ex;
+  double  Theta_q2ex;
+  double  Phi_q2ex;
+  double  X_den;
+  double  Y_den;
+  double  Z_den;
+  double  Theta_den;
+  double  Phi_den;
+  double  X_dex;
+  double  Y_dex;
+  double  Z_dex;
+  double  Theta_dex;
+  double  Phi_dex;
+  double  X_q3en;
+  double  Y_q3en;
+  double  Z_q3en;
+  double  Theta_q3en;
+  double  Phi_q3en;
+  double  X_q3ex;
+  double  Y_q3ex;
+  double  Z_q3ex;
+  double  Theta_q3ex;
+  double  Phi_q3ex;
+  double  X_sen;
+  double  Y_sen;
+  double  Z_sen;
+  double  Theta_sen;
+  double  Phi_sen;
+  double  X_sm;
+  double  Y_sm;
+  double  Z_sm;
+  double  Theta_sm;
+  double  Phi_sm;
+  double  X_sex;
+  double  Y_sex;
+  double  Z_sex;
+  double  Theta_sex;
+  double  Phi_sex;
+  double  X_col;
+  double  Y_col;
+  double  Z_col;
+  double  Theta_col;
+  double  Phi_col;
+  
+  
+  //reconstructed variables at target plane
+  double  Xtg_rec_tr;
+  double  Ytg_rec_tr;
+  double	Thetatg_rec_tr;
+  double  Phitg_rec_tr;
+  
+  double  Xtg_rec_db_tr;
+  double  Ytg_rec_db_tr;
+  double	Thetatg_rec_db_tr;
+  double  Phitg_rec_db_tr;
+  
+  double  X_rec_tr;
+  double  Y_rec_tr;
+  double  Z_rec_tr;
+  double	Theta_rec_tr;
+  double  Phi_rec_tr;
+  double  X_rec;
+  double  Y_rec;
+  double  Z_rec;
+  double  P_rec;
+  double  Theta_rec;
+  double  Phi_rec;
+  
 	double  Delta;
 	double  Delta_rec;
 	double  Delta_rec_db;
@@ -468,7 +655,7 @@ private:
 	TH1D *hP0[MaxPrimaryNum], *hTheta0[MaxPrimaryNum], *hPhi0[MaxPrimaryNum];
 	TH1D *hX0[MaxPrimaryNum], *hY0[MaxPrimaryNum], *hZ0[MaxPrimaryNum];
 	TH2D *h2Z0VSY0[MaxPrimaryNum], *h2Y0VSX0[MaxPrimaryNum]; 
-	TH2D *h2Theta0_trVSPhi0_tr[MaxPrimaryNum], *h2Thetavb_trVSPhivb_tr[MaxPrimaryNum];
+	TH2D *h2Theta0_trVSPhi0_tr[MaxPrimaryNum], *h2Theta_vb_trVSPhi_vb_tr[MaxPrimaryNum];
 	TH3D *h3Z0Y0X0[MaxPrimaryNum];
 	TH2D *h2P0VSTheta0[MaxPrimaryNum], *h2Theta0VSPhi0[MaxPrimaryNum];
 	//TH3D *h3P0Theta0Phi0[MaxPrimaryNum];
