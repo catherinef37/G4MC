@@ -50,8 +50,16 @@ HRSBeamTarget::HRSBeamTarget(){
 
     fAlreadyWarned = false;
 
-    G4cout << "Access CREX Database" << G4endl;
-    fDatabase = new HRSDatabase(1);
+    gConfig->GetArgument("SnakeModel",mSnakeModel);
+
+    if( mSnakeModel == 47 || mSnakeModel == 49 || mSnakeModel == 50 ||
+	mSnakeModel == 51 || mSnakeModel == 54 ){
+      G4cout << "Access PREX Database" << G4endl;
+      fDatabase = new HRSDatabase(0);
+    }else if( mSnakeModel == 48 || mSnakeModel == 53 || mSnakeModel == 55 ){
+      G4cout << "Access CREX Database" << G4endl;
+      fDatabase = new HRSDatabase(1);
+    }
 
 }
 
@@ -192,7 +200,6 @@ void HRSBeamTarget::SetTargetPos(G4double z){
 HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is has gone through the lead
     HRSVertex thisvert;
     
-    gConfig->GetArgument("SnakeModel",mSnakeModel);
     gConfig->GetArgument("LHRSMomentum",mLHRSMomentum);
     gConfig->GetArgument("RHRSMomentum",mRHRSMomentum);
     gConfig->GetParameter("LSeptumAngle",mLSeptumAngle);
@@ -248,7 +255,7 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
     double   mtravel [__MAX_MAT];
 
     //G4cout << mLHRSMomentum << " <--------> " << gDefaultBeamE_PREX << G4endl;
-    if( mSnakeModel != 53){
+    if( mSnakeModel != 53 || mSnakeModel != 55 || mSnakeModel != 48){
       fBeamE = mLHRSMomentum;//gDefaultBeamE_PREX;
       //fBeamE = gDefaultBeamE_PREX;
       nmsmat = 2;
@@ -351,9 +358,12 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
     // Sample multiple scattering + angles
     
     G4double msth, msph;
+
+
     
     if( nmsmat > 0 ){
       //G4cout << "Initializing multiple scattering\n";
+      //G4cout << fSampE << " " << nmsmat << " " << msthick << " " << msA << " " << msZ << G4endl;
 	fMS->Init( fSampE, nmsmat, msthick, msA, msZ );
 	msth = fMS->GenerateMSPlane();
 	msph = fMS->GenerateMSPlane();
@@ -395,14 +405,14 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
       ( xscreen + .0004 * EEE * EEE * pow( sin( theta_over_2 ) , 4 ) );//mott is in barns, and all energy is in MeV
     //  ( xscreen + 400. * EEE * EEE * pow( sin( theta_over_2 ) , 4 ) );
     double FFF;
-    if( mSnakeModel == 53){
-      //FFF = InterpolateNickieCa48(QQ2 / GeV / GeV);//this is indeed FF squared, already included.
-      //G4cout << "About to interpolate" << G4endl;
-      FFF = fDatabase->Interpolate(EEE / GeV, fTh * 180. / pi, 0, 0);//0 means non stretched, and XS, whereas 1, 1 means stretched and asym.
-      //G4cout << "Interpolated" << G4endl;
-    }else{
-      FFF = InterpolateNickie(QQ2 / GeV / GeV);//this is indeed FF squared, already included.
-    }
+    //if( mSnakeModel == 53){
+    //FFF = InterpolateNickieCa48(QQ2 / GeV / GeV);//this is indeed FF squared, already included.
+    //G4cout << "About to interpolate" << G4endl;
+    FFF = fDatabase->Interpolate(EEE / GeV, fTh * 180. / pi, 0, 0);//0 means non stretched, and XS, whereas 1, 1 means stretched and asym.
+    //G4cout << "Interpolated" << G4endl;
+    //}else{
+    //FFF = InterpolateNickie(QQ2 / GeV / GeV);//this is indeed FF squared, already included.
+    //}
     //G4cout << ZZZ << " " << EEE << " " << MMM << " " << theta_over_2 * 180. / 3.141592654<< " " << QQ2 << " " << mott << " " << FFF << G4endl;
 
     double XXS    = mott * FFF;// * 1000000000.; //convert to nb from barns
@@ -418,7 +428,7 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
     if( mLSeptumAngle == 4. ){
       minimum_angle = 3.;
       //G4cout << minimum_angle << " is the minimum angle right now." << G4endl;
-    }else if ( mLSeptumAngle == 6.  ){
+    }else if ( mLSeptumAngle == 6.  || mLSeptumAngle == 5.){
       minimum_angle = 4.;
       //G4cout << minimum_angle << " is the minimum angle right now." << G4endl;
     }else if ( mLSeptumAngle == 4.5 ){
@@ -433,13 +443,24 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
     }
     double anglemin_over_2 = minimum_angle / 2 * pi / 180.;//half of min angle
     double QQ2min       = 4 * EEE * EEE * pow( sin( anglemin_over_2 ), 2) / ( 1 - 2 * EEE / MMM * pow( sin( anglemin_over_2 ), 2) );
-    double FFFmax       = InterpolateNickie(QQ2min / GeV / GeV);//this is indeed FF squared, already included.
+    double FFFmax;//       = InterpolateNickie(QQ2min / GeV / GeV);//this is indeed FF squared, already included.
+    //if( mSnakeModel == 53){
+    //G4cout << "About to interpolate" << G4endl;
+    //G4cout << EEE << G4endl;
+    FFFmax = fDatabase->Interpolate(EEE / GeV, minimum_angle, 0, 0);//0 means non stretched, and XS, whereas 1, 1 means stretched and asym.
+    //G4cout << "Interpolated" << G4endl;
+    //}else{
+    //G4cout << EEE << " " << QQ2min << " " << minimum_angle << " " << anglemin_over_2 << " " << 4 * EEE * EEE * pow( sin( anglemin_over_2 ), 2) << " " << ( 1 - 2 * EEE / MMM * pow( sin( anglemin_over_2 ), 2) ) << G4endl;
+    //FFFmax = InterpolateNickie(QQ2min / GeV / GeV);//this is indeed FF squared, already included.
+    //}
+
     //    double mottmax = pow( ZZZ * .197 * cos( anglemin_over_2 ) / 137. , 2 ) /
     //( xscreen + .0004 * EEE * EEE * pow( sin( anglemin_over_2 ) , 4 ) );
     double mottmax = pow( ZZZ * .197 * cos( anglemin_over_2 ) / 137. , 2 ) /
       ( xscreen + .0004 * EEE * EEE * pow( sin( anglemin_over_2 ) , 4 ) );
     
     prob_sample = G4UniformRand() * mottmax * FFFmax;
+    //G4cout << mottmax << " " << FFFmax << G4endl;
     thisvert.pass = 0;
     //G4cout << thisvert.pass << " " << prob_sample << " " << mott * FFF << ", mott = " << mott << ", FFF = " << FFF << G4endl ;
     
@@ -539,6 +560,7 @@ HRSVertex HRSBeamTarget::SampleVertex(G4double ztarget){//ztarget is how far is 
 	}
       */
       
+      //G4cout << "The energy at the end of Sample Vertex is " << ef << G4endl;
       
       //thisvert.fBeamE = fSampE;
       //thisvert.fBeamE = fBeamE;

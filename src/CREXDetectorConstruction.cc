@@ -1433,9 +1433,9 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		  double pLSeptumWindowPos_Y=mPivotYOffset;
 		  double pLSeptumWindowPos_Z=(mPivot2LHRSVBFace+mHRSVBThick/2.0)*
 		    cos(mLSeptumAngle)+mPivotZOffset;
-		  new G4PVPlacement(pRotLSeptum,
-				    G4ThreeVector(pLSeptumWindowPos_X,pLSeptumWindowPos_Y,pLSeptumWindowPos_Z),
-				    septumWindowLogical,"virtualBoundaryPhys_LHRS",motherLogical,0,0,0);
+		  //new G4PVPlacement(pRotLSeptum,
+		  //G4ThreeVector(pLSeptumWindowPos_X,pLSeptumWindowPos_Y,pLSeptumWindowPos_Z),
+		  //septumWindowLogical,"virtualBoundaryPhys_LHRS",motherLogical,0,0,0);
 		}if(mSetupRHRS){
 		  double pRSeptumWindowPos_X=(mPivot2RHRSVBFace+mHRSVBThick/2.)*
 		    sin(mRSeptumAngle)+mPivotXOffset;			
@@ -1446,9 +1446,9 @@ G4VPhysicalVolume* CREXDetectorConstruction::ConstructSeptumNSieve(G4LogicalVolu
 		  double pRSeptumWindowPos_Y=mPivotYOffset;
 		  double pRSeptumWindowPos_Z=(mPivot2RHRSVBFace+mHRSVBThick/2.0)*
 		    cos(mRSeptumAngle)+mPivotZOffset;
-		  new G4PVPlacement(pRotRSeptum,
-				    G4ThreeVector(pRSeptumWindowPos_X,pRSeptumWindowPos_Y,pRSeptumWindowPos_Z),
-				    septumWindowLogical,"virtualBoundaryPhys_RHRS",motherLogical,0,0,0);
+		  //new G4PVPlacement(pRotRSeptum,
+		  //G4ThreeVector(pRSeptumWindowPos_X,pRSeptumWindowPos_Y,pRSeptumWindowPos_Z),
+		  //septumWindowLogical,"virtualBoundaryPhys_RHRS",motherLogical,0,0,0);
 		}
 		//NICKIE ADDED ALL OF THIS
 		/*

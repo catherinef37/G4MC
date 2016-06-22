@@ -171,95 +171,110 @@ public:
   double  Theta_q1en_tr;
   double  Phi_q1en_tr;
   double  P_q1en_tr;
-
   int     a_q1en_tr;
+
   double  X_q1ex_tr;
   double  Y_q1ex_tr;
   double  Z_q1ex_tr;
   double  Theta_q1ex_tr;
   double  Phi_q1ex_tr;
   double  P_q1ex_tr;
-
   int     a_q1ex_tr;
+
   double  X_q2en_tr;
   double  Y_q2en_tr;
   double  Z_q2en_tr;
   double  Theta_q2en_tr;
   double  Phi_q2en_tr;
   double  P_q2en_tr;
-
   int     a_q2en_tr;
+
   double  X_q2ex_tr;
   double  Y_q2ex_tr;
   double  Z_q2ex_tr;
   double  Theta_q2ex_tr;
   double  Phi_q2ex_tr;
   double  P_q2ex_tr;
-
   int     a_q2ex_tr;
+
   double  X_den_tr;
   double  Y_den_tr;
   double  Z_den_tr;
   double  Theta_den_tr;
   double  Phi_den_tr;
   double  P_den_tr;
-
   int     a_den_tr;
+
   double  X_dex_tr;
   double  Y_dex_tr;
   double  Z_dex_tr;
   double  Theta_dex_tr;
   double  Phi_dex_tr;
   double  P_dex_tr;
-
   int     a_dex_tr;
+
   double  X_q3en_tr;
   double  Y_q3en_tr;
   double  Z_q3en_tr;
   double  Theta_q3en_tr;
   double  Phi_q3en_tr;
   double  P_q3en_tr;
-
   int     a_q3en_tr;
+
   double  X_q3ex_tr;
   double  Y_q3ex_tr;
   double  Z_q3ex_tr;
   double  Theta_q3ex_tr;
   double  Phi_q3ex_tr;
   double  P_q3ex_tr;
-
   int     a_q3ex_tr;
+
   double  X_sen_tr;
   double  Y_sen_tr;
   double  Z_sen_tr;
   double  Theta_sen_tr;
   double  Phi_sen_tr;
   double  P_sen_tr;
-
   int     a_sen_tr;
+
   double  X_sm_tr;
   double  Y_sm_tr;
   double  Z_sm_tr;
   double  Theta_sm_tr;
   double  Phi_sm_tr;
   double  P_sm_tr;
-
   int     a_sm_tr;
+
   double  X_sex_tr;
   double  Y_sex_tr;
   double  Z_sex_tr;
   double  Theta_sex_tr;
   double  Phi_sex_tr;
   double  P_sex_tr;
-
   int     a_sex_tr;
+
+  double  X_coil_tr;
+  double  Y_coil_tr;
+  double  Z_coil_tr;
+  double  Theta_coil_tr;
+  double  Phi_coil_tr;
+  double  P_coil_tr;
+  int     a_coil_tr;
+
+  double  X_mid_tr;
+  double  Y_mid_tr;
+  double  Z_mid_tr;
+  double  Theta_mid_tr;
+  double  Phi_mid_tr;
+  double  P_mid_tr;
+  int     a_mid_tr;
+
   double  X_col_tr;
   double  Y_col_tr;
   double  Z_col_tr;
   double  Theta_col_tr;
   double  Phi_col_tr;
   double  P_col_tr;
-
   int     a_col_tr;
 
   double  X_q1en;
@@ -317,6 +332,16 @@ public:
   double  Z_sex;
   double  Theta_sex;
   double  Phi_sex;
+  double  X_coil;
+  double  Y_coil;
+  double  Z_coil;
+  double  Theta_coil;
+  double  Phi_coil;
+  double  X_mid;
+  double  Y_mid;
+  double  Z_mid;
+  double  Theta_mid;
+  double  Phi_mid;
   double  X_col;
   double  Y_col;
   double  Z_col;

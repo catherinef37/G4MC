@@ -114,7 +114,9 @@ HRSPrimaryGeneratorAction::HRSPrimaryGeneratorAction()
 	if(pSetupHMS) gConfig->GetParameter("HMSMomentum",HMSMomentum); //GeV
 
 	gConfig->GetArgument("BeamEnergy",beamEnergy);
-	beamEnergy*=GeV;
+	//G4cout << beamEnergy << G4endl;
+	//beamEnergy*=GeV;
+	//G4cout << beamEnergy << G4endl;
 	gConfig->GetArgument("TargetMass",targetMass);
 	targetMass*=GeV;
 	gConfig->GetArgument("LHRSMomentum",leftHRSMomentum); //GeV
@@ -486,6 +488,7 @@ void HRSPrimaryGeneratorAction::GetMomentum(int i)
       pass = 1;
     }
   }while(pass == 0);
+
   //G4cout << "XS: " << XS_208Pb <<endl;
   //G4cout << travel << " " << pPtot << G4endl;
   //G4cout << "ms: " << msth << " " << msph << G4endl;
@@ -499,7 +502,7 @@ void HRSPrimaryGeneratorAction::GetMomentum(int i)
   }else{
     momentum3V[i].setRThetaPhi(pPtot,pTheta,pPhi);
   }
-  
+  //G4cout << "Ending generator action" << G4endl;
 }
 
 

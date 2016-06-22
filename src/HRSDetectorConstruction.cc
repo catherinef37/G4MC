@@ -1482,11 +1482,15 @@ G4VPhysicalVolume* HRSDetectorConstruction::ConstructHRS(G4LogicalVolume* mother
 	  //double pSeptumPlaceZ = 70.414 * cm;
 	  double pSeptumPlaceZ = 69.99937 * cm;
 	  new G4PVPlacement(0,G4ThreeVector(0,0,pSeptumPlaceZ - 0.5 * pSeptumZ + 2 * vb_thickness),
-			    LPlaneLogical2,"virtualBoundaryPhys_sen",motherLogical,0,0,0);//q1en
+			    LPlaneLogical2,"virtualBoundaryPhys_sen",motherLogical,0,0,0);//sen
 	  new G4PVPlacement(0,G4ThreeVector(0,0,pSeptumPlaceZ),
-			    LPlaneLogical2,"virtualBoundaryPhys_sm",motherLogical,0,0,0);//q1en
+			    LPlaneLogical2,"virtualBoundaryPhys_sm",motherLogical,0,0,0);//sm
 	  new G4PVPlacement(0,G4ThreeVector(0,0,pSeptumPlaceZ + 0.5 * pSeptumZ),
-			    LPlaneLogical2,"virtualBoundaryPhys_sex",motherLogical,0,0,0);//q1en
+			    LPlaneLogical2,"virtualBoundaryPhys_sex",motherLogical,0,0,0);//sex
+	  new G4PVPlacement(0,G4ThreeVector(0,0,36. * cm),
+			    LPlaneLogical2,"virtualBoundaryPhys_coil",motherLogical,0,0,0);//coil
+	  new G4PVPlacement(0,G4ThreeVector(0,0,-50. * cm),
+			    LPlaneLogical2,"virtualBoundaryPhys_mid",motherLogical,0,0,0);//mid
 	  
 	}
 	//double pLQ1Pos_Z_en=(pHallCenter2LQ1Face);//NIM

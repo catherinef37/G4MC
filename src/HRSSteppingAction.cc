@@ -615,6 +615,48 @@ void HRSSteppingAction::FillRootArray(const G4Step* theStep)
 	  //RootTrack->Phi_sex_tr=v3p.phi()/rad;
 	  //RootTrack->VBName=strPhysVolName.substr(foundVB);
 	  //kill this track whenever it hit the virtual boundary
+	}else if ( strPhysVolName.find("virtualBoundaryPhys_coil") != string::npos ){
+	  //hit the virtualBoundary, record this step then kill this track
+	  //cout << "Recording at the virtual boundary!" << endl;
+	  
+	  RootTrack->X_coil=xx;
+	  RootTrack->Y_coil=yy;
+	  RootTrack->Z_coil=zz;
+	  RootTrack->Theta_coil=v3p.theta()/rad;
+	  RootTrack->Phi_coil=v3p.phi()/rad;
+	  RootTrack->X_coil_tr=xx / 1000.;
+	  RootTrack->Y_coil_tr=yy / 1000.;
+	  RootTrack->Z_coil_tr=zz / 1000.;
+	  RootTrack->P_coil_tr=v3p.mag()/GeV;
+	  Transform::P_HCS2TCS(RootTrack->Theta_coil, RootTrack->Phi_coil, -( RootTrack->X_coil < 0. ? -5. * deg : 5. * deg ),
+			       RootTrack->Theta_coil_tr , RootTrack->Phi_coil_tr);
+	  RootTrack->Theta_coil_tr = -RootTrack->Theta_coil_tr;
+	  RootTrack->Phi_coil_tr = -RootTrack->Phi_coil_tr;
+	  //RootTrack->Theta_coil_tr=v3p.theta()/rad;
+	  //RootTrack->Phi_coil_tr=v3p.phi()/rad;
+	  //RootTrack->VBName=strPhysVolName.substr(foundVB);
+	  //kill this track whenever it hit the virtual boundary
+	}else if ( strPhysVolName.find("virtualBoundaryPhys_mid") != string::npos ){
+	  //hit the virtualBoundary, record this step then kill this track
+	  //cout << "Recording at the virtual boundary!" << endl;
+	  
+	  RootTrack->X_mid=xx;
+	  RootTrack->Y_mid=yy;
+	  RootTrack->Z_mid=zz;
+	  RootTrack->Theta_mid=v3p.theta()/rad;
+	  RootTrack->Phi_mid=v3p.phi()/rad;
+	  RootTrack->X_mid_tr=xx / 1000.;
+	  RootTrack->Y_mid_tr=yy / 1000.;
+	  RootTrack->Z_mid_tr=zz / 1000.;
+	  RootTrack->P_mid_tr=v3p.mag()/GeV;
+	  Transform::P_HCS2TCS(RootTrack->Theta_mid, RootTrack->Phi_mid, -( RootTrack->X_mid < 0. ? -5. * deg : 5. * deg ),
+			       RootTrack->Theta_mid_tr , RootTrack->Phi_mid_tr);
+	  RootTrack->Theta_mid_tr = -RootTrack->Theta_mid_tr;
+	  RootTrack->Phi_mid_tr = -RootTrack->Phi_mid_tr;
+	  //RootTrack->Theta_mid_tr=v3p.theta()/rad;
+	  //RootTrack->Phi_mid_tr=v3p.phi()/rad;
+	  //RootTrack->VBName=strPhysVolName.substr(foundVB);
+	  //kill this track whenever it hit the virtual boundary
 	}else if ( strPhysVolName.find("virtualBoundaryPhys_col") != string::npos ){
 	  //hit the virtualBoundary, record this step then kill this track
 	  //cout << "Recording at the virtual boundary!" << endl;
