@@ -36,11 +36,14 @@ public:
 	G4UIcmdWithAnInteger*      StepperCmd;
 	G4UIcmdWithADoubleAndUnit* MinStepCmd;
 	G4UIcmdWithoutParameter*   UpdateCmd;
-	G4UIcmdWith3VectorAndUnit *BField3VFZB1Cmd;
-	G4UIcmdWith3VectorAndUnit *BField3VFZB2Cmd;
-	G4UIcmdWith3VectorAndUnit *BField3VFZB3Cmd;
-  G4UIcmdWith3VectorAndUnit *BField3VFZB3enCmd;
-	G4UIcmdWith3VectorAndUnit *BField3VFZB4Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBL1Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBR1Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBL2Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBR2Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBL3Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBR3Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBL4Cmd;
+	G4UIcmdWithADoubleAndUnit *BFieldFZBR4Cmd;
 
 };
 

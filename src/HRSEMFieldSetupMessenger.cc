@@ -40,35 +40,63 @@ HRSEMFieldSetupMessenger::HRSEMFieldSetupMessenger(HRSEMFieldSetup* pmsg)
   MinStepCmd->SetParameterName("min step",false,false);
   MinStepCmd->SetDefaultUnit("mm");
   MinStepCmd->AvailableForStates(G4State_Idle);  
-  /*
-  BField3VFZB1Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB1Field3V",this);  
-  BField3VFZB1Cmd->SetGuidance("Set the quad    magnetic field for FZB1");
-  BField3VFZB1Cmd->SetParameterName("Bx","By","Bz",false);
-  BField3VFZB1Cmd->SetDefaultUnit("tesla");  
-  BField3VFZB1Cmd->SetUnitCandidates("tesla kilogauss gause");
-  BField3VFZB1Cmd->AvailableForStates(G4State_Idle);  
+  
+  BFieldFZBL1Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBL1Field",this);  
+  BFieldFZBL1Cmd->SetGuidance("Set the quad    magnetic field for FZBL1");
+  BFieldFZBL1Cmd->SetParameterName("Field",false);
+  BFieldFZBL1Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBL1Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBL1Cmd->AvailableForStates(G4State_Idle);  
 
-  BField3VFZB2Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB2Field3V",this);  
-  BField3VFZB2Cmd->SetGuidance("Set the quad    magnetic field for FZB2");
-  BField3VFZB2Cmd->SetParameterName("Bx","By","Bz",false);
-  BField3VFZB2Cmd->SetDefaultUnit("tesla");  
-  BField3VFZB2Cmd->SetUnitCandidates("tesla kilogauss gause");
-  BField3VFZB2Cmd->AvailableForStates(G4State_Idle);  
-  */
-  BField3VFZB3Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB3Field3V",this);  
-  BField3VFZB3Cmd->SetGuidance("Set the uniform magnetic field for FZB3");
-  BField3VFZB3Cmd->SetParameterName("Bx","By","Bz",false);
-  BField3VFZB3Cmd->SetDefaultUnit("tesla");  
-  BField3VFZB3Cmd->SetUnitCandidates("tesla kilogauss gause");
-  BField3VFZB3Cmd->AvailableForStates(G4State_Idle);  
-  /*
-  BField3VFZB4Cmd = new G4UIcmdWith3VectorAndUnit("/field/setFZB4Field3V",this);  
-  BField3VFZB4Cmd->SetGuidance("Set the quad    magnetic field for FZB4");
-  BField3VFZB4Cmd->SetParameterName("Bx","By","Bz",false);
-  BField3VFZB4Cmd->SetDefaultUnit("tesla");  
-  BField3VFZB4Cmd->SetUnitCandidates("tesla kilogauss gause");
-  BField3VFZB4Cmd->AvailableForStates(G4State_Idle);  
-  */
+  BFieldFZBR1Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBR1Field",this);  
+  BFieldFZBR1Cmd->SetGuidance("Set the quad    magnetic field for FZBR1");
+  BFieldFZBR1Cmd->SetParameterName("Field",false);
+  BFieldFZBR1Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBR1Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBR1Cmd->AvailableForStates(G4State_Idle);  
+
+  BFieldFZBL2Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBL2Field",this);  
+  BFieldFZBL2Cmd->SetGuidance("Set the quad    magnetic field for FZBL2");
+  BFieldFZBL2Cmd->SetParameterName("Field",false);
+  BFieldFZBL2Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBL2Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBL2Cmd->AvailableForStates(G4State_Idle);  
+  
+  BFieldFZBR2Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBR2Field",this);  
+  BFieldFZBR2Cmd->SetGuidance("Set the quad    magnetic field for FZBR2");
+  BFieldFZBR2Cmd->SetParameterName("Field",false);
+  BFieldFZBR2Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBR2Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBR2Cmd->AvailableForStates(G4State_Idle);  
+/*
+ * Dipole field not yet adjustable.
+  BFieldFZBL3Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBL3Field",this);  
+  BFieldFZBL3Cmd->SetGuidance("Set the uniform magnetic field for FZBL3");
+  BFieldFZBL3Cmd->SetParameterName("Field",false);
+  BFieldFZBL3Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBL3Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBL3Cmd->AvailableForStates(G4State_Idle);  
+  
+  BFieldFZBR3Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBR3Field",this);  
+  BFieldFZBR3Cmd->SetGuidance("Set the uniform magnetic field for FZBR3");
+  BFieldFZBR3Cmd->SetParameterName("Field",false);
+  BFieldFZBR3Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBR3Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBR3Cmd->AvailableForStates(G4State_Idle);  
+*/
+  BFieldFZBL4Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBL4Field",this);  
+  BFieldFZBL4Cmd->SetGuidance("Set the quad    magnetic field for FZBL4");
+  BFieldFZBL4Cmd->SetParameterName("Field",false);
+  BFieldFZBL4Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBL4Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBL4Cmd->AvailableForStates(G4State_Idle);  
+  
+  BFieldFZBR4Cmd = new G4UIcmdWithADoubleAndUnit("/field/setFZBR4Field",this);  
+  BFieldFZBR4Cmd->SetGuidance("Set the quad    magnetic field for FZBR4");
+  BFieldFZBR4Cmd->SetParameterName("Field",false);
+  BFieldFZBR4Cmd->SetDefaultUnit("tesla");  
+  BFieldFZBR4Cmd->SetUnitCandidates("tesla kilogauss gause");
+  BFieldFZBR4Cmd->AvailableForStates(G4State_Idle);  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,10 +107,14 @@ HRSEMFieldSetupMessenger::~HRSEMFieldSetupMessenger()
   delete UpdateCmd;
   delete MinStepCmd;
   delete HRSFieldDir;
-  //delete BField3VFZB1Cmd;
-  //delete BField3VFZB2Cmd;
-  delete BField3VFZB3Cmd;
-  //delete BField3VFZB4Cmd;
+  delete BFieldFZBL1Cmd;
+  delete BFieldFZBR1Cmd;
+  delete BFieldFZBL2Cmd;
+  delete BFieldFZBR2Cmd;
+  //delete BFieldFZBL3Cmd;
+  //delete BFieldFZBR3Cmd;
+  delete BFieldFZBL4Cmd;
+  delete BFieldFZBR4Cmd;
  
 }
 
@@ -104,22 +136,42 @@ void HRSEMFieldSetupMessenger::SetNewValue( G4UIcommand* command, G4String newVa
   { 
     fEMFieldSetup->SetMinStep(MinStepCmd->GetNewDoubleValue(newValue));
   }
-  //else if( command == BField3VFZB1Cmd )
-    //{ 
-    //fEMFieldSetup->SetBField3VFZB1(BField3VFZB1Cmd->GetNew3VectorValue(newValue));
-    //}
-  //else if( command == BField3VFZB2Cmd )
-  //{ 
-  //fEMFieldSetup->SetBField3VFZB2(BField3VFZB2Cmd->GetNew3VectorValue(newValue));
-  //}
-  //else if( command == BField3VFZB3Cmd )
-    //{ 
-    //fEMFieldSetup->SetBField3VFZB3(BField3VFZB3Cmd->GetNew3VectorValue(newValue));
-    //}
-  //else if( command == BField3VFZB4Cmd )
-  //{ 
-  //fEMFieldSetup->SetBField3VFZB4(BField3VFZB4Cmd->GetNew3VectorValue(newValue));
-  //}
+
+  else if( command == BFieldFZBL1Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBL1(BFieldFZBL1Cmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == BFieldFZBR1Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBR1(BFieldFZBR1Cmd->GetNewDoubleValue(newValue));
+  }
+
+  else if( command == BFieldFZBL2Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBL2(BFieldFZBL2Cmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == BFieldFZBR2Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBR2(BFieldFZBR2Cmd->GetNewDoubleValue(newValue));
+  }
+
+/*  else if( command == BFieldFZBL3Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBL3(BFieldFZBL3Cmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == BFieldFZBR3Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBR3(BFieldFZBR3Cmd->GetNewDoubleValue(newValue));
+  }
+*/
+  else if( command == BFieldFZBL4Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBL4(BFieldFZBL4Cmd->GetNewDoubleValue(newValue));
+  }
+  else if( command == BFieldFZBR4Cmd )
+  { 
+    fEMFieldSetup->SetBFieldFZBR4(BFieldFZBR4Cmd->GetNewDoubleValue(newValue));
+  }
 }
 
 //

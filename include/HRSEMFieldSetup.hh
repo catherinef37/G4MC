@@ -53,34 +53,34 @@ public:
 
 	//Local field  FZB1
 	void UpdateFieldFZBL1();
-	void SetBField3VFZBL1(G4double fieldGradient);
+	void SetBFieldFZBL1(G4double field);
 	G4FieldManager* GetFieldManagerFZBL1(){return fLocalFieldManagerFZBL1;}
 	void UpdateFieldFZBR1();
-	void SetBField3VFZBR1(G4double fieldGradient);
+	void SetBFieldFZBR1(G4double field);
 	G4FieldManager* GetFieldManagerFZBR1(){return fLocalFieldManagerFZBR1;}
 	
 	//Local field  FZB2
 	void UpdateFieldFZBL2();
-	void SetBField3VFZBL2(G4double fieldGradient);
+	void SetBFieldFZBL2(G4double field);
 	G4FieldManager* GetFieldManagerFZBL2(){return fLocalFieldManagerFZBL2;}
 	void UpdateFieldFZBR2();
-	void SetBField3VFZBR2(G4double fieldGradient);
+	void SetBFieldFZBR2(G4double field);
 	G4FieldManager* GetFieldManagerFZBR2(){return fLocalFieldManagerFZBR2;}
 
 	//Local field  FZB3	
         void UpdateFieldFZBL3();
-	void SetBField3VFZBL3(G4double fbend);
+	void SetBFieldFZBL3(G4double fbend);
 	G4FieldManager* GetFieldManagerFZBL3(){return fLocalFieldManagerFZBL3;}
         void UpdateFieldFZBR3();
-	void SetBField3VFZBR3(G4double fbend);
+	void SetBFieldFZBR3(G4double fbend);
 	G4FieldManager* GetFieldManagerFZBR3(){return fLocalFieldManagerFZBR3;}
 
 	//Local field  FZB4
 	void UpdateFieldFZBL4();
-	void SetBField3VFZBL4(G4double fieldGradient);
+	void SetBFieldFZBL4(G4double field);
 	G4FieldManager* GetFieldManagerFZBL4(){return fLocalFieldManagerFZBL4;}
 	void UpdateFieldFZBR4();
-	void SetBField3VFZBR4(G4double fieldGradient);
+	void SetBFieldFZBR4(G4double field);
 	G4FieldManager* GetFieldManagerFZBR4(){return fLocalFieldManagerFZBR4;}
 
 private:

@@ -20,9 +20,11 @@ class BField_Quad : public G4MagneticField
   
   ~BField_Quad();
   
+  void SetField(G4double field){fGradient = field;}
   void GetFieldValue(const G4double yTrack[],
 		     G4double B[]     ) const;
   G4ThreeVector GetFringeField(G4ThreeVector) const;
+
 private:
   
   G4double          fGradient;

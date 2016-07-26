@@ -415,8 +415,7 @@ void HRSEMFieldSetup::UpdateFieldFZBR2()
 	fLocalFieldManagerFZBR2->SetChordFinder( fChordFinderFZBR2 );
 }
 
-
-
+/////////////////////////////////////////////////////////////////////////////
 void HRSEMFieldSetup::UpdateFieldFZBL3()
 {
   fStepperFZBL3 = new G4ClassicalRK4( fEquationFZBL3, 8 );
@@ -476,6 +475,51 @@ void HRSEMFieldSetup::UpdateFieldFZBR4()
 	fChordFinderFZBR4 = new G4ChordFinder((G4MagneticField*) fMagFieldFZBR4, fMinStep, fStepperFZBR4);
 	fLocalFieldManagerFZBR4->SetChordFinder( fChordFinderFZBR4 );
 }
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Change field values
+/////////////////////////////////////////////////////////////////////////////
+void HRSEMFieldSetup::SetBFieldFZBL1(G4double field)
+{
+  fMagFieldFZBL1 -> SetField(field);
+}
+void HRSEMFieldSetup::SetBFieldFZBR1(G4double field)
+{
+  fMagFieldFZBR1 -> SetField(field);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+void HRSEMFieldSetup::SetBFieldFZBL2(G4double field)
+{
+  fMagFieldFZBL2 -> SetField(field);
+}
+void HRSEMFieldSetup::SetBFieldFZBR2(G4double field)
+{
+  fMagFieldFZBR2 -> SetField(field);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+/*void HRSEMFieldSetup::SetBFieldFZBL3(G4double fBend)
+{
+  //Method to change fBend must be created in the BField_Dipole class.
+  fMagFieldFZBL3 -> METHOD_NAME(fBend);
+}
+void HRSEMFieldSetup::SetBFieldFZBR3(G4double fBend)
+{
+  fMagFieldFZBR3 -> METHOD_NAME(fBend);
+}*/
+
+/////////////////////////////////////////////////////////////////////////////
+void HRSEMFieldSetup::SetBFieldFZBL4(G4double field)
+{
+  fMagFieldFZBL4 -> SetField(field);
+}
+void HRSEMFieldSetup::SetBFieldFZBR4(G4double field)
+{
+  fMagFieldFZBR4 -> SetField(field);
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

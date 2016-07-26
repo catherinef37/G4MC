@@ -44,7 +44,6 @@ BField_Quad::~BField_Quad()
 }
 
 ////////////////////////////////////////////////////////////////////////
-
 void BField_Quad::GetFieldValue( const G4double y[7],
 				 G4double B[3]  ) const  
 {
