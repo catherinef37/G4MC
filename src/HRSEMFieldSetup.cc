@@ -274,6 +274,7 @@ HRSEMFieldSetup::HRSEMFieldSetup()
   RROTATEQ3->rotateX(-45.0 * deg);
   RROTATEQ3->rotateY( mRHRSAngle);
   
+  G4cout << "gradients: " << KAPPA1 << " " << KAPPA2 << " " << KAPPA3 << G4endl;
   fMagFieldFZBL1 = new BField_Quad(KAPPA1, LORIGINQ1, LROTATEQ1, pQ1Length, pQ1Radius, 1);
   fEquationFZBL1 = new G4Mag_UsualEqRhs(fMagFieldFZBL1);	
   fStepperFZBL1  = new G4ClassicalRK4(fEquationFZBL1);
@@ -482,42 +483,50 @@ void HRSEMFieldSetup::UpdateFieldFZBR4()
 /////////////////////////////////////////////////////////////////////////////
 void HRSEMFieldSetup::SetBFieldFZBL1(G4double field)
 {
-  fMagFieldFZBL1 -> SetField(field);
+	fMagFieldFZBL1 -> SetField(field);
+	UpdateFieldFZBL1();
 }
 void HRSEMFieldSetup::SetBFieldFZBR1(G4double field)
 {
-  fMagFieldFZBR1 -> SetField(field);
+	fMagFieldFZBR1 -> SetField(field);
+	UpdateFieldFZBR1();
 }
 
 /////////////////////////////////////////////////////////////////////////////
 void HRSEMFieldSetup::SetBFieldFZBL2(G4double field)
 {
-  fMagFieldFZBL2 -> SetField(field);
+	fMagFieldFZBL2 -> SetField(field);
+	UpdateFieldFZBL2();
 }
 void HRSEMFieldSetup::SetBFieldFZBR2(G4double field)
 {
-  fMagFieldFZBR2 -> SetField(field);
+	fMagFieldFZBR2 -> SetField(field);
+	UpdateFieldFZBR2();
 }
 
 /////////////////////////////////////////////////////////////////////////////
 /*void HRSEMFieldSetup::SetBFieldFZBL3(G4double fBend)
 {
   //Method to change fBend must be created in the BField_Dipole class.
-  fMagFieldFZBL3 -> METHOD_NAME(fBend);
+	fMagFieldFZBL3 -> METHOD_NAME(fBend);
+	UpdateFieldFZBL3();
 }
 void HRSEMFieldSetup::SetBFieldFZBR3(G4double fBend)
 {
-  fMagFieldFZBR3 -> METHOD_NAME(fBend);
+	fMagFieldFZBR3 -> METHOD_NAME(fBend);
+	UpdateFieldFZBR3();
 }*/
 
 /////////////////////////////////////////////////////////////////////////////
 void HRSEMFieldSetup::SetBFieldFZBL4(G4double field)
 {
-  fMagFieldFZBL4 -> SetField(field);
+	fMagFieldFZBL4 -> SetField(field);
+	UpdateFieldFZBL4();
 }
 void HRSEMFieldSetup::SetBFieldFZBR4(G4double field)
 {
-  fMagFieldFZBR4 -> SetField(field);
+	fMagFieldFZBR4 -> SetField(field);
+	UpdateFieldFZBR4();
 }
 
 

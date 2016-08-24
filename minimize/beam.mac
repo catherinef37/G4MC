@@ -1,0 +1,96 @@
+# trun off all verbos
+#this will print how many events have been thrown in this run and 
+#how long it just took, it is good only for shooting a large amount 
+#of events like /run/beamOn 10000, not good for event by event 
+#shooting like fsgen
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/stepping/verbose 0
+#this will print the event header
+#/mydet/verbose 0
+#for txt output
+/tracking/particleOnly e-
+#/tracking/particleOnly all
+#write out  all tracks in txt output
+#/tracking/thisTrackOnly 0
+#set no txt output
+
+/tracking/noSecondary 1
+###################################
+
+#/vis/viewer/set/viewpointThetaPhi 3.14 0.
+
+/mydet/gunRLow 0.0 mm
+/mydet/gunRHigh 0.0 mm
+#/mydet/gunZLow  -110.5 cm
+#/mydet/gunZHigh -109.5 cm
+#/mydet/gunZLow  -105.7 cm
+#/mydet/gunZHigh -104.7 cm
+#/mydet/gunZHigh -104.716 cm
+#/mydet/gunZLow -105.216 cm
+#/mydet/gunZ -1053.79 mm
+/mydet/gunZHigh -1054.04 mm
+/mydet/gunZLow -1053.54 mm
+#trigger the random momentum and vertex generator
+#/mydet/particle1/momentum 2.2 GeV
+/mydet/particle1/momentum 1.06 GeV
+#/mydet/particle1/momentum 5.0 GeV
+#/mydet/particle1/theta 5 deg
+/mydet/particle1/thetaLow 4 deg
+/mydet/particle1/thetaHigh 7 deg
+#/mydet/particle1/thetaLow 3 deg
+#/mydet/particle1/thetaHigh 14 deg
+#/mydet/particle1/theta 12.5 deg
+#/mydet/particle1/phi 0. deg
+#/mydet/particle1/phi 180. deg
+/mydet/particle1/phiLow 140. deg
+/mydet/particle1/phiHigh 220. deg
+#/mydet/particle1/phiLow 90. deg
+#/mydet/particle1/phiHigh 270. deg
+#This is the one I normally use
+#/mydet/gunZ  -87.693 cm
+#This is the one I normally use
+#/mydet/gunZ  -83.3 cm
+#the entry below comes from ELOG2941
+#/mydet/gunZ -110 cm
+/mydet/gunRLow  2 mm
+/mydet/gunRHigh 2 mm
+#/mydet/gunZ  0 cm
+#/mydet/gunZ  -100. cm
+
+/mydet/particleNum 1
+/mydet/particle1/particleName e-
+#use the elastic engine
+#/mydet/particle1/engine HRSElasEl
+#use the fitted result for 90 degrees Helm coils
+#/mydet/particle1/engine H90UserFit
+#/mydet/particle1/engine Uniform
+#/mydet/particle1/engine PREX
+#/mydet/particle1/engine HRSQuasiElasEl
+#/mydet/particle1/momentumLow 1.00 GeV
+#/mydet/particle1/momentumHigh 1.12 GeV
+#/mydet/particle1/thetaLow 3 deg
+#/mydet/particle1/thetaHigh 28 deg
+#/mydet/particle1/phiLow 90. deg
+#/mydet/particle1/phiHigh 270. deg
+#/mydet/particle1/thetaLow 4.5 deg
+#/mydet/particle1/thetaHigh 5.5 deg
+#/mydet/particle1/phiLow 160. deg
+#/mydet/particle1/phiHigh 180. deg
+#randomize in TCS and with elipse shape, 1 is for rectangle shape
+#/mydet/particle1/randomizeInTCS 0
+
+###############################################
+#Test new commands to change quadrupole fields#
+###############################################
+/field/setFZBL1Field 0.310865 tesla
+#/field/setFZBR1Field 0 tesla
+/field/setFZBL2Field 1.11659 tesla
+#/field/setFZBR2Field 0 tesla
+/field/setFZBL4Field 1.38203 tesla
+#/field/setFZBR4Field 0 tesla
+
+
+#/mydet/particle1/detectorAngle 5.69 deg
+/run/beamOn 50000
